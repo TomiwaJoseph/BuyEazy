@@ -1,0 +1,317 @@
+body {
+    font-family: 'open sans';
+    /* min-height: 75rem; */
+    padding-top: 4.5rem;
+    color: rgb(58, 58, 58);
+}
+
+
+/* <--------- Base --------> */
+nav.navbar{
+    font-family: 'Montserrat';
+}
+a:hover {
+    text-decoration: none;
+}
+#nav_col{
+    color: teal!important;
+}
+.navbar-dark{
+    background-color: #e7e7e7!important;
+}
+nav.navbar a, nav.navbar ul li a {
+    color: rgb(58, 58, 58) !important;
+}
+nav.navbar ul li a:hover{
+    font-size: 22px;
+    color: teal!important;
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+}
+.navbar-brand{
+    font-size: 40px;
+}
+nav.navbar ul li {
+    padding: 0 15px;
+    font-size: 20px;
+}
+nav.navbar form {
+    background-color: teal;
+    padding: 3px;
+    position: absolute;
+    display: none;
+}
+.footer{
+    background-color: #f0f0f0!important;
+    padding: 50px 0 50px 0;
+    font-family: 'montserrat';
+    margin-top: 50px;
+}
+.footer-top-box{
+    margin-top: 10px;
+}
+.footer-top-box p{
+    font-size: 20px;
+}
+.footer-top-box p i{
+    font-size: 30px;
+    color: teal;
+    margin-right: 10px;
+}
+.footer-top-box p a{
+    color: rgb(58, 58, 58);
+}
+.foot_hr{
+    background-color: teal;
+}
+.newsletter-box{
+	margin-top: 15px;
+	position: relative;
+}
+.newsletter-box input{
+	height: 40px;
+	border: 1px solid teal;
+	padding: 0 10px;
+	background: #fff;
+	padding: 0 20px;
+	width: 100%;
+}
+.newsletter-box i{
+	position: absolute;
+	right: 15px;
+	top: 10px;
+	font-size: 20px;
+}
+.newsletter-box button{	
+    background-color: none;
+    color: teal;
+    border: 1px solid teal;
+}
+.newsletter-box button:hover{
+    background-color: teal;
+    color: #fff;
+}
+.footer-top-box .social_media{
+    display: inline-block;
+}
+.footer-top-box .social_media i{
+    font-size: 30px;
+    border: 2px solid teal;
+    padding: 5px;
+    color: rgb(58, 58, 58);
+}
+.footer-top-box .social_media i:hover{
+    background: teal;
+    color: white;
+}
+.cart{
+    position: fixed;
+    bottom: 50%;
+    right: 1%;
+    font-size: 30px;
+    cursor: pointer;
+}
+.cart i,
+.cart a{
+    color: teal;
+}
+
+
+/* <---------- Index --------> */
+.carousel-item img{
+    width: 70%;
+    height: auto;
+}
+.carousel-item h1,
+.carousel-item p{
+    color: rgb(58, 58, 58);
+}
+.carousel-item .btn-primary{
+    color: white!important;
+    background-color: teal!important;
+    border-color: teal;
+}
+.space_up{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.row .item i.fa{
+    font-size: 50px;
+    color: teal;
+}
+
+.row .item p{
+    color: #9c9c9c;
+    font-size: 25px;
+}
+.row .item h3{
+    font-size: 25px;
+    margin-top: 10px;
+}
+#categories p{
+    font-size: 25px;
+    color: rgb(58, 58, 58);
+}
+#categories p:hover{
+    color: teal;
+}
+.product-img:hover img{
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.product-img .product-hover .product-cart {
+    width: 100%;
+    position: absolute;
+    bottom: 30px;
+    opacity: 0;
+    transform: translateY(100px);
+    -webkit-transform: translateY(100px);
+    -moz-transform: translateY(100px);
+    -o-transform: translateY(100px);
+    -ms-transform: translateY(100px);
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+.product-img:hover .product-hover .product-cart {
+    opacity: 1;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -o-transform: translateY(0);
+    -ms-transform: translateY(0);
+}
+.product-item .product-cart .btn {
+    background-color: #2f2f2f;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 30px;
+    text-transform: uppercase;
+    position: relative;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    border-radius: 0;
+}
+.product-item .product-img .product-hover {
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    opacity: 0;
+    background-color: rgba(135, 230, 245, 0.75);
+    background-image: linear-gradient(to top, #32c8de 0%, transparent 49%, transparent 82%, transparent 100%);
+    background-image: -webkit-linear-gradient(to top, #32c8de 0%, transparent 49%, transparent 82%, transparent 100%);
+    background-image: -moz-linear-gradient(to top, #32c8de 0%, transparent 49%, transparent 82%, transparent 100%);
+    background-image: -o-linear-gradient(to top, #32c8de 0%, transparent 49%, transparent 82%, transparent 100%);
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+.product-item .btn:hover {
+    background-color: #fff;
+    border-color: #fff;
+    color: #2f2f2f
+}
+.product-item .product-img:hover .product-hover {
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* <--------- Register and Login Forms ----------> */
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.log:hover {
+    color: #fff;
+    background: teal;
+    border: 1px solid teal;
+}
+
+.log {
+    background: none;
+    color: teal;
+    outline: none;
+    border: 1px solid teal;
+    width: 100%;
+}
+
+.form-control:focus {
+    -webkit-box-shadow: 0 3px 10px -2px teal !important;
+    box-shadow: 0 3px 10px -2px teal !important;
+    color: #000;
+    border: 1px none;
+}
+form .alert-block{
+    display: none;
+}
+.category {
+    display: inline-block;
+    background: #1072f2;
+    padding: 2px 8px;
+    line-height: 1.5;
+    font-size: 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    color: #fff !important;
+    margin-right: 10px;
+    letter-spacing: .2em;
+    text-decoration: none;
+}
