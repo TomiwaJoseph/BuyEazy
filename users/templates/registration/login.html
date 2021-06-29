@@ -1,0 +1,52 @@
+{% extends "main/base.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}EazyBuy | Log In{% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-4 mx-auto my-auto text-center">
+        <h2>Log In</h2>
+        <hr>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mx-auto my-auto" id="log_cat">
+        <div class="content-section mt-1 bg-light">
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <div class="form-group">
+                    <button class="btn btn-outline-info log" type="submit">Login</button>
+                </div>
+            </form>
+            <div class="mb-2">
+                <small class="text-muted">
+                    Don't Have An Account? <a class="ml-2 category" href="{% url 'register' %}">Sign Up</a>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
