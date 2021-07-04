@@ -27,12 +27,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# AUTH_USER_MODEL = 'users.CustomUser'
+# AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
 
 # Application definition
 
 INSTALLED_APPS = [
     'main.apps.MainConfig',
     'users.apps.UsersConfig',
+    'shop.apps.ShopConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
