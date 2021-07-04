@@ -12,7 +12,8 @@
         <div class="carousel-inner text-center">
             <div class="carousel-item active">
                 <div class="container">
-                    <img src="{% static 'main/assets/img/carousel/surfaces2.jpg' %}" class="img-fluid" alt="carousel_img_1">
+                    <img src="{% static 'main/assets/img/carousel/surfaces2.jpg' %}" class="img-fluid"
+                        alt="carousel_img_1">
                 </div>
                 <div class="container text-center mt-3">
                     <h1 class="">Example system</h1>
@@ -23,7 +24,8 @@
             </div>
             <div class="carousel-item">
                 <div class="container">
-                    <img src="{% static 'main/assets/img/carousel/ipadair2m.jpg' %}" class="img-fluid" alt="carousel_img_1">
+                    <img src="{% static 'main/assets/img/carousel/ipadair2m.jpg' %}" class="img-fluid"
+                        alt="carousel_img_1">
                 </div>
                 <div class="container text-center mt-3">
                     <h1>Another example system</h1>
@@ -76,10 +78,11 @@
 
 <div class="container">
     <div class="row" id="categories">
-        <div class="col-sm-4 text-center product-item">
+        <div class="col-sm-3 text-center product-item">
             <div class="product-img">
                 <a href="">
-                    <img src="{% static 'main/assets/img/products/apple-imac-27-retina.jpg' %}" alt="Blog" class="image img-fluid" />
+                    <img src="{% static 'main/assets/img/products/apple-imac-27-retina.jpg' %}" alt="Blog"
+                        class="image img-fluid" />
                     <br><br>
                     <div class="product-hover">
                         <div class="product-cart">
@@ -92,12 +95,15 @@
                     </div>
                 </a>
             </div>
-            <a href="{% url 'login' %}"><p>View all Desktops</p></a>
+            <a href="{% url 'login' %}">
+                <p>Desktops</p>
+            </a>
         </div>
-        <div class="col-sm-4 text-center product-item">
+        <div class="col-sm-3 text-center product-item">
             <div class="product-img">
                 <a href="">
-                    <img src="{% static 'main/assets/img/products/lenovo-yoga.jpg' %}" alt="Blog" class="image img-fluid" />
+                    <img src="{% static 'main/assets/img/products/chrome-book-asus.jpg' %}" alt="Blog"
+                        class="image img-fluid" />
                     <br><br>
                     <div class="product-hover">
                         <div class="product-cart">
@@ -110,12 +116,15 @@
                     </div>
                 </a>
             </div>
-            <a href="{% url 'login' %}"><p>View all Hybrid Devices</p></a>
+            <a href="{% url 'login' %}">
+                <p>Laptops</p>
+            </a>
         </div>
-        <div class="col-sm-4 text-center product-item">
+        <div class="col-sm-3 text-center product-item">
             <div class="product-img">
                 <a href="">
-                    <img src="{% static 'main/assets/img/products/asus-transformer.jpg' %}" alt="Blog" class="image img-fluid" />
+                    <img src="{% static 'main/assets/img/products/lenovo-yoga.jpg' %}" alt="Blog"
+                        class="image img-fluid" />
                     <br><br>
                     <div class="product-hover">
                         <div class="product-cart">
@@ -128,49 +137,67 @@
                     </div>
                 </a>
             </div>
-            <a href="{% url 'login' %}"><p>View all Tablets</p></a>
+            <a href="{% url 'login' %}">
+                <p>Hybrid Devices</p>
+            </a>
+        </div>
+        <div class="col-sm-3 text-center product-item">
+            <div class="product-img">
+                <a href="">
+                    <img src="{% static 'main/assets/img/products/asus-transformer.jpg' %}" alt="Blog"
+                        class="image img-fluid" />
+                    <br><br>
+                    <div class="product-hover">
+                        <div class="product-cart">
+                            <a class="btn btn-secondary btn-block" href="#">Add to cart</a>
+                            {% if user.is_authenticated %}
+                            <a class="btn btn-secondary btn-block" href="#">Add to wishlist</a>
+                            {% endif %}
+                            <a class="btn btn-secondary btn-block" href="#">View this product</a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <a href="{% url 'login' %}">
+                <p>Tablets</p>
+            </a>
         </div>
     </div>
 </div>
 
-
-
-
-
-
-
-<hr class="mb-4">
-<div class="row">
-    <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
-        <div class="item text-center">
-            <i class="fa fa-phone"></i>
-            <h3>24/7 free</h3>
-            <p>support</p>
+<div class="container">
+    <hr class="mb-4">
+    <div class="row">
+        <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
+            <div class="item text-center">
+                <i class="fa fa-phone"></i>
+                <h3>24/7 free</h3>
+                <p>support</p>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
+            <div class="item text-center">
+                <i class="fa fa-star"></i>
+                <h3>Low price<h3>
+                <p>guarantee</p>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
+            <div class="item text-center">
+                <i class="fa fa-gear"></i>
+                <h3> Manufacturer’s<h3>
+                <p>warranty</p>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
+            <div class="item text-center">
+                <i class="fa fa-recycle"></i>
+                <h3> Full refund<h3>
+                <p>guarantee</p>
+            </div>
         </div>
     </div>
-    <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
-        <div class="item text-center">
-            <i class="fa fa-star"></i>
-            <h3>Low price<h3>
-                    <p>guarantee</p>
-        </div>
-    </div>
-    <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
-        <div class="item text-center">
-            <i class="fa fa-gear"></i>
-            <h3> Manufacturer’s<h3>
-                    <p>warranty</p>
-        </div>
-    </div>
-    <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
-        <div class="item text-center">
-            <i class="fa fa-recycle"></i>
-            <h3> Full refund<h3>
-                    <p>guarantee</p>
-        </div>
-    </div>
+    <hr>
 </div>
-
-
 
 {% endblock %}
