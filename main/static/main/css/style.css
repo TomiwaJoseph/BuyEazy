@@ -5,162 +5,230 @@ body {
     color: rgb(58, 58, 58);
 }
 
+a,
+a:hover {
+    color: rgb(58, 58, 58);
+}
+
 
 /* <--------- Base --------> */
-nav.navbar{
-    font-family: 'Montserrat';
+nav.navbar {
+    font-family: 'dosis';
 }
+
 a:hover {
     text-decoration: none;
 }
-#nav_col{
-    color: teal!important;
+
+#nav_col {
+    color: teal !important;
 }
-.navbar-dark{
-    background-color: #e7e7e7!important;
+
+.navbar-dark {
+    background-color: #e7e7e7 !important;
 }
-nav.navbar a, nav.navbar ul li a {
+
+nav.navbar a,
+nav.navbar ul li a {
     color: rgb(58, 58, 58) !important;
 }
-nav.navbar ul li a:hover{
-    font-size: 22px;
-    color: teal!important;
-    -webkit-transition: all 1s ease;
-    transition: all 1s ease;
+
+nav.navbar ul li a:hover {
+    font-size: 21px;
+    color: teal !important;
 }
-.navbar-brand{
+
+.navbar-brand {
     font-size: 40px;
 }
+
 nav.navbar ul li {
     padding: 0 15px;
     font-size: 20px;
 }
+
 nav.navbar form {
     background-color: teal;
     padding: 3px;
     position: absolute;
     display: none;
 }
-.footer{
-    background-color: #f0f0f0!important;
-    padding: 50px 0 50px 0;
-    font-family: 'montserrat';
-    margin-top: 50px;
+
+.auth_opt {
+    display: none;
+    position: absolute;
+    background-color: #e7e7e7;
+    min-width: 160px;
+    z-index: 1;
 }
-.footer-top-box{
+
+.auth_opt a {
+    color: rgb(58, 58, 58);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.auth_opt a {
+    margin-left: 10px;
+}
+
+.in_or_up:hover .auth_opt {
+    display: block;
+}
+
+.footer {
+    background-color: #f0f0f0 !important;
+    padding: 30px 0 30px 0;
+    font-family: 'montserrat';
+    margin-top: 20px;
+}
+
+.footer-top-box {
     margin-top: 10px;
 }
-.footer-top-box p{
-    font-size: 20px;
+
+.footer-top-box h3 {
+    font-family: 'dosis';
 }
-.footer-top-box p i{
-    font-size: 30px;
+
+.footer-top-box p,
+#contct_addr p {
+    font-size: 15px;
+}
+
+.footer-top-box span,
+#contct_addr span {
+    margin-left: 20px;
+}
+
+.footer-top-box p i,
+#contct_addr i {
+    font-size: 25px;
     color: teal;
     margin-right: 10px;
 }
-.footer-top-box p a{
-    color: rgb(58, 58, 58);
-}
-.foot_hr{
+
+.foot_hr {
     background-color: teal;
 }
-.newsletter-box{
-	margin-top: 15px;
-	position: relative;
+
+.newsletter-box {
+    margin-top: 15px;
+    position: relative;
 }
-.newsletter-box input{
-	height: 40px;
-	border: 1px solid teal;
-	padding: 0 10px;
-	background: #fff;
-	padding: 0 20px;
-	width: 100%;
+
+.newsletter-box input {
+    height: 40px;
+    border: 1px solid teal;
+    padding: 0 10px;
+    background: #fff;
+    padding: 0 20px;
+    width: 100%;
 }
-.newsletter-box i{
-	position: absolute;
-	right: 15px;
-	top: 10px;
-	font-size: 20px;
+
+.newsletter-box i {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 20px;
 }
-.newsletter-box button{	
+
+.newsletter-box button {
     background-color: none;
     color: teal;
     border: 1px solid teal;
 }
-.newsletter-box button:hover{
+
+.newsletter-box button:hover {
     background-color: teal;
     color: #fff;
 }
-.footer-top-box .social_media{
+
+.footer-top-box .social_media {
     display: inline-block;
 }
-.footer-top-box .social_media i{
+
+.footer-top-box .social_media i {
     font-size: 30px;
     border: 2px solid teal;
     padding: 5px;
     color: rgb(58, 58, 58);
 }
-.footer-top-box .social_media i:hover{
+
+.footer-top-box .social_media i:hover {
     background: teal;
     color: white;
 }
-.cart{
+
+.cart {
     position: fixed;
     bottom: 50%;
     right: 1%;
     font-size: 30px;
     cursor: pointer;
 }
+
 .cart i,
-.cart a{
+.cart a {
     color: teal;
 }
 
 
 /* <---------- Index --------> */
-.carousel-item img{
+.carousel-item img {
     width: 70%;
     height: auto;
 }
+
 .carousel-item h1,
-.carousel-item p{
+.carousel-item p {
     color: rgb(58, 58, 58);
 }
-.carousel-item .btn-primary{
-    color: white!important;
-    background-color: teal!important;
+
+.carousel-item .btn-primary {
+    color: white !important;
+    background-color: teal !important;
     border-color: teal;
 }
-.space_up{
-    margin-top: 100px;
+
+.space_up {
+    margin-top: 40px;
     margin-bottom: 100px;
 }
-.row .item i.fa{
-    font-size: 50px;
+
+.row .item i.fa {
+    font-size: 30px;
     color: teal;
 }
 
-.row .item p{
+.row .item p {
     color: #9c9c9c;
-    font-size: 25px;
+    font-size: 20px;
 }
-.row .item h3{
-    font-size: 25px;
+
+.row .item h3 {
+    font-size: 20px;
     margin-top: 10px;
 }
-#categories p{
-    font-size: 25px;
+
+#categories p {
+    font-size: 20px;
     color: rgb(58, 58, 58);
 }
-#categories p:hover{
+
+#categories p:hover {
     color: teal;
 }
-.product-img:hover img{
+
+.product-img:hover img {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
+
 .product-img .product-hover .product-cart {
     width: 100%;
     position: absolute;
@@ -178,6 +246,7 @@ nav.navbar form {
     padding-right: 30px;
     padding-left: 30px;
 }
+
 .product-img:hover .product-hover .product-cart {
     opacity: 1;
     transform: translateY(0);
@@ -186,6 +255,7 @@ nav.navbar form {
     -o-transform: translateY(0);
     -ms-transform: translateY(0);
 }
+
 .product-item .product-cart .btn {
     background-color: #2f2f2f;
     color: #fff;
@@ -201,6 +271,7 @@ nav.navbar form {
     transition: all 0.2s ease-in-out;
     border-radius: 0;
 }
+
 .product-item .product-img .product-hover {
     position: absolute;
     overflow: hidden;
@@ -219,41 +290,470 @@ nav.navbar form {
     -o-transition: all 0.4s ease-in-out;
     transition: all 0.4s ease-in-out;
 }
+
 .product-item .btn:hover {
     background-color: #fff;
     border-color: #fff;
     color: #2f2f2f
 }
+
 .product-item .product-img:hover .product-hover {
     opacity: 1;
+}
+
+/* <--------- Single Product ------------> */
+.specification {
+    padding-top: 10px;
+    border-bottom: 1px solid #eee;
+
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.specification label {
+    /* font-family: 'dosis'; */
+    font-weight: 600;
+    color: teal;
+}
+
+.specification:hover {
+    background-color: #f5f5f5;
+}
+
+.single-product-details {
+    margin-top: 40px;
+}
+
+.single-product-details h1 {
+    font-family: 'dosis';
+}
+
+.single-product-details small {
+    font-size: 20px;
+}
+
+.single-product-details h5 {
+    font-size: 30px;
+    color: teal;
+}
+
+.single-product-details .text-success,
+.single-product-details .text-danger {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.shrt_desc h3 {
+    font-family: 'dosis';
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.single-product-details .btn {
+    text-transform: uppercase;
+    /* font-family: 'dosis'; */
+    padding: 10px;
+}
+
+.single-product-details .fa {
+    color: #fff;
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+#reviews {
+    margin-top: 100px;
+}
+
+#reviews .btn {
+    background: teal;
+    color: #fff;
+}
+
+#reviewer {
+    color: teal;
+    font-weight: 700;
+}
+
+.text-secondary {
+    font-weight: 600;
+}
+
+.media-body .log,
+.utils .btn-info {
+    background: rgb(58, 58, 58) !important;
+    color: #fff !important;
+    border: none;
+}
+
+.media-body .log:hover,
+.utils .btn-info:hover {
+    color: white !important;
+    background-color: teal !important;
+}
+
+#rel_pro {
+    font-family: 'dosis';
+    margin-top: 50px;
+}
+
+.name_amt .name {
+    font-size: 20px;
+    font-family: 'dosis';
+}
+
+.name_amt .amt {
+    font-size: 20px;
+    color: teal;
+    font-weight: 600;
+}
+
+.thick_hr {
+    height: 2px;
+    background-color: teal;
+}
+
+small {
+    text-decoration: line-through;
+}
+
+.text-muted {
+    text-decoration: none;
+}
+
+.utils i {
+    font-size: 30px;
+    color: rgb(58, 58, 58)
+}
+
+.utils i:hover {
+    font-size: 30px;
+    color: teal
+}
+
+.the_img img:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.content-section:hover {
+    box-shadow: 0 0 10px rgba(48, 46, 77, 0.15);
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.utils .active {
+    color: red;
+}
+
+.carousel-indicators li img {
+    margin-top: 30px;
+    background-color: red;
+}
+
+.single-product-slider .carousel-control-prev {
+    bottom: auto;
+    background: teal;
+    width: 6%;
+    padding: 10px 0;
+    background-image: none;
+    top: 40%;
+}
+
+.single-product-slider .carousel-control-next {
+    bottom: auto;
+    background: teal;
+    width: 6%;
+    padding: 10px 0;
+    background-image: none;
+    top: 40%;
+}
+
+.single-product-slider .carousel-indicators li img {
+    opacity: 0.5;
+}
+
+.single-product-slider .carousel-indicators li.active img {
+    opacity: 1;
+}
+
+
+/* <--------- Shop ----------> */
+.search-product {
+    position: relative;
+}
+
+.search-product input[type="text"] {
+    background: #f1f1f1;
+    border: 0;
+    box-shadow: none;
+    border-radius: 0;
+    color: #000;
+    height: 45px;
+    font-weight: 300;
+    font-size: 15px;
+    margin-bottom: 15px;
+    padding: 0 20px;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.search-product button {
+    background: rgb(58, 58, 58);
+    color: #ffffff;
+    font-size: 18px;
+    position: absolute;
+    right: 0px;
+    padding: 8px 15px;
+    top: 0;
+    line-height: 27px;
+    border: none;
+    cursor: pointer;
+    height: 100%;
+}
+
+.search-product button:hover {
+    background: teal;
+}
+
+#sidebar h3 {
+    font-family: 'dosis';
+}
+
+#sidebar_filt_but button,
+#filter_form button {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    border: 1px solid teal !important;
+    color: teal;
+    font-size: 15px;
+}
+
+#sidebar_filt_but .active {
+    background: teal !important;
+    color: #fff;
+}
+
+#sidebar_filt_but button:hover,
+#filter_form button:hover {
+    background: teal !important;
+    color: #fff;
+}
+
+#filter_form .form-group{
+    display: block;
+    margin-bottom: 15px;
+}
+#filter_form .form-group input{
+    padding: 0;
+    height: initial;
+    width: initial;
+    margin-bottom: 0;
+    display: none;
+    cursor: pointer;
+}
+#filter_form .form-group label{
+    position: relative;
+    cursor: pointer;
+}
+#filter_form .form-group label:before{
+    content: '';
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: 2px solid teal;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 7px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 5px;
+}
+#filter_form .form-group input:checked + label:after{
+    /* content: '✔'; */
+    content: '';
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: 7px;
+    width: 6px;
+    height: 14px;
+    border: solid teal;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+#filter_form .form-group input:checked + label{
+    color: red;
+}
+
+
+@keyframes tick{
+    0%{
+        transform: scale(0)
+    }
+    0%{
+        transform: scale(1.3)
+    }
+    100%{
+        transform: scale(1)
+    }
 }
 
 
 
 
 
+/*--- /.price-range-slider ---*/
+.slider-labels {
+    margin-top: 20px;
+}
 
+/* Functional styling;
+* These styles are required for noUiSlider to function.
+* You don't need to change these rules to apply your design.
+*/
+.noUi-target,
+.noUi-target * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -ms-touch-action: none;
+    touch-action: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 
+.noUi-target {
+    position: relative;
+    direction: ltr;
+}
 
+.noUi-base {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    /* Fix 401 */
+}
 
+.noUi-origin {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
 
+.noUi-handle {
+    position: relative;
+    z-index: 1;
+}
 
+.noUi-stacking .noUi-handle {
+    /* This class is applied to the lower origin when
+its values is > 50%. */
+    z-index: 10;
+}
 
+.noUi-state-tap .noUi-origin {
+    -webkit-transition: left 0.3s, top .3s;
+    transition: left 0.3s, top .3s;
+}
 
+.noUi-state-drag * {
+    cursor: inherit !important;
+}
 
+/* Painting and performance;
+* Browsers can paint handles in their own layer.
+*/
+.noUi-base,
+.noUi-handle {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
 
+/* Slider size and handle placement;
+*/
+.noUi-horizontal {
+    height: 4px;
+}
 
+.noUi-horizontal .noUi-handle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    left: -7px;
+    top: -7px;
+    background-color: #008080;
+}
 
+/* Styling;
+*/
+.noUi-background {
+    background: #D6D7D9;
+}
 
+.noUi-connect {
+    background: #008080;
+    -webkit-transition: background 450ms;
+    transition: background 450ms;
+}
 
+.noUi-origin {
+    border-radius: 2px;
+}
 
+.noUi-target {
+    border-radius: 2px;
+}
 
+/* Handles and cursors;
+*/
+.noUi-draggable {
+    cursor: w-resize;
+}
 
+.noUi-vertical .noUi-draggable {
+    cursor: n-resize;
+}
 
+.noUi-handle {
+    cursor: default;
+    -webkit-box-sizing: content-box !important;
+    -moz-box-sizing: content-box !important;
+    box-sizing: content-box !important;
+}
 
+.noUi-handle:active {
+    border: 8px solid #345DBB;
+    border: 8px solid rgba(53, 93, 187, 0.38);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    left: -14px;
+    top: -14px;
+}
 
+/* Disabled state;
+*/
+[disabled].noUi-connect,
+[disabled] .noUi-connect {
+    background: #B8B8B8;
+}
 
-
+[disabled].noUi-origin,
+[disabled] .noUi-handle {
+    cursor: not-allowed;
+}
 
 
 
@@ -291,6 +791,7 @@ nav.navbar form {
     outline: none;
     border: 1px solid teal;
     width: 100%;
+    font-family: 'montserrat';
 }
 
 .form-control:focus {
@@ -299,12 +800,14 @@ nav.navbar form {
     color: #000;
     border: 1px none;
 }
-form .alert-block{
+
+form .alert-block {
     display: none;
 }
+
 .category {
     display: inline-block;
-    background: #1072f2;
+    background: teal;
     padding: 2px 8px;
     line-height: 1.5;
     font-size: 12px;
@@ -314,4 +817,11 @@ form .alert-block{
     margin-right: 10px;
     letter-spacing: .2em;
     text-decoration: none;
+}
+
+
+/* <--------- Contact ----------> */
+
+#contct_addr .mb-4 {
+    text-align: justify;
 }
