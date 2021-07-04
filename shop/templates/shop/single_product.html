@@ -1,0 +1,326 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}EazyBuy | About{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-xl-6 col-lg-5 col-md-6">
+      <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+          <div class="carousel-item active"> <img class="d-block w-100 img-fluid"
+              src="{% static 'main/assets/img/products/lenovo-yoga.jpg' %}" alt="First slide"> </div>
+          <div class="carousel-item"> <img class="d-block w-100 img-fluid"
+              src="{% static 'main/assets/img/products/asus-transformer.jpg' %}" alt="Second slide">
+          </div>
+          <div class="carousel-item"> <img class="d-block w-100 img-fluid"
+              src="{% static 'main/assets/img/products/surface-pro.jpg' %}" alt="Third slide">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel-example-1" role="button" data-slide="next">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+          <span class="sr-only">Next</span>
+        </a>
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-1" data-slide-to="0" class="active">
+            <img class="d-block w-100 img-fluid" src="{% static 'main/assets/img/products/lenovo-yoga.jpg' %}" alt="" />
+          </li>
+          <li data-target="#carousel-example-1" data-slide-to="1">
+            <img class="d-block w-100 img-fluid" src="{% static 'main/assets/img/products/asus-transformer.jpg' %}"
+              alt="" />
+          </li>
+          <li data-target="#carousel-example-1" data-slide-to="2">
+            <img class="d-block w-100 img-fluid" src="{% static 'main/assets/img/products/surface-pro.jpg' %}" alt="" />
+          </li>
+        </ol>
+      </div>
+      <div class="single-product-details">
+        <hr>
+        <h1>Lenovo Yoga</h1>
+        <h5> <small class="text-danger">$ 60.00</small> $40.79</h5>
+        {% if 'yes' %}
+        <p class="text-success">Available</p>
+        {% else %}
+        <p class="text-danger">Out of Stock</p>
+        {% endif%}
+        <p>Visualize ideas as you paint, edit, and design. Let the 10-bit color depth and strikingly large 28” display
+          pull you in from across the room. Or, lose yourself in the creative details of your work.</p>
+        <hr>
+        <div class="utils mb-3">
+          <a href="" class="btn btn-info"><i class="fa fa-heart"></i> Add to Wishlist</a>
+          <a href="{% url 'shop' %}" class="btn btn-info"><i class="fa fa-shopping-bag"></i> Add to Cart</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-lg-7 col-md-6">
+      <div class="shrt_desc">
+        <h3>Short Description</h3>
+        <div class="row specification">
+          <div class="col-sm-6"> <label>Operating system</label> </div>
+          <div class="col-sm-6">
+            <p>Chrome OS™</p>
+          </div>
+        </div>
+        <div class="row specification">
+          <div class="col-sm-6"> <label>Processor</label> </div>
+          <div class="col-sm-6">
+            <p>Intel® Celeron® N2840 with Intel® HD Graphics (2.16 GHz, up to 2.58 GHz, 1 MB cache, 2 cores)</p>
+          </div>
+        </div>
+        <div class="row specification">
+          <div class="col-sm-6"> <label>Processor technology</label> </div>
+          <div class="col-sm-6">
+            <p>Intel Turbo Boost Technology</p>
+          </div>
+        </div>
+        <div class="row specification">
+          <div class="col-sm-6"> <label>Graphics</label> </div>
+          <div class="col-sm-6">
+            <p>Intel HD Graphics</p>
+          </div>
+        </div>
+        <div class="row specification">
+          <div class="col-sm-6"> <label>Memory</label> </div>
+          <div class="col-sm-6">
+            <p>2 GB DDR3L SDRAM (onboard)</p>
+          </div>
+        </div>
+        <div class="row specification">
+          <div class="col-sm-6"> <label>Hard drive</label> </div>
+          <div class="col-sm-6">
+            <p>16 GB eMMC</p>
+          </div>
+        </div>
+        <div class="row specification">
+          <div class="col-sm-6"> <label>Wireless</label> </div>
+          <div class="col-sm-6">
+            <p>802.11ac (2x2) and Bluetooth® 4.0 combo</p>
+          </div>
+        </div>
+        <div class="row specification">
+          <div class="col-sm-6"> <label>Power supply</label> </div>
+          <div class="col-sm-6">
+            <p>45 W AC power adapter</p>
+          </div>
+        </div>
+        <div class="row specification">
+          <div class="col-sm-6"> <label>Battery</label> </div>
+          <div class="col-sm-6">
+            <p>3-cell, 36 Wh Li-ion</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" id="reviews">
+  <div class="row">
+    <div class="col-md-7">
+      <div class="card card-outline-secondary my-4">
+        <div class="card-header">
+          <h2>Product Reviews</h2>
+        </div>
+        <div class="card-body">
+          <div class="media mb-3">
+            <div class="content-section">
+              <div class="media-body">
+                <span id="reviewer">Naira Marley</span><span class="text-secondary"> - June 30, 2021</span>
+                <hr>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam
+                  inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam
+                  aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+              </div>
+            </div>
+          </div>
+          <div class="media mb-3">
+            <div class="media-body">
+              <div class="content-section">
+                <span id="reviewer">Olamide</span><span class="text-secondary"> - June 30, 2021</span>
+                <hr>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam
+                  inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam
+                  aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+              </div>
+            </div>
+          </div>
+          <div class="media mb-3">
+            <div class="media-body">
+              <div class="content-section">
+                <span id="reviewer">Reminisce</span><span class="text-secondary"> - June 30, 2021</span>
+                <hr>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam
+                  inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam
+                  aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="card card-outline-secondary my-4">
+        <div class="card-header">
+          <h2>Add a review</h2>
+        </div>
+        <div class="card-body">
+          <div class="media mb-3">
+            <div class="media-body">
+              <!-- <div class="content-section"> -->
+              <form action="{% url 'contact' %}" method="POST">
+                {% csrf_token %}
+                {% if not user.is_authenticated %}
+                <div class="form-group">
+                  <p>Name *</p>
+                  <input required type="text" class="form-control" name="name">
+                </div>
+                <div>
+                  <p>Email *</p>
+                  <input required type="email" class="form-control" name="email">
+                </div>
+                {% endif %}
+                <div class="form-group">
+                  <p>Your Review *</p>
+                  <textarea required name="message" rows="8" class="form-control"></textarea>
+                </div>
+                <button type="submit" class="btn btn-outline-info log my-3 text-uppercase">Leave a review</button>
+              </form>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4 mx-auto my-auto text-center">
+    <h1 id="rel_pro">Related Products</1>
+      <hr>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-md-3">
+      <a href="">
+        <div class="content-section text-center">
+          <div class="the_img">
+            <img class="d-block w-100 img-fluid" src="{% static 'main/assets/img/products/lenovo-yoga.jpg' %}">
+            <hr>
+          </div>
+          <div class="name_amt">
+            <p class="name">Lenovo Yoga</p>
+            <p class="amt">$209.99 <small class="text-danger">$249.99</small></p>
+          </div>
+          <div class="d-flex justify-content-around align-items-center utils mb-3">
+            <a href=""><i class="fa fa-heart active"></i></a>
+            <!-- inside heart...{if something}{endif} -->
+            <a href="{% url 'shop' %}" class="btn btn-info">Add to Cart</a>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="">
+        <div class="content-section text-center">
+          <div class="the_img">
+            <img class="d-block w-100 img-fluid" src="{% static 'main/assets/img/products/chrome-book-11.jpg' %}">
+            <hr>
+          </div>
+          <div class="name_amt">
+            <p class="name">HP Chromebook 14</p>
+            <p class="amt">$209.99 <small class="text-danger">$249.99</small></p>
+          </div>
+          <div class="d-flex justify-content-around align-items-center utils mb-3">
+            <a href=""><i class="fa fa-heart"></i></a>
+            <!-- inside heart...{if something}{endif} -->
+            <a href="{% url 'shop' %}" class="btn btn-info">Add to Cart</a>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="">
+        <div class="content-section text-center">
+          <div class="the_img">
+            <img class="d-block w-100 img-fluid" src="{% static 'main/assets/img/products/surface-pro.jpg' %}">
+            <hr>
+          </div>
+          <div class="name_amt">
+            <p class="name">Surface Pro</p>
+            <p class="amt">$209.99 <small class="text-danger">$249.99</small></p>
+          </div>
+          <div class="d-flex justify-content-around align-items-center utils mb-3">
+            <a href=""><i class="fa fa-heart active"></i></a>
+            <!-- inside heart...{if something}{endif} -->
+            <a href="{% url 'shop' %}" class="btn btn-info">Add to Cart</a>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
+      <a href="">
+        <div class="content-section text-center">
+          <div class="the_img">
+            <img class="d-block w-100 img-fluid" src="{% static 'main/assets/img/products/lenovo-ideacenter.jpg' %}">
+            <hr>
+          </div>
+          <div class="name_amt">
+            <p class="name">Lenovo Idea Center</p>
+            <p class="amt">$209.99 <small class="text-danger">$249.99</small></p>
+          </div>
+          <div class="d-flex justify-content-around align-items-center utils mb-3">
+            <a href=""><i class="fa fa-heart"></i></a>
+            <!-- inside heart...{if something}{endif} -->
+            <a href="{% url 'shop' %}" class="btn btn-info">Add to Cart</a>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <hr class="mb-4">
+  <div class="row">
+      <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
+          <div class="item text-center">
+              <i class="fa fa-phone"></i>
+              <h3>24/7 free</h3>
+              <p>support</p>
+          </div>
+      </div>
+      <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
+          <div class="item text-center">
+              <i class="fa fa-star"></i>
+              <h3>Low price<h3>
+                      <p>guarantee</p>
+          </div>
+      </div>
+      <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
+          <div class="item text-center">
+              <i class="fa fa-gear"></i>
+              <h3> Manufacturer’s<h3>
+                      <p>warranty</p>
+          </div>
+      </div>
+      <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
+          <div class="item text-center">
+              <i class="fa fa-recycle"></i>
+              <h3> Full refund<h3>
+                      <p>guarantee</p>
+          </div>
+      </div>
+  </div>
+  <hr>
+</div>
+
+{% endblock %}
