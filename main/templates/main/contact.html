@@ -6,29 +6,50 @@
 
 <div class="row">
     <div class="col-md-4 mx-auto my-auto text-center">
-        <h2>Contact us</h2>
+        <h2>Get in touch</h2>
         <hr>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-6 mx-auto">
-        <form action="{% url 'contact' %}" method="POST" class="mt-4 p-4 bg-light">
-            {% csrf_token %}
-            <div class="form-group">
-                <p>Subject *</p>
-                <input required type="text" class="form-control" name="subject">
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="content-section mt-4">
+                <form action="{% url 'contact' %}" method="POST" class="p-4">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <p>Your name *</p>
+                        <input required type="text" class="form-control" name="name">
+                    </div>
+                    <div class="form-group">
+                        <p>Subject *</p>
+                        <input required type="text" class="form-control" name="subject">
+                    </div>
+                    <div class="form-group">
+                        <p>Email *</p>
+                        <input required type="email" class="form-control" name="email">
+                    </div>
+                    <div class="form-group">
+                        <p>Message *</p>
+                        <textarea required name="message" rows="8" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-outline-info log my-3 text-uppercase">Send message</button>
+                </form>
             </div>
-            <div class="form-group">
-                <p>Email *</p>
-                <input required type="email" class="form-control" name="email">
+        </div>
+        <div class="col-md-5 mt-4">
+            <div class="content-section" id="contct_addr">
+                <h3>Contact Info</h3>
+                <hr class="foot_hr">
+                <p class="mb-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sit id neque nihil facere similique dignissimos fugiat, perspiciatis voluptatibus labore repudiandae minima alias velit rerum ut voluptas, magni itaque culpa quasi eum. Ex ratione consectetur eligendi eaque pariatur distinctio blanditiis deleniti aut dolor! Vitae ab consectetur, unde officia totam quod excepturi!</p>
+                <p><i class="fa fa-map-marker"></i>Address: No. 123456789<br>
+                    <span>some street address,</span><br>
+                    <span>some code</span>
+                </p>
+                <p><i class="fa fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+234 8115 8128 01</a></p>
+                <p><i class="fa fa-envelope"></i>Email: <a href="mailto:tomjoe@gmail.com">tomjoe@gmail.com</a></p>
             </div>
-            <div class="form-group">
-                <p>Message *</p>
-                <textarea required name="message" rows="8" class="form-control"></textarea>
-            </div>
-            <button type="submit" class="btn btn-outline-info log my-3">Send message</button>
-        </form>
+        </div>
     </div>
 </div>
 
