@@ -27,8 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# AUTH_USER_MODEL = 'users.CustomUser'
-# AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
+AUTH_USER_MODEL = 'users.CustomUser'
+AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
 
 # Application definition
 
