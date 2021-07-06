@@ -9,6 +9,7 @@
     <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet"> -->
     <link rel="stylesheet" href="{% static 'main/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/side_cart.css' %}">
     <link rel="stylesheet" href="{% static 'main/fonts/fontawesome/css/font-awesome.min.css' %}">
     <title>
         {% block title %} EazyBuy {% endblock %}
@@ -16,6 +17,7 @@
 </head>
 
 <body>
+    {% block side_cart %} {% endblock %}
 
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top rounded">
         <div class="container">
@@ -48,27 +50,30 @@
                         </form>
                     </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" id="dropdown09" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown09">
-                            <a class="dropdown-item drop" href="#">My Account</a>
-                            <a class="dropdown-item drop" href="#">Wishlist</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="" id="show_cart">Cart</a>
+                        </li>
+                        <li class="nav-item in_or_up">
+                            <a href="#" class="nav-link dropdown-toggle" id="dropdown09" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user"></i>
+                            </a>
+                            <div class="auth_opt text-center">
+                                <a class="nav-link" href="{% url 'login' %}">Account</a>
+                                <a class="nav-link" href="{% url 'register' %}">Wishlist</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
                     {% else %}
-                    <li class="nav-item in_or_up">
-                        <a href="" class="nav-link">Login</a>
-                        <div class="auth_opt text-center">
-                            <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-lock"></i> Login</a>
-                            <a class="nav-link" href="{% url 'register' %}"><i class="fa fa-user"></i> Sign Up</a>
-                        </div>
-                    </li>
+                        <li class="nav-item in_or_up">
+                            <a class="nav-link">Login</a>
+                            <div class="auth_opt text-center">
+                                <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-lock"></i> Login</a>
+                                <a class="nav-link" href="{% url 'register' %}"><i class="fa fa-user"></i> Sign Up</a>
+                            </div>
+                        </li>
                     {% endif %}
 
                 </ul>
