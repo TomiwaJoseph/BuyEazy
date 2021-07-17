@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'taggit',
+    # 'taggit',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +141,5 @@ EMAIL_HOST_USER = os.environ.get('MAIL_NAME')
 EMAIL_HOST_PASSWORD = os.environ.get('MAIL_PASS')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
