@@ -4,164 +4,55 @@
 {% block content %}
 <div class="space_up">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol> -->
         <div class="carousel-inner text-center">
-            <div class="carousel-item active">
-                <div class="container">
-                    <img src="{% static 'main/assets/img/carousel/surfaces2.jpg' %}" class="img-fluid"
-                        alt="carousel_img_1">
+            {% for i in carousel %}
+                <div class="carousel-item">
+                    <div class="container">
+                        <img src="{{ i.main_image.url }}" class="img-fluid"
+                            alt="carousel_img_1">
+                    </div>
+                    <div class="container text-center mt-2">
+                        <h1>{{ i.title }}</h1>
+                        <p>{{ i.description }}</p>
+                        <p><a class="btn btn-primary" href="{{ i.get_absolute_url }}" role="button">View product</a></p>
+                    </div>
                 </div>
-                <div class="container text-center mt-3">
-                    <h1 class="">Example system</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
-                        at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Buy now</a></p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="container">
-                    <img src="{% static 'main/assets/img/carousel/ipadair2m.jpg' %}" class="img-fluid"
-                        alt="carousel_img_1">
-                </div>
-                <div class="container text-center mt-3">
-                    <h1>Another example system</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
-                        at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="container">
-                    <img src="{% static 'main/assets/img/carousel/newlaptops.jpg' %}" class="img-fluid"
-                        alt="carousel_img_1">
-                </div>
-                <div class="container text-center mt-3">
-                    <h1>One more for good measure</h1>
-                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida
-                        at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span><i class="fa fa-angle-left" aria-hidden="true"></i></span>
             <span class="sr-only">Previous</span>
         </a>
         <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>
             <span class="sr-only">Next</span>
         </a>
     </div>
 </div>
 
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-md-4 text-center" data-aos="fade-left" data-aos-delay="200">
-            <div class="card mb-3">
-                <div class="card-img-top">
-                    <img src="{% static 'main/assets/img/carousel/surfaces2.jpg' %}" alt="" class="img-fluid">
-                </div>
-                <div class="card-body text-center">
-                    <h5 class="card-title">Microsoft Surface Pro</h5>
-                    <p>$1899.99</p>
-                    <a href="">View details</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-
 <div class="container">
     <div class="row" id="categories">
-        <div class="col-sm-3 text-center product-item">
-            <div class="product-img">
-                <a href="">
-                    <img src="{% static 'main/assets/img/products/apple-imac-27-retina.jpg' %}" alt="Blog"
+        {% for product in all_categories %}
+            <div class="col-sm-3 text-center product-item">
+                <div class="product-img">
+                    <img src="{{ product.main_image.url }}" alt="Blog"
                         class="image img-fluid" />
                     <br><br>
                     <div class="product-hover">
                         <div class="product-cart">
-                            <a class="btn btn-secondary btn-block" href="#">Add to cart</a>
-                            {% if user.is_authenticated %}
-                            <a class="btn btn-secondary btn-block" href="#">Add to wishlist</a>
+                            <button class="btn btn-secondary btn-block add_to_cart_btn" data-id="{{ product.id }}">Add to cart</button>
+                            {% if user.is_authenticated and product not in user.wishlist_owner.folder.all %}
+                                <button class="btn btn-secondary btn-block wishlist_btn" data-id="{{ product.id }}">Add to wishlist</button>
                             {% endif %}
-                            <a class="btn btn-secondary btn-block" href="#">View this product</a>
+                            <a class="btn btn-secondary btn-block" href="{{ product.get_absolute_url }}">View this product</a>
                         </div>
                     </div>
+                </div>
+                <a href="{% url 'login' %}">
+                    <p>{{ product.category }}</p>
                 </a>
             </div>
-            <a href="{% url 'login' %}">
-                <p>Desktops</p>
-            </a>
-        </div>
-        <div class="col-sm-3 text-center product-item">
-            <div class="product-img">
-                <a href="">
-                    <img src="{% static 'main/assets/img/products/chrome-book-asus.jpg' %}" alt="Blog"
-                        class="image img-fluid" />
-                    <br><br>
-                    <div class="product-hover">
-                        <div class="product-cart">
-                            <a class="btn btn-secondary btn-block" href="#">Add to cart</a>
-                            {% if user.is_authenticated %}
-                            <a class="btn btn-secondary btn-block" href="#">Add to wishlist</a>
-                            {% endif %}
-                            <a class="btn btn-secondary btn-block" href="#">View this product</a>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <a href="{% url 'login' %}">
-                <p>Laptops</p>
-            </a>
-        </div>
-        <div class="col-sm-3 text-center product-item">
-            <div class="product-img">
-                <a href="">
-                    <img src="{% static 'main/assets/img/products/lenovo-yoga.jpg' %}" alt="Blog"
-                        class="image img-fluid" />
-                    <br><br>
-                    <div class="product-hover">
-                        <div class="product-cart">
-                            <a class="btn btn-secondary btn-block" href="#">Add to cart</a>
-                            {% if user.is_authenticated %}
-                            <a class="btn btn-secondary btn-block" href="#">Add to wishlist</a>
-                            {% endif %}
-                            <a class="btn btn-secondary btn-block" href="#">View this product</a>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <a href="{% url 'login' %}">
-                <p>Hybrid Devices</p>
-            </a>
-        </div>
-        <div class="col-sm-3 text-center product-item">
-            <div class="product-img">
-                <a href="">
-                    <img src="{% static 'main/assets/img/products/asus-transformer.jpg' %}" alt="Blog"
-                        class="image img-fluid" />
-                    <br><br>
-                    <div class="product-hover">
-                        <div class="product-cart">
-                            <a class="btn btn-secondary btn-block" href="#">Add to cart</a>
-                            {% if user.is_authenticated %}
-                            <a class="btn btn-secondary btn-block" href="#">Add to wishlist</a>
-                            {% endif %}
-                            <a class="btn btn-secondary btn-block" href="#">View this product</a>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <a href="{% url 'login' %}">
-                <p>Tablets</p>
-            </a>
-        </div>
+        {% endfor %}
     </div>
 </div>
 
@@ -201,3 +92,4 @@
 </div>
 
 {% endblock %}
+
