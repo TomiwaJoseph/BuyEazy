@@ -1,6 +1,9 @@
 $(document).ready(function () {
 
-    $('#all_cat').addClass('active')
+    $('#all_cat').addClass('active');
+
+    $(".carousel-item").eq(0).addClass('active');
+    // $('div.carousel-inner > div:first-child').addClass('active')
 
     const filter = document.querySelector('#sidebar_filt_but');
     all_filter_buttons = filter.querySelectorAll('button');
@@ -14,35 +17,17 @@ $(document).ready(function () {
             }
             this.classList.add('active');
         })
-    }
+    };
 
     // $('li.active').removeClass('active');
     // $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
 
-    // $('.add_pho').click(function () {
-    //     $('#add_try').show()
-    //     $('#show_inp').removeClass('active')
-    //     $('#tried').removeClass('active')
-    //     $('#paint_comments').removeClass('active')
-    //     $('#comments').hide()
-    //     $('#tries').hide()
-    //     $('#add_comment').hide()
-    // })
-
-
-    // $('.carousel-item').eq(0).addClass('active')
-    // $('div.carousel-inner > div:first-child').addClass('active')
 
     //Cart
     //Toggle
     setTimeout(function () {
         $('body').find('.cart').fadeIn('slow');
     }, 1000);
-
-    // $('a[href="#open-cart"]').on('click', function () {
-    //     $('body').addClass('modal-open');
-    //     $('body').find('.cart').attr('data-toggle', 'active');
-    // });
     
     $('#show_cart').click(function(e){
         e.preventDefault();
