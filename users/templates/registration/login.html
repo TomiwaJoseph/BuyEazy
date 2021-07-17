@@ -15,7 +15,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-6 mx-auto my-auto" id="log_cat">
+    <div class="col-md-4 mx-auto my-auto" id="log_cat">
         <div class="content-section mt-1 bg-light">
             {% if form.errors %}
                 {% for field in form %}
@@ -36,6 +36,7 @@
                 {{ form | crispy }}
                 <div class="form-group">
                     <button class="btn btn-outline-info log" type="submit">Login</button>
+                    <button class="btn btn-outline-danger mt-4 w-100"><i class="fa fa-google mr-2"></i>Login with Google</button>
                 </div>
             </form>
             <div class="mb-2">
