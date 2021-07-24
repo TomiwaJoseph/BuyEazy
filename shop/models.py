@@ -8,7 +8,7 @@ class Product(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=300)
     category = models.ForeignKey("Category", on_delete=models.CASCADE,
-        related_name="product_category")
+        related_name="product_category", null=True)
     operating_system = models.CharField(max_length=50)
     processor = models.CharField(max_length=150)
     processor_technology = models.CharField(max_length=100)
@@ -19,7 +19,8 @@ class Product(models.Model):
     power_supply = models.CharField(max_length=100)
     battery = models.CharField(max_length=100)
     main_image = models.ImageField(upload_to="products")
-    price = models.CharField(max_length=10)
+    price = models.PositiveIntegerField()
+    discount_price = models.PositiveIntegerField()
     slug = models.SlugField(max_length=100)
     availability = models.BooleanField(default=True)
 
@@ -30,16 +31,16 @@ class Product(models.Model):
         return reverse('view_product', args=[self.slug])
 
     def image_tag(self):
-        return mark_safe("<img src='{}' height='20'/>".format(self.main_image.url))
+        return mark_safe("<img src='{}' height='30'/>".format(self.main_image.url))
 
     image_tag.short_description = "Image"
 
 
 class Reviews(models.Model):
-    product_id = models.ForeignKey("Product", 
+    product_id = models.ForeignKey("Product", null=True,
         on_delete=models.CASCADE, related_name="reviewed_product")
     review = models.CharField(max_length=100, blank=False)
-    reviewer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    reviewer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     date_reviewed =  models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -65,7 +66,7 @@ class Category(models.Model):
 
 class ProductImages(models.Model):
     product_id = models.ForeignKey("Product", on_delete=models.CASCADE,
-        related_name="product_images")
+        related_name="product_images", null=True)
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to="products/sub_images")
 
@@ -79,9 +80,33 @@ class ProductImages(models.Model):
 
 class Wishlist(models.Model):
     user =  models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, 
-        related_name="wishlist_owner")
+        related_name="wishlist_owner", null=True)
     folder = models.ManyToManyField(Product, blank=True)
 
     def __str__(self):
         return "{}'s wishlist".format(self.user)
+
+
+# class OrderItem(models.Model):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL,
+#                              on_delete=models.CASCADE)
+#     ordered = models.BooleanField(default=False)
+#     item = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     quantity = models.IntegerField(default=1)
+
+#     def __str__(self):
+#         return f"{self.quantity} of {self.item.title}"
+
+
+# class Order(models.Model):
+#     user = models.ForeignKey(settings.AUTH_USER_MODEL,
+#         on_delete=models.CASCADE)
+#     ref_code = models.CharField(max_length=20, blank=True, null=True)
+#     items = models.ManyToManyField(OrderItem)
+#     start_date = models.DateTimeField(auto_now_add=True)
+#     ordered_date = models.DateTimeField()
+#     ordered = models.BooleanField(default=False)
+
+#     def __str__(self):
+#         return self.user.email - self.ref_code
 
