@@ -7,7 +7,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1000;
+    z-index: 3000;
 }
 
 .cart>.overlay {
@@ -26,18 +26,19 @@
     top: 0;
     left: auto;
     right: 0;
-    width: 400px;
+    width: 300px;
     height: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    z-index: 9999999;
+    z-index: 99000;
     background-color: #ffffff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 .window h3{
     font-size: 25px;
+    font-family: 'dosis';
 }
 .cart>.window>.content {
     position: relative;
@@ -57,11 +58,11 @@
     top: 45%;
     top: calc(50% - 25px);
     left: -60px;
-    width: 60px;
+    width: 80px;
     height: 50px;
     border-radius: 50px 0px 0px 50px;
     background-color: teal;
-    z-index: 100;
+    z-index: 10;
 
     font-size: 16px;
     line-height: 20px;
@@ -142,6 +143,7 @@
     border: 1px solid teal!important;
     color: #fff;
     background-color: teal;
+    font-family: 'dosis';
 }
 .cart>.window>.checkout .btn:hover{
     background-color: #fff;
@@ -151,6 +153,7 @@
 .checkout span{
     color: #1b1b1b;
     font-size: 25px;
+    font-family: 'dosis';
 }
 
 /* Checkout */
@@ -168,8 +171,9 @@
 /* Text */
 /* Media */
 .media h2{
-    font-size: 16px;
+    font-size: 18px;
     color: #696969;
+    font-family: 'dosis';
 }
 .media-body label {
     font-size: 14px;
@@ -420,6 +424,7 @@
 .cart>.label>i {
     position: relative;
     display: inline-block;
+    font-size: 14px;
 
     -webkit-animation: swayCart 3s ease-in-out infinite;
     -moz-animation: swayCart 3s ease-in-out infinite;
