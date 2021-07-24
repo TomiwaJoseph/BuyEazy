@@ -1,0 +1,65 @@
+{% extends 'main/base.html' %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col" id="cartList">
+        <div class="table-main table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Images</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product_, item in cart_data.items %}
+                        <tr>
+                            <td class="thumbnail-img">
+                                <a href="{% url 'view_product' item.title|slugify %}">
+                                    <img class="img-fluid" src="{{ item.image }}" alt="{{ item.title }}" />
+                                </a>
+                            </td>
+                            <td class="name-pr">
+                                <a href="{% url 'view_product' item.title|slugify %}">{{ item.title }}</a>
+                            </td>
+                            <td class="price-pr">
+                                <p>$ {{ item.price }}</p>
+                            </td>
+                            <td class="quantity-box">
+                                <input type="number" class="qty-{{ product_ }}" value="{{ item.quantity }}" min="1">
+                            </td>
+                            <td class="total-pr">
+                                <p>$ {% widthratio item.price 1 item.quantity %}</p>
+                            </td>
+                            <td class="remove-pr">
+                                <button class="btn btn-info update-product" data-item="{{ product_ }}">
+                                    <i class="fa fa-sync"></i>
+                                </button>
+                                <button class="btn btn-danger delete-product" data-item="{{ product_ }}">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% if totalItems %}
+            <a href="{% url 'checkout' %}" class="btn btn-outline-info options" id="pro_chkout_btn">Proceed to Checkout</a>
+        {% else %}
+            <h1 class="no_items">You have no items in cart</h1>
+            <a href="{% url 'shop' %}" class="btn btn-outline-info options1">Go to Shop</a>
+            <a href="{% url 'gallery' %}" class="btn btn-outline-info options2">Go to Gallery</a>
+        {% endif %}
+    </div>
+    
+</div>
+
+
+{% endblock %}
