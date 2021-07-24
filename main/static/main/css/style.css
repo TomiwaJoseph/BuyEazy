@@ -1,7 +1,7 @@
 body {
     font-family: 'open sans';
     /* min-height: 75rem; */
-    padding-top: 4.5rem;
+    padding-top: 7rem;
     color: rgb(58, 58, 58);
 }
 
@@ -161,7 +161,7 @@ a:hover {
 }
 
 .fixed-top {
-    z-index: 1000;
+    z-index: 2000;
 }
 
 nav.navbar {
@@ -186,7 +186,7 @@ a:hover {
 
 nav.navbar a,
 nav.navbar ul li a {
-    color: rgb(58, 58, 58) !important;
+    color: #3a3a3a !important;
 }
 
 nav.navbar ul li a:hover {
@@ -219,7 +219,7 @@ nav.navbar form {
 }
 
 .auth_opt a {
-    color: rgb(58, 58, 58);
+    color: #3a3a3a;
     padding: 8px 5px;
     text-decoration: none;
     display: block;
@@ -310,9 +310,8 @@ nav.navbar form {
 
 .footer-top-box .social_media i {
     font-size: 30px;
-    border: 2px solid teal;
-    padding: 5px;
-    color: rgb(58, 58, 58);
+    padding: 7px;
+    color: teal;
 }
 
 .footer-top-box .social_media i:hover {
@@ -348,10 +347,8 @@ nav.navbar form {
     color: teal !important;
     background-color: #fff !important;
 }
-
 .space_up {
     margin-bottom: 100px;
-    margin-top: 40px;
 }
 
 .row .item i.fa {
@@ -559,6 +556,9 @@ nav.navbar form {
     font-size: 20px;
     font-family: 'dosis';
 }
+.name_amt p a:hover{
+    color: teal;
+}
 
 .name_amt .amt {
     font-size: 20px;
@@ -571,41 +571,68 @@ nav.navbar form {
     background-color: teal;
 }
 
-small {
-    text-decoration: line-through;
+del{
+    font-size: 14px;
 }
+
+/* small {
+    text-decoration: line-through;
+} */
+/* small.text-danger{
+    font-size: 14px;
+} */
 
 .text-muted {
     text-decoration: none;
 }
-
-.utils i {
-    font-size: 30px;
-    color: rgb(58, 58, 58)
+.shop_utils i{
+    font-size: 25px;
+    margin-bottom: 10px;
 }
-
+.shop_utils .fa-heart {
+    color: rgb(58, 58, 58);
+}
+.shop_utils .fa-heart:hover{
+    cursor: pointer;
+    color: #dc3545;
+    -webkit-transform: scale(1.4);
+    transform: scale(1.4);
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.shop_utils .fa-shopping-cart:hover{
+    color: teal;
+    cursor: pointer;
+    -webkit-transform: scale(1.4);
+    transform: scale(1.4);
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.shop_utils .fa-shopping-cart{
+    color: rgb(58, 58, 58);
+}
 .the_img img:hover {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-
 .content-section:hover {
     box-shadow: 0 0 10px rgba(48, 46, 77, 0.15);
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-
-.utils .active {
-    color: red;
+.fa-heart.active{
+    color: #dc3545;
 }
-
+.fa-shopping-cart.active{
+    /* color: #007bff; */
+    color: teal;
+}
 .carousel-indicators li img {
     margin-top: 30px;
     background-color: red;
 }
-
 .single-product-slider .carousel-control-prev {
     bottom: auto;
     background: teal;
@@ -634,10 +661,22 @@ small {
 
 
 /* <--------- Shop ----------> */
+#loadMore{
+    color: #fff;
+    background-color: teal;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    font-family: 'dosis';
+    margin-bottom: 30px;
+}
+#loadMore:hover{
+    color: #fff;
+    background-color: #016868;
+}
 .search-product {
     position: relative;
 }
-
 .search-product input[type="text"] {
     background: #f1f1f1;
     border: 0;
@@ -653,7 +692,6 @@ small {
     -moz-transition: all .5s ease;
     transition: all .5s ease;
 }
-
 .search-product button {
     background: rgb(58, 58, 58);
     color: #ffffff;
@@ -966,4 +1004,165 @@ form .alert-block {
 
 #contct_addr .mb-4 {
     text-align: justify;
+}
+
+
+/* <--------- Search ----------> */
+
+#search_q h2,
+#search_q h3{
+    font-family: 'dosis';
+}
+
+
+/* <--------- Cart ----------> */
+.table-main table thead{
+    background: teal;
+    color: #ffffff;
+}
+.table-main .table thead th{
+    font-size: 18px;
+    font-family: 'dosis';
+}
+.table-main table td.thumbnail-img{
+    width: 100px;
+}
+.table-main table td{
+    vertical-align: middle;
+    font-size: 16px;
+}
+.quantity-box input{
+    width: 50px;
+    border: 2px solid teal;
+    text-align: center;
+}
+.name-pr a{
+    font-weight: 700;
+    font-size: 18px;
+    color: #3a3a3a;
+    font-family: 'dosis';
+}
+.remove-pr{
+    text-align: center;
+}
+.remove-pr button{
+    font-size: 14px;
+}
+.input-group .form-control{
+    min-height: 50px;
+    border-radius: 0px;
+    font-weight: 600;
+    border: 3px solid #e8e8e8;
+    font-size: 18px;
+}
+.input-group .input-group-append button{
+    color: #fff!important;
+    background: #3a3a3a!important;
+    outline: none;
+    border: none;
+}
+.input-group .input-group-append button:hover{
+    color: #fff!important;
+    background: teal!important;
+}
+.order-box{
+    font-family: 'dosis';
+}
+.order-box h3{
+    font-size: 28px;
+    color: #3a3a3a;
+    font-weight: 700;
+}
+.order-box h4 {
+    font-size: 16px;
+    padding: 0px;
+    line-height: 35px !important;
+}
+.order-box .font-weight-bold{
+    font-size: 18px;
+}
+.gr-total h5 {
+    font-weight: 700;
+    color: teal;
+    font-size: 18px;
+    margin: 0px;
+    padding: 0px;
+    line-height: 35px !important;
+}
+.gr-total .h5{
+    margin: 0px;
+    font-weight: 700;
+    line-height: 35px;
+}
+#pro_chkout_btn{
+    color: #fff!important;
+    background: #3a3a3a!important;
+    outline: none;
+    border: none;
+    width: 100%;
+    font-family: 'dosis';
+    padding: 10px;
+    font-size: 18px;
+}
+#pro_chkout_btn:hover{
+    color: #fff!important;
+    background: teal!important;
+}
+#chkout_btn {
+    color: #fff!important;
+    background: #3a3a3a!important;
+    outline: none;
+    border: none;
+    width: 100%;
+    font-family: 'dosis';
+    padding: 10px;
+}
+#chkout_btn:hover{
+    color: #fff!important;
+    background: teal!important;
+}
+.no_items{
+    font-family: 'dosis';
+}
+.options1,
+.options2{
+    font-family: 'dosis';
+    color: #fff!important;
+    background: #3a3a3a!important;
+    outline: none;
+    border: none;
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+}
+.options1:hover{
+    color: #fff!important;
+    background: teal!important;
+}
+.options2:hover{
+    color: #fff!important;
+    background: #dc3545!important;
+}
+
+
+
+/* <--------- Checkout ----------> */
+
+.img_name{
+    display: inline-block;
+}
+.img_name h2{
+    font-size: 16px;
+    display: inline;
+}
+.chk_price{
+    font-size: 16px;
+}
+.billing-box h4{
+    font-size: 28px;
+    color: #3a3a3a;
+    font-weight: 700;
+    font-family: 'dosis';
 }
