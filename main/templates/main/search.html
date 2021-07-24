@@ -1,0 +1,73 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col" id="search_q">
+            {% if query %}
+                <h2>Search results for "<span style="color: teal;">{{ search_input }}</span>"</h2>
+            {% else %}
+                <h3>No results for "<span style="color: teal;">{{ search_input }}</span>"</h3>
+                <br>
+                <h2>Products you might find interesting</h2>
+                <hr>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% if query %}
+            {% for product in query %}
+                <div class="col-md-3">
+                    <a href="{% url 'view_product' product.slug %}">
+                        <div class="content-section text-center">
+                            <div class="the_img">
+                                <img class="d-block w-100 img-fluid"
+                                    src="{{ product.main_image.url }}" alt="{{ product.title }}">
+                                <hr>
+                            </div>
+                            <div class="name_amt">
+                                <p class="name">{{ product.title }}</p>
+                                <p class="amt">${{ product.price }} {% if product.discount_price %}<del class="text-danger">${{ product.discount_price }}</del>{% endif %}</p>
+                            </div>
+                            <div class="col-10 d-flex shop_utils justify-content-around">
+                                <a><i class="fa fa-heart wishlist_btn {% if product in user.wishlist_owner.folder.all %}active{% endif %}" data-id="{{ product.id }}"></i></a>
+                                <a><i class="fa fa-shopping-cart add_to_cart_btn {% if product.id|slugify in request.session.cart_data %}active{% endif %}" 
+                                    data-id="{{ product.id }}" data-price="{{ product.price }}" data-title="{{ product.title }}" data-image="{{ product.main_image.url }}"
+                                    ></i></a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+            {% else %}
+                {% for product in interested %}
+                    <div class="col-md-3">
+                        <a href="{% url 'view_product' product.slug %}">
+                            <div class="content-section text-center">
+                                <div class="the_img">
+                                    <img class="d-block w-100 img-fluid"
+                                        src="{{ product.main_image.url }}" alt="{{ product.title }}">
+                                    <hr>
+                                </div>
+                                <div class="name_amt">
+                                    <p class="name">{{ product.title }}</p>
+                                    <p class="amt">${{ product.price }} {% if product.discount_price %}<del class="text-danger">${{ product.discount_price }}</del>{% endif %}</p>
+                                </div>
+                                <div class="col-10 d-flex shop_utils justify-content-around">
+                                    <a><i class="fa fa-heart wishlist_btn {% if product in user.wishlist_owner.folder.all %}active{% endif %}" data-id="{{ product.id }}"></i></a>
+                                    <a><i class="fa fa-shopping-cart add_to_cart_btn {% if product.id|slugify in request.session.cart_data %}active{% endif %}" data-id="{{ product.id }}" data-title="{{ product.title }}"></i></a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
