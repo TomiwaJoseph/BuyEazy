@@ -6,8 +6,8 @@ from .models import (Product, Reviews, ProductImages,
 class ProductAdmin(admin.ModelAdmin):
     search_fields = ['title',]
     list_filter = ['category',]
-    list_editable = ['availability']
-    list_display = ('title', 'category', 'availability', 'image_tag')
+    list_editable = ['availability', 'category', 'price', 'discount_price']
+    list_display = ('title', 'price', 'discount_price', 'category', 'availability', 'image_tag')
     prepopulated_fields = {'slug': ('title',)}
 
     def make_available(modeladmin, request, queryset):
@@ -21,8 +21,8 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    # list_display = ('')
     prepopulated_fields = {'slug': ('title',)}
+
 
 admin.site.register(ProductImages)
 admin.site.register(Reviews)
