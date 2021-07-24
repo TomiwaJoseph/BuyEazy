@@ -25,3 +25,6 @@ def register(request):
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+def dashboard(request):
+    return render(request, 'users/dashboard.html')
