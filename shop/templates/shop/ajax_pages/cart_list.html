@@ -1,0 +1,56 @@
+
+<div class="table-main table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Images</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product_, item in cart_data.items %}
+                <tr>
+                    <td class="thumbnail-img">
+                        <a href="#">
+                            <img class="img-fluid" src="{{ item.image }}" alt="{{ item.title }}" />
+                        </a>
+                    </td>
+                    <td class="name-pr">
+                        <a href="#">{{ item.title }}</a>
+                    </td>
+                    <td class="price-pr">
+                        <p>$ {{ item.price }}</p>
+                    </td>
+                    <td class="quantity-box">
+                        <input type="number" class="qty-{{ product_ }}" value="{{ item.quantity }}">
+                    </td>
+                    <td class="total-pr">
+                        <p>$ {% widthratio item.price 1 item.quantity %}</p>
+                    </td>
+                    <td class="remove-pr">
+                        <button class="btn btn-info update-product" data-item="{{ product_ }}">
+                            <i class="fa fa-sync"></i>
+                        </button>
+                        <button class="btn btn-danger delete-product" data-item="{{ product_ }}">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-9 my-auto mx-auto">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter your coupon code" aria-describedby="Enjoy coupon here">
+            <div class="input-group-append">
+                <button class="btn btn-success" type="button">Apply Coupon</button>
+            </div>
+        </div>
+    </div>
+</div>

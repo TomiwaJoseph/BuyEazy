@@ -1,0 +1,16 @@
+
+
+{% for product in cart_contents %}
+    <div class="media">
+        <div class="media-left">
+            <a href="#">
+                <img class="media-object" src="{{ product.main_image.url }}" alt="{{ product.title }}" />
+            </a>
+        </div>
+        <div class="media-body">
+            <h2 class="h4 media-heading">{{ product.title }}</h2>
+            <label>{{ product.category }}</label>
+            <p class="price">${{ product.price }}</p>
+        </div>
+    </div>
+{% endfor %}
