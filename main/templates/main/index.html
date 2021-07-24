@@ -9,7 +9,7 @@
                 <div class="carousel-item">
                     <div class="container">
                         <img src="{{ i.main_image.url }}" class="img-fluid"
-                            alt="carousel_img_1">
+                            alt="{{ i.title }}">
                     </div>
                     <div class="container text-center mt-2">
                         <h1>{{ i.title }}</h1>
@@ -35,12 +35,12 @@
         {% for product in all_categories %}
             <div class="col-sm-3 text-center product-item">
                 <div class="product-img">
-                    <img src="{{ product.main_image.url }}" alt="Blog"
+                    <img src="{{ product.main_image.url }}" alt="{{ product.title }}"
                         class="image img-fluid" />
                     <br><br>
                     <div class="product-hover">
                         <div class="product-cart">
-                            <button class="btn btn-secondary btn-block add_to_cart_btn" data-id="{{ product.id }}">Add to cart</button>
+                            <button class="btn btn-secondary btn-block add_to_cart_btn" data-id="{{ product.id }}" data-title="{{ product.title }}">Add to cart</button>
                             {% if user.is_authenticated and product not in user.wishlist_owner.folder.all %}
                                 <button class="btn btn-secondary btn-block wishlist_btn" data-id="{{ product.id }}">Add to wishlist</button>
                             {% endif %}
