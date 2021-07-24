@@ -39,10 +39,19 @@ def index(request):
 def contact(request):
     return render(request, 'main/contact.html')
 
-# def newsletter(request):
-#     get_email = request.POST.get('email')
-#     # if get_email:
-#     #     new_email = Newsletter.objects.create(email=get_email)
-#     #     new_email.save()
-#     return HttpResponse(status=204)
+def search_product(request):
+    search_input = request.POST.get('search')
+    query = Product.objects.filter(title__icontains=search_input)
+    
+    random_query = list(Product.objects.all())
+    random.shuffle(random_query)
+    all_categories = random_query[:4]
+    
+    context = {
+        'search_input': search_input,
+        'query': query,
+        'interested': all_categories,
+    }
+    return render(request, 'main/search.html', context)
+
 
