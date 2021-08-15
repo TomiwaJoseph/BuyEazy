@@ -2,17 +2,6 @@
 
 $(document).ready(function(){
 
-    // $('#loadMore').on('click', function(){
-    //     const total_items = document.querySelector('.shop_utils');
-    //     all_a_tags = total_items.querySelectorAll('i');
-    //     totalButtons = all_a_tags.length;
-    //     for (let i = 0; i < totalButtons; i++){
-    //         // var check = $('#cart_utils').attr('data-wish')
-    //         console.log(all_a_tags[i])
-    //     }
-    // })
-
-
     $('#success_tic').on('hidden.bs.modal', function(){
         $('.cart .label').prop('disabled', false)
     })
@@ -20,7 +9,7 @@ $(document).ready(function(){
         $('.cart .label').prop('disabled', true)
     })
 
-    $('#cart_update, #show_cart').on('click', function(){
+    $('.label').on('click', function(){
         $.ajax({
             url: '/show-preview/',
             success: function(res){
@@ -150,6 +139,11 @@ $(document).ready(function(){
                 // $('.gr-total .h5').text(' $ ' + res.total_amount)
             }
         })
+    })
+
+
+    $(document).on('click', '.del_wish_item', function(){
+        console.log('delete wishlist item')
     })
 
 })
