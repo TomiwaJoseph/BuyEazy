@@ -8,7 +8,7 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total</th>
-                <th>Remove</th>
+                <th>Update cart</th>
             </tr>
         </thead>
         <tbody>
@@ -44,7 +44,14 @@
         </tbody>
     </table>
 </div>
-<div class="row">
+{% if totalItems %}
+    <a href="{% url 'checkout' %}" class="btn btn-outline-info options" id="pro_chkout_btn">Proceed to Checkout</a>
+{% else %}
+    <h1 class="no_items">You have no items in cart</h1>
+    <a href="{% url 'shop' %}" class="btn btn-outline-info options1">Go to Shop</a>
+    <a href="{% url 'gallery' %}" class="btn btn-outline-info options2">Go to Gallery</a>
+{% endif %}
+<!-- <div class="row">
     <div class="col-9 my-auto mx-auto">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Enter your coupon code" aria-describedby="Enjoy coupon here">
@@ -53,4 +60,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
