@@ -160,6 +160,11 @@ a:hover {
     }
 }
 
+.alert-dismissible{
+    font-family: 'dosis';
+    font-size: 18px;
+}
+
 .fixed-top {
     z-index: 2000;
 }
@@ -320,16 +325,15 @@ nav.navbar form {
 }
 
 /* <---------- Index --------> */
-.carousel-control-prev .fa,
-.carousel-control-next .fa {
+#myCarousel .carousel-control-prev .fa,
+#myCarousel .carousel-control-next .fa {
     font-size: 35px;
     color: teal;
     font-weight: 700;
 }
 
-.carousel-item img {
-    /* width: 70%; */
-    height: 370px;
+#myCarousel .carousel-item img {
+    width: 42%;
 }
 
 .carousel-item h1,
@@ -455,6 +459,12 @@ nav.navbar form {
 }
 
 /* <--------- Single Product ------------> */
+
+#carousel-example-1 .carousel-inner img{
+    width: 80%;
+    margin: auto;
+}
+
 .specification {
     padding-top: 10px;
     border-bottom: 1px solid #eee;
@@ -483,10 +493,6 @@ nav.navbar form {
     font-family: 'dosis';
 }
 
-.single-product-details small {
-    font-size: 20px;
-}
-
 .single-product-details h5 {
     font-size: 30px;
     color: teal;
@@ -504,18 +510,21 @@ nav.navbar form {
     font-weight: 600;
 }
 
-.single-product-details .btn {
-    text-transform: uppercase;
-    /* font-family: 'dosis'; */
+.single-product-details .utils .btn {
+    /* text-transform: uppercase; */
+    font-family: 'dosis';
     padding: 10px;
+    width: 48%;
 }
 
-.single-product-details .fa {
-    color: #fff;
-    font-size: 20px;
-    margin-right: 5px;
+#reviews .text-secondary{
+    font-size: 15px;
+    font-style: italic;
 }
 
+#reviews h2{
+    font-family: 'dosis';
+}
 #reviews {
     margin-top: 100px;
 }
@@ -528,6 +537,14 @@ nav.navbar form {
 #reviewer {
     color: teal;
     font-weight: 700;
+}
+#review_form button{
+    width: 100%;
+    font-family: 'dosis';
+}
+#review_form button:hover{
+    color: teal;
+    background: none;
 }
 
 .text-secondary {
@@ -574,14 +591,6 @@ nav.navbar form {
 del{
     font-size: 14px;
 }
-
-/* small {
-    text-decoration: line-through;
-} */
-/* small.text-danger{
-    font-size: 14px;
-} */
-
 .text-muted {
     text-decoration: none;
 }
@@ -724,7 +733,8 @@ del{
     font-size: 15px;
 }
 
-#sidebar_filt_but .active {
+#sidebar_filt_but .active,
+#dashboard_sidebar .active {
     background: teal !important;
     color: #fff;
 }
@@ -930,26 +940,6 @@ its values is > 50%. */
     cursor: not-allowed;
 }
 
-
-
-/* <--------- Checkout Page ----------> */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* <--------- Register and Login Forms ----------> */
 .content-section {
     background: #ffffff;
@@ -1016,6 +1006,15 @@ form .alert-block {
 
 
 /* <--------- Cart ----------> */
+/* .grand_tot{
+    font-family: 'dosis';
+}
+.grand_tot h5{
+    font-weight: 700;
+}
+.grand_tot h4{
+    color: teal;
+} */
 .table-main table thead{
     background: teal;
     color: #ffffff;
@@ -1149,7 +1148,15 @@ form .alert-block {
 
 
 /* <--------- Checkout ----------> */
-
+.address-box h4{
+    font-size: 28px;
+    color: #3a3a3a;
+    font-weight: 700;
+    font-family: 'dosis';
+}
+.address-box h3{
+    font-size: 24px;
+}
 .img_name{
     display: inline-block;
 }
@@ -1160,9 +1167,70 @@ form .alert-block {
 .chk_price{
     font-size: 16px;
 }
-.billing-box h4{
-    font-size: 28px;
-    color: #3a3a3a;
+.coupon_center h5{
+    font-family: 'dosis';
+    color: teal;
+}
+.coupon_center small{
+    color: #28a745;
+}
+.coupon_center .h5{
+    font-size: 16px;
+    color: #28a745;
+}
+#use_existing{
+    color: teal;
     font-weight: 700;
+}
+
+/* <--------- Dashboard ----------> */
+
+#dashboard_sidebar .list-group-item:hover{
+    color: #fff;
+    background: teal;
+    outline: none;
+    border: 1px solid teal;
+}
+#dashboard_sidebar .text-danger:hover{
+    color: #fff!important;
+    background: #dc3545;
+    outline: none;
+    border: 1px solid #dc3545;
+}
+#each_card a:hover{
+    color: #fff;
+    background: teal;
+}
+#each_card a{
+    background: none;
+    color: teal;
+    border: 1px solid teal;
+    font-size: 12px;
+}
+
+#each_card button{
+    background: none;
+}
+#each_card h5{
     font-family: 'dosis';
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
