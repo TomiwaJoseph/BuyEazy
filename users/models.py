@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, BaseUserManager
-
+from shop.models import Product
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -47,4 +47,13 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.email
+
+
+class Wishlist(models.Model):
+    user =  models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, 
+        related_name="wishlist_owner", null=True)
+    folder = models.ManyToManyField(Product, blank=True)
+
+    def __str__(self):
+        return "{}'s wishlist".format(self.user)
 
