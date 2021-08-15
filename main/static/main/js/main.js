@@ -34,19 +34,19 @@ $(document).ready(function () {
     setTimeout(function () {
         $('body').find('.cart').fadeIn('slow');
     }, 1000);
-    
-    $('#show_cart').click(function(e){
-        e.preventDefault();
-        know_state = $('.cart').attr("data-toggle")
-        if (know_state == 'inactive'){
-            $('body').addClass('modal-open');
-            $('body').find('.cart').attr('data-toggle', 'active');
-        }
-        else {
-            $('body').removeClass('modal-open');
-            $('body').find('.cart').attr('data-toggle', 'inactive');    
-        };
-    });
+
+    // $('#show_cart').click(function(e){
+    //     e.preventDefault();
+    //     know_state = $('.cart').attr("data-toggle")
+    //     if (know_state == 'inactive'){
+    //         $('body').addClass('modal-open');
+    //         $('body').find('.cart').attr('data-toggle', 'active');
+    //     }
+    //     else {
+    //         $('body').removeClass('modal-open');
+    //         $('body').find('.cart').attr('data-toggle', 'inactive');    
+    //     };
+    // });
 
     $('.cart').on('click', '.label', function () {
         $('body').addClass('modal-open');
@@ -59,4 +59,46 @@ $(document).ready(function () {
     });
     //Toggle
 
+    // $('#wishlist_section').hide()
+
+    $('#wish_sidebar_btn').addClass('active')
+    $('#wishlist_section').show();
+    $('#orders_section').hide();
+    $('#password_change_section').hide();
+
+
+    const sidebar_filter = $('#dashboard_sidebar');
+    all_sidebar_buttons = $('#dashboard_sidebar').find('button');
+    sidebarButtonCount = all_sidebar_buttons.length;
+
+    for (let i = 0; i < sidebarButtonCount; i++){
+        const side_buttons = all_sidebar_buttons[i];
+        side_buttons.addEventListener('click', function(){
+            // console.log(side_buttons.innerHTML);
+            for (let j = 0; j < sidebarButtonCount; j++){
+                all_sidebar_buttons[j].classList.remove('active');
+            }
+            this.classList.add('active');
+            if (this.innerHTML == 'Wishlist'){
+                $('#wishlist_section').show();
+                $('#orders_section').hide();
+                $('#password_change_section').hide();
+            } else if (this.innerHTML == 'Orders'){
+                $('#orders_section').show();
+                $('#wishlist_section').hide();
+                $('#password_change_section').hide();
+            } else {
+                $('#password_change_section').show();
+                $('#orders_section').hide();
+                $('#wishlist_section').hide();
+            }
+        })
+    }
+    
+
+
+
+
+
+    
 });
