@@ -26,9 +26,15 @@ SECRET_KEY = '2ifu4rle103qiq77$^qf!a81q$adzp6%8@)tzq^rp=z$%om2vy'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
 
 AUTH_USER_MODEL = 'users.CustomUser'
-AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
+
+AUTHENTICATION_BACKENDS = [
+    'users.backends.EmailBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2'
+]
 
 # Application definition
 
@@ -44,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'django_countries',
+    'widget_tweaks',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -130,7 +138,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'index'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -146,4 +155,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 STRIPE_PUBLIC_KEY = "pk_test_51I1qtTB87wdwaKDB0MG5E1u8G6BylMiG5wNRRbhPRTzpLrFEvLI6IboPq9v2SubDUnVbRc79bokBCoNnSyFITM3c00RuRjpSpR"
 STRIPE_SECRET_KEY = "sk_test_51I1qtTB87wdwaKDBRrNVVpro9X5OOU9ZCVeTrsF72rf3rrPEj1uMXVVAghgzfWuIYbe5PI4bBEK2wewQoRExp2JI00btpaeu0r"
-STRIPE_WEBHOOK_SECRET = ""
+STRIPE_WEBHOOK_SECRET = "whsec_Q2fEbq3cgU3vAoGSHwDX7Z8IjirexZqD"
+
+PASSWORD_RESET_TIMEOUT = 3600
