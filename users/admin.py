@@ -5,7 +5,8 @@ from .models import CustomUser, UserProfile, Wishlist
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    list_display = ('email', 'is_staff', 'is_active',)
+    # list_editable = ['full_name']
+    list_display = ('email', 'full_name', 'is_staff', 'is_active',)
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
