@@ -1,5 +1,5 @@
 body {
-    font-family: 'open sans';
+    font-family: 'montserrat';
     /* min-height: 75rem; */
     padding-top: 7rem;
     color: rgb(58, 58, 58);
@@ -13,6 +13,11 @@ a:hover {
 
 /* <--------- Base --------> */
 
+.alert-error{
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
 #success_tic .page-body {
     max-width: 300px;
     background-color: #FFFFFF;
@@ -298,13 +303,17 @@ nav.navbar form {
     font-size: 20px;
 }
 
-.newsletter-box button {
+.newsletter-box button,
+#profile_upd_btn,
+#reset_success_btn {
     background-color: none;
     color: teal;
     border: 1px solid teal;
 }
 
-.newsletter-box button:hover {
+.newsletter-box button:hover,
+#profile_upd_btn:hover,
+#reset_success_btn:hover {
     background-color: teal;
     color: #fff;
 }
@@ -370,13 +379,9 @@ nav.navbar form {
     margin-top: 10px;
 }
 
-#categories p {
-    font-size: 20px;
-    color: rgb(58, 58, 58);
-}
-
-#categories p:hover {
-    color: teal;
+#sort_category{
+    font-size: 18px;
+    color: #3a3a3a;
 }
 
 .product-img:hover img {
@@ -476,7 +481,6 @@ nav.navbar form {
 }
 
 .specification label {
-    /* font-family: 'dosis'; */
     font-weight: 600;
     color: teal;
 }
@@ -626,8 +630,10 @@ del{
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-.content-section:hover {
-    box-shadow: 0 0 10px rgba(48, 46, 77, 0.15);
+.content-section:hover,
+#your_addresses_section .list-group-item:hover {
+    box-shadow: 0 1px 2px rgba(43, 59, 93, 0.29), 0 0 13px rgba(43, 59, 93, 0.29);
+    /* box-shadow: 0 0 10px rgba(48, 46, 77, 0.15); */
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
@@ -948,13 +954,11 @@ its values is > 50%. */
     border-radius: 3px;
     margin-bottom: 20px;
 }
-
 .log:hover {
     color: #fff;
     background: teal;
     border: 1px solid teal;
 }
-
 .log {
     background: none;
     color: teal;
@@ -963,18 +967,15 @@ its values is > 50%. */
     width: 100%;
     font-family: 'montserrat';
 }
-
 .form-control:focus {
     -webkit-box-shadow: 0 3px 10px -2px teal !important;
     box-shadow: 0 3px 10px -2px teal !important;
     color: #000;
     border: 1px none;
 }
-
-form .alert-block {
-    display: none;
+.login_error{
+    font-size: 14px;
 }
-
 .category {
     display: inline-block;
     background: teal;
@@ -988,7 +989,38 @@ form .alert-block {
     letter-spacing: .2em;
     text-decoration: none;
 }
-
+.category:hover {
+    background: #016868;
+}
+#product_center .btn{
+    background: none!important;
+    color: teal!important;
+    width: 75%;
+    border: none;
+}
+#product_center .btn:hover{
+    background: teal!important;
+    color: #fff!important;
+}
+#design_hr hr{
+    border: none;
+    height: 2px;
+    background-color: teal;
+    width: 20%;
+}
+.login_media i{
+    font-size: 28px;
+    margin: 10px 0;
+    padding: 10px;
+    color: #fff;
+    border-radius: 3px;
+}
+.login_media .fa-facebook-f{
+    background-color: #3b5998;
+}
+.login_media .fa-google{
+    background-color: #db4a39;
+}
 
 /* <--------- Contact ----------> */
 
@@ -1015,6 +1047,9 @@ form .alert-block {
 .grand_tot h4{
     color: teal;
 } */
+#remove_pt {
+    margin-top: -20px;
+}
 .table-main table thead{
     background: teal;
     color: #ffffff;
@@ -1064,12 +1099,10 @@ form .alert-block {
     color: #fff!important;
     background: teal!important;
 }
-.order-box{
-    font-family: 'dosis';
-}
 .order-box h3{
     font-size: 28px;
     color: #3a3a3a;
+    font-family: 'dosis';
     font-weight: 700;
 }
 .order-box h4 {
@@ -1086,11 +1119,13 @@ form .alert-block {
     font-size: 18px;
     margin: 0px;
     padding: 0px;
+    font-family: 'dosis';
     line-height: 35px !important;
 }
 .gr-total .h5{
     margin: 0px;
     font-weight: 700;
+    font-family: 'dosis';
     line-height: 35px;
 }
 #pro_chkout_btn{
@@ -1148,7 +1183,11 @@ form .alert-block {
 
 
 /* <--------- Checkout ----------> */
-.address-box h4{
+.address-box h4,
+#cat_div,
+#addr_type,
+.stripe-payment-box h3,
+.paypal-payment-box h3{
     font-size: 28px;
     color: #3a3a3a;
     font-weight: 700;
@@ -1161,11 +1200,12 @@ form .alert-block {
     display: inline-block;
 }
 .img_name h2{
-    font-size: 16px;
+    font-size: 14px;
     display: inline;
 }
 .chk_price{
     font-size: 16px;
+    font-weight: 600;
 }
 .coupon_center h5{
     font-family: 'dosis';
@@ -1214,8 +1254,17 @@ form .alert-block {
 #each_card h5{
     font-family: 'dosis';
 }
-
-
+.list-group-item span{
+    color: teal;
+}
+.del_wish_item{
+    cursor: pointer;
+}
+#wishlist_section h1,
+#orders_section h1,
+#your_addresses_section h1{
+    font-family: 'dosis';
+}
 
 
 
