@@ -42,6 +42,7 @@
       <div class="single-product-details">
         <hr>
         <h1>{{ object.title }}</h1>
+        <p class="category">{{ object.category.title }}</p>
         <h5>{% if object.discount_price %}<del class="text-danger">$ {{ object.discount_price}}</del>{% endif %} ${{ object.price }}</h5>
         <!-- {% if object.availability %}
         <p class="text-success">Available</p>
