@@ -1,29 +1,43 @@
 {% extends 'main/base.html' %}
 {% load static %}
+{% load users_tags %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="list-group" id="dashboard_sidebar">
-            <!-- <button class="list-group-item btn btn-outline-info">Dashboard</button> -->
+            <button class="list-group-item btn btn-outline-info" id="dash_btn">Dashboard</button>
             <button class="list-group-item btn btn-outline-info" id="wish_sidebar_btn">Wishlist</button>
             <button class="list-group-item btn btn-outline-info" id="order_sidebar_btn">Orders</button>
-            <button class="list-group-item btn btn-outline-info" id="pass_change_btn">Password Change</button>
-            <!-- <a href="{% url 'logout' %}" class="list-group-item text-danger btn btn-outline-info">Logout</a> -->
+            <button class="list-group-item btn btn-outline-info" id="pass_change_btn">Profile edit</button>
+            <button class="list-group-item btn btn-outline-info" id="your_addr_btn">Your addresses</button>
+            <a href="{% url 'logout' %}" class="list-group-item text-danger btn btn-outline-info">Logout</a>
         </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8 pl-4">
+        <div class="row" id="dashboard_section">
+            <div class="col-md-12">
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
         <div class="row" id="wishlist_section">
+            {% if not all_wishlist.first.folder.all %}
+                <h1>There is no items in your wishlist</h1>
+            {% endif %}
+
             {% for product in all_wishlist.first.folder.all %}
                 <div class="col-3 mb-3 mb-4">
                     <div class="card text-center" id="each_card">
                         <img class="img-fluid w-75 mx-auto" src="{{ product.main_image.url }}" alt="{{ product.title }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ product.title }}</h5>
-                            <div class="d-inline-block">
-                                <a href="{% url 'view_product' product.slug %}" class="btn btn-primary">View</a>
-                                <button class="btn del_wish_item"><i class="fa fa-trash text-danger"></i></button>
+                            <div class="d-flex justify-content-between align-items-center wish_utils">
+                                <a href="{% url 'view_product' product.slug %}" class="btn btn-primary w-75">View</a>
+                                <i class="del_wish_item fa fa-trash text-danger" data-id="{{ product.id }}"></i>
                             </div>
                         </div>
                     </div>
@@ -31,43 +45,126 @@
             {% endfor %}
         </div>
         <div class="row" id="orders_section">
-            <div class="col-12 mb-4 bg-secondary">
-                <div class="table-responsive">
-                    <table class="table-bordered table">
-                        <thead>
-                            <tr>
-                                <th>Inv no</th>
-                                <th>Item</th>
-                                <th>Qty</th>
-                                <th>Price</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for item in orderitems %}
-                            <tr>
-                                <td>{{item.invoice_no}}</td>
-                                <td>
-                                    <p><img src="/media/{{item.image}}" width="80" /></p>
-                                    {{item.item}}
-                                </td>
-                                <td>{{item.qty}}</td>
-                                <td>{{item.price}}</td>
-                                <td>{{item.total}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+            <div class="col-12 mb-4">
+                <div class="row">
+                    {% if not completed_orders %}
+                        <h1>You have no completed orders with us... yet.</h1>
+                    {% endif %}
+
+                    {% if completed_orders %}
+                        <div class="col-5">
+                            <div class="table-responsive">
+                                <table class="table-bordered table">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Ref No</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in completed_orders %}
+                                            <tr>
+                                                <td><button id='show_details' data-code="{{ item.ref_code }}" class="btn w-100 category">{{ item.ref_code }}</button></td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-7 order-box" id="order_details_box">
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
         <div class="row" id="password_change_section">
-            <div class="col-12 mb-4 bg-warning">
-                password change
+            <div class="col-12 mb-4">
+                <div class="content-section">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ update_form|crispy }}
+                        <button id="profile_upd_btn" class="btn w-100 mb-2 btn-outline-info" type="submit">Update</button>
+                    </form>
+                    <hr>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ change_password_form|crispy }}
+                        <button id="profile_upd_btn" class="btn w-100 mb-2 btn-outline-info" type="submit">Update</button>
+                    </form>
+                </div>
             </div>
+        </div>
+        <div class="row" id="your_addresses_section">
+            {% if not user_address_qs %}
+                <h1>You have no billing and shipping address with us... yet.</h1>
+            {% endif %}
+            {% for address in user_address_qs %}
+                <div class="col-6 mb-4">
+                    <div id="addr_type">
+                        <h4 class="mb-3">{{ address.address_type|lookup_address_type }}</h4>
+                        <hr class="thick_hr">
+                    </div>
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <p><span>Street address: </span>{{ address.street_address }}</p>
+                        </div>
+                        <div class="list-group-item">
+                            <p><span>Apartment address: </span>{{ address.apartment_address }}</p>
+                        </div>
+                        <div class="list-group-item">
+                            <p><span>Country: </span>{{ address.country|lookup_country }}</p>
+                        </div>
+                        <div class="list-group-item">
+                            <p><span>Zip code: </span>{{ address.zip_code }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>
 
+
+{% endblock %}
+
+{% block script %}
+
+<script src="{% static 'main/js/chart.js' %}"></script>
+<script type="text/javascript">
+	const labels = {{ monthNumber|safe }};
+	const data = {
+	  labels: labels,
+	  datasets: [{
+	    label: 'Orders By Month',
+	    backgroundColor: '#008080',
+        borderColor: '#008080',
+        // borderWidth: 3,
+	    data: {{ totalOrders }},
+	  }]
+    };
+    const options = {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
+            xAxes: [{
+                barPercentage: 0.4,
+            }]
+        }
+    }
+
+	const config = {
+	  type: 'bar',
+	  data,
+	  options: options
+	};
+
+	var myChart = new Chart(
+	    document.getElementById('myChart'),
+	    config
+  	);
+
+</script>
 
 {% endblock %}
