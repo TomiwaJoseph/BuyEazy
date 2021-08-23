@@ -141,9 +141,87 @@ $(document).ready(function(){
         })
     })
 
-
     $(document).on('click', '.del_wish_item', function(){
-        console.log('delete wishlist item')
+        var _product_id = $(this).attr('data-id');
+        $.ajax({
+            url: '/delete-wishlist-item/',
+            data: {
+                'id': _product_id,
+            },
+            success: function(res){
+                $('#wishlist_section').html(res.wishlist_products);
+                $('.modal-content h2').text('Deleted from wishlist');
+                $('.modal-content p').text('This product has been successfully deleted from your wishlist');
+                $('#success_tic').modal('show');
+            }
+        })
+    })
+
+    $(document).on('click', '#show_details', function(){
+        var _ref_code = $(this).attr('data-code')
+        $.ajax({
+            url: '/show-order-details/',
+            data: {
+                ref_code: _ref_code
+            },
+            dataType: "json",
+            success: function(res){
+                $('#order_details_box').html(res.order_details);
+            }
+        })
+    })
+
+    const filter = document.querySelector('#sidebar_filt_but');
+    all_filter_buttons = $('#sidebar_filt_but').find('button')
+    totalButtons = all_filter_buttons.length;
+
+    for (let i = 0; i < totalButtons; i++) {
+        const button = all_filter_buttons[i]
+        button.addEventListener('click', function () {
+            for (let j = 0; j < totalButtons; j++) {
+                all_filter_buttons[j].classList.remove('active');
+            }
+            this.classList.add('active');
+            var _category = this.innerHTML;
+            $.ajax({
+                url: '/specific-category/',
+                data: {
+                    _category: _category
+                },
+                dataType: "json",
+                success: function(res){
+                    $('#product_container').html(res.filtered_products);
+                    $("#cat_div h4").html("All " + res.category);
+                    $("#loadMore").remove();
+                }
+            }) 
+        })
+    };
+
+
+    $('#filter_form').submit(function(event){
+        event.preventDefault();
+
+        var slider = document.getElementById('slider-range');
+        var slider_value = slider.noUiSlider.get();
+        var min_value = $("#min_value").val(slider_value[0]);
+        var max_value = $("#max_value").val(slider_value[1]);
+
+        $.ajax({
+            url: '/specific-category-and-price/',
+            type: 'POST',
+            data: $('#filter_form').serialize(),
+            dataType: "json",
+            success: function(res){
+                $("#cat_div h4").html("Filtered products category and price");
+                $("#loadMore").remove();
+                if (res.filtered_products.length != 3){
+                    $('#product_container').html(res.filtered_products);
+                } else{
+                    $('#product_container').html("No product within range...");
+                }
+            }
+        })
     })
 
 })
