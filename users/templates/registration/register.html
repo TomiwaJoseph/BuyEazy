@@ -1,5 +1,6 @@
 {% extends "main/base.html" %}
 {% load crispy_forms_tags %}
+{% load i18n widget_tweaks %}
 
 {% block title %}EazyBuy | Register{% endblock %}
 
@@ -18,7 +19,14 @@
         <div class="content-section mt-1 bg-light">
             <form method="POST">
                 {% csrf_token %}
-                {{ form | crispy }}
+                {% for field in form %}
+                    <p>{{ field.label_tag }}
+                        {{ field|attr:"class:form-control"}}
+                        {% for error in field.errors %}
+                            <small style="color: red; font-weight: 600">{{ error }}</small>
+                        {% endfor %}
+                    </p>
+                {% endfor %}
                 <div class="form-group">
                     <button class="btn btn-outline-info log" type="submit">Sign Up</button>
                 </div>
