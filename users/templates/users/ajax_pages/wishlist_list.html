@@ -1,0 +1,20 @@
+
+
+{% if not wishlist_products.first.folder.all %}
+    <h1>There is no items in your wishlist</h1>
+{% endif %}
+
+{% for product in wishlist_products.first.folder.all %}
+    <div class="col-3 mb-3 mb-4">
+        <div class="card text-center" id="each_card">
+            <img class="img-fluid w-75 mx-auto" src="{{ product.main_image.url }}" alt="{{ product.title }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.title }}</h5>
+                <div class="d-flex justify-content-between align-items-center wish_utils">
+                    <a href="{% url 'view_product' product.slug %}" class="btn btn-primary w-75">View</a>
+                    <i class="del_wish_item fa fa-trash text-danger" data-id="{{ product.id }}"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
