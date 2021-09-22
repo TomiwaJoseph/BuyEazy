@@ -15,18 +15,18 @@
             {% for product_, item in cart_data.items %}
                 <tr>
                     <td class="thumbnail-img">
-                        <a href="#">
+                        <a href="{% url 'view_product' item.title|slugify %}">
                             <img class="img-fluid" src="{{ item.image }}" alt="{{ item.title }}" />
                         </a>
                     </td>
                     <td class="name-pr">
-                        <a href="#">{{ item.title }}</a>
+                        <a href="{% url 'view_product' item.title|slugify %}">{{ item.title }}</a>
                     </td>
                     <td class="price-pr">
                         <p>$ {{ item.price }}</p>
                     </td>
                     <td class="quantity-box">
-                        <input type="number" class="qty-{{ product_ }}" value="{{ item.quantity }}">
+                        <input type="number" class="qty-{{ product_ }}" value="{{ item.quantity }}" min="1">
                     </td>
                     <td class="total-pr">
                         <p>$ {% widthratio item.price 1 item.quantity %}</p>
@@ -44,20 +44,22 @@
         </tbody>
     </table>
 </div>
+<hr id="remove_pt">
+<div class="row">
+    <div class="col-9 mx-auto">
+        {% if cart_data %}
+            <div class="d-flex gr-total my-4">
+                <h5>Grand Total</h5>
+                <div class="ml-auto h5"> $ {{ total_amount }}</div>
+            </div>
+        {% endif %}
+    </div>
+</div>
 {% if totalItems %}
     <a href="{% url 'checkout' %}" class="btn btn-outline-info options" id="pro_chkout_btn">Proceed to Checkout</a>
 {% else %}
     <h1 class="no_items">You have no items in cart</h1>
-    <a href="{% url 'shop' %}" class="btn btn-outline-info options1">Go to Shop</a>
+    <a href="{% url 'shop' %}" class="btn btn-outline-info options1 mt-2">Go to Shop</a>
     <a href="{% url 'gallery' %}" class="btn btn-outline-info options2">Go to Gallery</a>
 {% endif %}
-<!-- <div class="row">
-    <div class="col-9 my-auto mx-auto">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Enter your coupon code" aria-describedby="Enjoy coupon here">
-            <div class="input-group-append">
-                <button class="btn btn-success" type="button">Apply Coupon</button>
-            </div>
-        </div>
-    </div>
-</div> -->
+
