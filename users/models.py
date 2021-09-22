@@ -1,12 +1,16 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, BaseUserManager
-from shop.models import Product
+from shop.models import Product, Order
+from django.core.validators import RegexValidator
+
+
+alphanumeric = RegexValidator(r'^^[a-zA-Z ]+$', 'Only letters and space are allowed.')
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def _create_user(self, email, password, **extra_fields):
+    def create_user(self, email, password=None, is_active=True, is_staff=False, is_admin=False, **extra_fields):
         if not email:
             raise ValueError('The given email must be set')
         email = self.normalize_email(email=email)
@@ -29,7 +33,8 @@ class UserManager(BaseUserManager):
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True, max_length=60)
     username = None
-    # username = models.CharField(max_length=50, unique=True, validators=[alphanumeric])
+    user_order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
+    full_name = models.CharField(max_length=50, unique=False, validators=[alphanumeric])
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -37,7 +42,7 @@ class CustomUser(AbstractUser):
     objects =  UserManager()
 
     def __str__(self):
-        return self.username if self.username else self.email
+        return self.full_name if self.full_name else self.email
 
 
 class UserProfile(models.Model):
