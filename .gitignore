@@ -1,3 +1,6 @@
+.env
+cert.crt
+cert.key
 __pycache__
 migrations
 assets
