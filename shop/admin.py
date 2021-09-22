@@ -17,13 +17,14 @@ class OrderItemAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_editable = ['being_delivered', 'received', 'refund_requested', 'refund_granted']
-    list_display = ['user', 'ref_code', 'ordered', 'paid_for', 'payment_date', 'being_delivered', 'received',
+    list_editable = ['being_processed', 'delivered', 'refund_requested', 'refund_granted']
+    list_display = ['user', 'ref_code', 'ordered', 'paid_for', 'payment_date', 'being_processed', 'delivered',
         'refund_requested', 'refund_granted', 'coupon']
 
 
 class AddressAdmin(admin.ModelAdmin):
-    list_display = ['user', 'street_address', 'country', 'address_type']
+    list_display = ['user', 'default', 'street_address', 'country', 'address_type']
+    list_editable = ['default']
 
 
 class CategoryAdmin(admin.ModelAdmin):
