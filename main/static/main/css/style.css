@@ -13,7 +13,7 @@ a:hover {
 
 /* <--------- Base --------> */
 
-.alert-error{
+.alert-error {
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
@@ -26,11 +26,11 @@ a:hover {
 #success_tic .page-body .head {
     text-align: center;
 }
-#success_tic h2{
+#success_tic h2 {
     color: teal;
     margin-bottom: 10px;
 }
-#success_tic h1{
+#success_tic h1 {
     text-align: center;
 }
 #success_tic .checkmark-circle {
@@ -164,36 +164,28 @@ a:hover {
         opacity: 1;
     }
 }
-
-.alert-dismissible{
+.alert-dismissible {
     font-family: 'dosis';
     font-size: 18px;
 }
-
 .fixed-top {
     z-index: 2000;
 }
-
 nav.navbar {
     font-family: 'dosis';
 }
-
 a:hover {
     text-decoration: none;
 }
-
 .in_or_up a {
     cursor: pointer;
 }
-
 #nav_col {
     color: teal !important;
 }
-
 .navbar-dark {
     background-color: #e7e7e7 !important;
 }
-
 nav.navbar a,
 nav.navbar ul li a {
     color: #3a3a3a !important;
@@ -203,23 +195,19 @@ nav.navbar ul li a:hover {
     font-size: 21px;
     color: teal !important;
 }
-
 .navbar-brand {
     font-size: 40px;
 }
-
 nav.navbar ul li {
     padding: 0 15px;
     font-size: 20px;
 }
-
 nav.navbar form {
     background-color: teal;
     padding: 3px;
     position: absolute;
     display: none;
 }
-
 .auth_opt {
     display: none;
     position: absolute;
@@ -227,7 +215,6 @@ nav.navbar form {
     min-width: 120px;
     z-index: 1;
 }
-
 .auth_opt a {
     color: #3a3a3a;
     padding: 8px 5px;
@@ -236,27 +223,22 @@ nav.navbar form {
     text-align: left;
     margin-left: 10px;
 }
-
 .auth_opt a:hover {
     background-color: white;
     margin-left: 0;
 }
-
 .in_or_up:hover .auth_opt {
     display: block;
 }
-
 .footer {
     background-color: #f0f0f0 !important;
     padding: 30px 0 30px 0;
     font-family: 'montserrat';
     margin-top: 20px;
 }
-
 .footer-top-box {
     margin-top: 10px;
 }
-
 .footer-top-box h3 {
     font-family: 'dosis';
 }
@@ -265,28 +247,23 @@ nav.navbar form {
 #contct_addr p {
     font-size: 15px;
 }
-
 .footer-top-box span,
 #contct_addr span {
     margin-left: 20px;
 }
-
 .footer-top-box p i,
 #contct_addr i {
     font-size: 25px;
     color: teal;
     margin-right: 10px;
 }
-
 .foot_hr {
     background-color: teal;
 }
-
 .newsletter-box {
     margin-top: 15px;
     position: relative;
 }
-
 .newsletter-box input {
     height: 40px;
     border: 1px solid teal;
@@ -295,14 +272,12 @@ nav.navbar form {
     padding: 0 20px;
     width: 100%;
 }
-
 .newsletter-box i {
     position: absolute;
     right: 15px;
     top: 10px;
     font-size: 20px;
 }
-
 .newsletter-box button,
 #profile_upd_btn,
 #reset_success_btn {
@@ -310,24 +285,20 @@ nav.navbar form {
     color: teal;
     border: 1px solid teal;
 }
-
 .newsletter-box button:hover,
 #profile_upd_btn:hover,
 #reset_success_btn:hover {
     background-color: teal;
     color: #fff;
 }
-
 .footer-top-box .social_media {
     display: inline-block;
 }
-
 .footer-top-box .social_media i {
     font-size: 30px;
     padding: 7px;
     color: teal;
 }
-
 .footer-top-box .social_media i:hover {
     background: teal;
     color: white;
@@ -360,6 +331,7 @@ nav.navbar form {
     color: teal !important;
     background-color: #fff !important;
 }
+
 .space_up {
     margin-bottom: 100px;
 }
@@ -379,7 +351,7 @@ nav.navbar form {
     margin-top: 10px;
 }
 
-#sort_category{
+#sort_category {
     font-size: 18px;
     color: #3a3a3a;
 }
@@ -465,7 +437,7 @@ nav.navbar form {
 
 /* <--------- Single Product ------------> */
 
-#carousel-example-1 .carousel-inner img{
+#carousel-example-1 .carousel-inner img {
     width: 80%;
     margin: auto;
 }
@@ -521,14 +493,15 @@ nav.navbar form {
     width: 48%;
 }
 
-#reviews .text-secondary{
+#reviews .text-secondary {
     font-size: 15px;
     font-style: italic;
 }
 
-#reviews h2{
+#reviews h2 {
     font-family: 'dosis';
 }
+
 #reviews {
     margin-top: 100px;
 }
@@ -542,11 +515,13 @@ nav.navbar form {
     color: teal;
     font-weight: 700;
 }
-#review_form button{
+
+#review_form button {
     width: 100%;
     font-family: 'dosis';
 }
-#review_form button:hover{
+
+#review_form button:hover {
     color: teal;
     background: none;
 }
@@ -577,7 +552,8 @@ nav.navbar form {
     font-size: 20px;
     font-family: 'dosis';
 }
-.name_amt p a:hover{
+
+.name_amt p a:hover {
     color: teal;
 }
 
@@ -592,20 +568,24 @@ nav.navbar form {
     background-color: teal;
 }
 
-del{
+del {
     font-size: 14px;
 }
+
 .text-muted {
     text-decoration: none;
 }
-.shop_utils i{
+
+.shop_utils i {
     font-size: 25px;
     margin-bottom: 10px;
 }
+
 .shop_utils .fa-heart {
     color: rgb(58, 58, 58);
 }
-.shop_utils .fa-heart:hover{
+
+.shop_utils .fa-heart:hover {
     cursor: pointer;
     color: #dc3545;
     -webkit-transform: scale(1.4);
@@ -613,7 +593,8 @@ del{
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-.shop_utils .fa-shopping-cart:hover{
+
+.shop_utils .fa-shopping-cart:hover {
     color: teal;
     cursor: pointer;
     -webkit-transform: scale(1.4);
@@ -621,15 +602,18 @@ del{
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-.shop_utils .fa-shopping-cart{
+
+.shop_utils .fa-shopping-cart {
     color: rgb(58, 58, 58);
 }
+
 .the_img img:hover {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
+
 .content-section:hover,
 #your_addresses_section .list-group-item:hover {
     box-shadow: 0 1px 2px rgba(43, 59, 93, 0.29), 0 0 13px rgba(43, 59, 93, 0.29);
@@ -637,17 +621,21 @@ del{
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-.fa-heart.active{
+
+.fa-heart.active {
     color: #dc3545;
 }
-.fa-shopping-cart.active{
+
+.fa-shopping-cart.active {
     /* color: #007bff; */
     color: teal;
 }
+
 .carousel-indicators li img {
     margin-top: 30px;
     background-color: red;
 }
+
 .single-product-slider .carousel-control-prev {
     bottom: auto;
     background: teal;
@@ -676,7 +664,7 @@ del{
 
 
 /* <--------- Shop ----------> */
-#loadMore{
+#loadMore {
     color: #fff;
     background-color: teal;
     font-size: 18px;
@@ -685,13 +673,16 @@ del{
     font-family: 'dosis';
     margin-bottom: 30px;
 }
-#loadMore:hover{
+
+#loadMore:hover {
     color: #fff;
     background-color: #016868;
 }
+
 .search-product {
     position: relative;
 }
+
 .search-product input[type="text"] {
     background: #f1f1f1;
     border: 0;
@@ -707,6 +698,7 @@ del{
     -moz-transition: all .5s ease;
     transition: all .5s ease;
 }
+
 .search-product button {
     background: rgb(58, 58, 58);
     color: #ffffff;
@@ -954,11 +946,13 @@ its values is > 50%. */
     border-radius: 3px;
     margin-bottom: 20px;
 }
+
 .log:hover {
     color: #fff;
     background: teal;
     border: 1px solid teal;
 }
+
 .log {
     background: none;
     color: teal;
@@ -967,15 +961,18 @@ its values is > 50%. */
     width: 100%;
     font-family: 'montserrat';
 }
+
 .form-control:focus {
     -webkit-box-shadow: 0 3px 10px -2px teal !important;
     box-shadow: 0 3px 10px -2px teal !important;
     color: #000;
     border: 1px none;
 }
-.login_error{
+
+.login_error {
     font-size: 14px;
 }
+
 .category {
     display: inline-block;
     background: teal;
@@ -989,36 +986,43 @@ its values is > 50%. */
     letter-spacing: .2em;
     text-decoration: none;
 }
+
 .category:hover {
     background: #016868;
 }
-#product_center .btn{
-    background: none!important;
-    color: teal!important;
+
+#product_center .btn {
+    background: none !important;
+    color: teal !important;
     width: 75%;
     border: none;
 }
-#product_center .btn:hover{
-    background: teal!important;
-    color: #fff!important;
+
+#product_center .btn:hover {
+    background: teal !important;
+    color: #fff !important;
 }
-#design_hr hr{
+
+#design_hr hr {
     border: none;
     height: 2px;
     background-color: teal;
     width: 20%;
 }
-.login_media i{
+
+.login_media i {
     font-size: 28px;
     margin: 10px 0;
     padding: 10px;
     color: #fff;
     border-radius: 3px;
 }
-.login_media .fa-facebook-f{
+
+.login_media .fa-facebook-f {
     background-color: #3b5998;
 }
-.login_media .fa-google{
+
+.login_media .fa-google {
     background-color: #db4a39;
 }
 
@@ -1032,7 +1036,7 @@ its values is > 50%. */
 /* <--------- Search ----------> */
 
 #search_q h2,
-#search_q h3{
+#search_q h3 {
     font-family: 'dosis';
 }
 
@@ -1050,69 +1054,84 @@ its values is > 50%. */
 #remove_pt {
     margin-top: -20px;
 }
-.table-main table thead{
+
+.table-main table thead {
     background: teal;
     color: #ffffff;
 }
-.table-main .table thead th{
+
+.table-main .table thead th {
     font-size: 18px;
     font-family: 'dosis';
 }
-.table-main table td.thumbnail-img{
+
+.table-main table td.thumbnail-img {
     width: 100px;
 }
-.table-main table td{
+
+.table-main table td {
     vertical-align: middle;
     font-size: 16px;
 }
-.quantity-box input{
+
+.quantity-box input {
     width: 50px;
     border: 2px solid teal;
     text-align: center;
 }
-.name-pr a{
+
+.name-pr a {
     font-weight: 700;
     font-size: 18px;
     color: #3a3a3a;
     font-family: 'dosis';
 }
-.remove-pr{
+
+.remove-pr {
     text-align: center;
 }
-.remove-pr button{
+
+.remove-pr button {
     font-size: 14px;
 }
-.input-group .form-control{
+
+.input-group .form-control {
     min-height: 50px;
     border-radius: 0px;
     font-weight: 600;
     border: 3px solid #e8e8e8;
     font-size: 18px;
 }
-.input-group .input-group-append button{
-    color: #fff!important;
-    background: #3a3a3a!important;
+
+.input-group .input-group-append button {
+    color: #fff !important;
+    background: #3a3a3a !important;
     outline: none;
     border: none;
 }
-.input-group .input-group-append button:hover{
-    color: #fff!important;
-    background: teal!important;
+
+.input-group .input-group-append button:hover {
+    color: #fff !important;
+    background: teal !important;
 }
-.order-box h3{
+
+.order-box h3 {
     font-size: 28px;
     color: #3a3a3a;
     font-family: 'dosis';
     font-weight: 700;
 }
+
 .order-box h4 {
     font-size: 16px;
     padding: 0px;
     line-height: 35px !important;
 }
-.order-box .font-weight-bold{
+
+.order-box .font-weight-bold {
     font-size: 18px;
 }
+
 .gr-total h5 {
     font-weight: 700;
     color: teal;
@@ -1122,15 +1141,17 @@ its values is > 50%. */
     font-family: 'dosis';
     line-height: 35px !important;
 }
-.gr-total .h5{
+
+.gr-total .h5 {
     margin: 0px;
     font-weight: 700;
     font-family: 'dosis';
     line-height: 35px;
 }
-#pro_chkout_btn{
-    color: #fff!important;
-    background: #3a3a3a!important;
+
+#pro_chkout_btn {
+    color: #fff !important;
+    background: #3a3a3a !important;
     outline: none;
     border: none;
     width: 100%;
@@ -1138,31 +1159,36 @@ its values is > 50%. */
     padding: 10px;
     font-size: 18px;
 }
-#pro_chkout_btn:hover{
-    color: #fff!important;
-    background: teal!important;
+
+#pro_chkout_btn:hover {
+    color: #fff !important;
+    background: teal !important;
 }
+
 #chkout_btn {
-    color: #fff!important;
-    background: #3a3a3a!important;
+    color: #fff !important;
+    background: #3a3a3a !important;
     outline: none;
     border: none;
     width: 100%;
     font-family: 'dosis';
     padding: 10px;
 }
-#chkout_btn:hover{
-    color: #fff!important;
-    background: teal!important;
+
+#chkout_btn:hover {
+    color: #fff !important;
+    background: teal !important;
 }
-.no_items{
+
+.no_items {
     font-family: 'dosis';
 }
+
 .options1,
-.options2{
+.options2 {
     font-family: 'dosis';
-    color: #fff!important;
-    background: #3a3a3a!important;
+    color: #fff !important;
+    background: #3a3a3a !important;
     outline: none;
     border: none;
     width: 100%;
@@ -1171,13 +1197,15 @@ its values is > 50%. */
     padding: 10px;
     font-size: 16px;
 }
-.options1:hover{
-    color: #fff!important;
-    background: teal!important;
+
+.options1:hover {
+    color: #fff !important;
+    background: teal !important;
 }
-.options2:hover{
-    color: #fff!important;
-    background: #dc3545!important;
+
+.options2:hover {
+    color: #fff !important;
+    background: #dc3545 !important;
 }
 
 
@@ -1187,99 +1215,182 @@ its values is > 50%. */
 #cat_div,
 #addr_type,
 .stripe-payment-box h3,
-.paypal-payment-box h3{
+.paypal-payment-box h3 {
     font-size: 28px;
     color: #3a3a3a;
     font-weight: 700;
     font-family: 'dosis';
 }
-.address-box h3{
+
+.address-box h3 {
     font-size: 24px;
 }
-.img_name{
+
+.img_name {
     display: inline-block;
 }
-.img_name h2{
+
+.img_name h2 {
     font-size: 14px;
     display: inline;
 }
-.chk_price{
+
+.chk_price {
     font-size: 16px;
     font-weight: 600;
 }
-.coupon_center h5{
+
+.coupon_center h5 {
     font-family: 'dosis';
     color: teal;
 }
-.coupon_center small{
+
+.coupon_center small {
     color: #28a745;
 }
-.coupon_center .h5{
+
+.coupon_center .h5 {
     font-size: 16px;
     color: #28a745;
 }
-#use_existing{
+
+#use_existing span{
     color: teal;
     font-weight: 700;
 }
 
 /* <--------- Dashboard ----------> */
 
-#dashboard_sidebar .list-group-item:hover{
+#dashboard_sidebar .list-group-item:hover {
     color: #fff;
     background: teal;
     outline: none;
     border: 1px solid teal;
 }
-#dashboard_sidebar .text-danger:hover{
-    color: #fff!important;
+
+#dashboard_sidebar .text-danger:hover {
+    color: #fff !important;
     background: #dc3545;
     outline: none;
     border: 1px solid #dc3545;
 }
-#each_card a:hover{
+
+#each_card a:hover {
     color: #fff;
     background: teal;
 }
-#each_card a{
+
+#each_card a {
     background: none;
     color: teal;
     border: 1px solid teal;
     font-size: 12px;
 }
 
-#each_card button{
+#each_card button {
     background: none;
 }
-#each_card h5{
+
+#each_card h5 {
     font-family: 'dosis';
 }
-.list-group-item span{
+
+.list-group-item span {
     color: teal;
 }
-.del_wish_item{
+
+.del_wish_item {
     cursor: pointer;
 }
+
 #wishlist_section h1,
 #orders_section h1,
-#your_addresses_section h1{
+#your_addresses_section h1 {
     font-family: 'dosis';
 }
 
 
+/* <--------------- Gallery -----------> */
+#gallery {
+    padding-top: 10px;
+}
+.img-wrapper {
+    position: relative;
+    /* margin-top: 15px; */
+}
+.img-overlay {
+    /* background: rgba(0, 128, 128, 0.418); */
+    background: rgba(0,0,0,0.7);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+}
+.img-overlay i {
+    color: #fff;
+    font-size: 2em;
+}
+#overlay {
+    background: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 
+}
+#gallery img {
+    margin: 0;
+    width: 80%;
+    height: auto;
+    object-fit: contain;
+    padding: 5%;
+}
+#nextButton {
+    color: #fff;
+    font-size: 40px;
+    transition: opacity 0.8s;
+}
+#nextButton:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+#prevButton {
+    color: #fff;
+    font-size: 40px;
+    transition: opacity 0.8s;
+}
+#prevButton:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+#exitButton {
+    color: #fff;
+    font-size: 40px;
+    transition: opacity 0.8s;
+    position: absolute;
+    top: 3px;
+    right: 15px;
+}
+#exitButton:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.image p{
+    color: teal;
+    font-weight: 500;
+}
