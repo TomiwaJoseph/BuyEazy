@@ -7,7 +7,11 @@
 <div class="cart" data-toggle="inactive">
     <div class="label">
         <i class="fa fa-shopping-cart"></i>
-        <span id="cart_update">{{ request.session.cart_data|length }}</span>
+        {% if user.is_authenticated %}
+            <span id="cart_update">{{ cart_size }}</span>
+        {% else %}
+            <span id="cart_update">{{ request.session.cart_data|length }}</span>
+        {% endif %}
     </div>
 
     <div class="overlay"></div>
@@ -40,6 +44,14 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
+            <div class="row">
+                <div class="col text-center">
+                    <div id="cat_div">
+                        <h4 class="mb-3">All products</h4>
+                        <hr class="thick_hr">
+                    </div>
+                </div>
+            </div>
             <div class="row" id="product_container">
                 {% for product in all_products %}
                     <div class="col-md-4 product_box">
@@ -56,7 +68,7 @@
                                 </div>
                                 <div class="col-10 d-flex shop_utils justify-content-around">
                                     <a><i class="fa fa-heart wishlist_btn {% if product in user.wishlist_owner.folder.all %}active{% endif %}" data-id="{{ product.id }}"></i></a>
-                                    <a><i class="fa fa-shopping-cart add_to_cart_btn {% if product.id|slugify in request.session.cart_data %}active{% endif %}" 
+                                    <a><i class="fa fa-shopping-cart add_to_cart_btn" 
                                         data-id="{{ product.id }}" data-price="{{ product.price }}" data-title="{{ product.title }}" data-image="{{ product.main_image.url }}"
                                         ></i></a>
                                 </div>
@@ -69,8 +81,9 @@
         </div>
         <div class="col-md-3" id="sidebar">
             <div class="search-product">
-                <form action="#">
-                    <input class="form-control" placeholder="Search here..." type="text">
+                <form method="POST" action="{% url 'search' %}">
+                    {% csrf_token %}
+                    <input name="search" class="form-control" placeholder="Search here..." type="text">
                     <button type="submit"> <i class="fa fa-search"></i> </button>
                 </form>
             </div>
@@ -78,8 +91,8 @@
             <h3>Categories</h3>
             <hr class="thick_hr">
             <div id="sidebar_filt_but">
-                <button class="btn btn-outline-info" id="all_cat">All</button>
                 <button class="btn btn-outline-info" id="all_desk">Desktops</button>
+                <button class="btn btn-outline-info" id="all_lapt">Laptops</button>
                 <button class="btn btn-outline-info" id="all_hybr">Hybrids</button>
                 <button class="btn btn-outline-info" id="all_tab">Tablets</button>
             </div>
@@ -101,34 +114,23 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <form id="filter_form">
-                        <input type="hidden" name="min-value" value="">
-                        <input type="hidden" name="max-value" value="">
-                        <div id="filter_checkboxes" class="form-group my-3">
-                            <input type="checkbox" name="category" id="Desktops">
-                            <label for="Desktops">Desktops</label>
-                        </div>
-                        <div id="filter_checkboxes" class="form-group my-3">
-                            <input type="checkbox" name="category" id="Laptops">
-                            <label for="Laptops">Laptops</label>
-                        </div>
-                        <div id="filter_checkboxes" class="form-group my-3">
-                            <input type="checkbox" name="category" id="Hybrid">
-                            <label for="Hybrid">Hybrid devices</label>
-                        </div>
-                        <div id="filter_checkboxes" class="form-group my-3">
-                            <input type="checkbox" name="category" id="Tablets">
-                            <label for="Tablets">Tablets</label>
-                        </div>
+                    <form id="filter_form" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" id="min_value" name="min-value" value="">
+                        <input type="hidden" id="max_value" name="max-value" value="">
+                        {% for category in all_categories %}
+                            <div id="filter_checkboxes" class="form-group my-3">
+                                <input type="checkbox" name="category" id="{{ category.title }}" value="{{ category.title }}">
+                                <label for="{{ category.title }}">{{ category.title }}</label>
+                            </div>
+                        {% endfor %}
                         <button type="submit" class="btn btn-outline-info my-3">Filter</button>
                     </form>
                 </div>
             </div>
-            <!-- </div> -->
         </div>
     </div>
 </div>
-
 
 <div class="container">
     <hr class="mb-4">
