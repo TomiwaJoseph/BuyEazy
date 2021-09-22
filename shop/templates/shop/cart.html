@@ -50,19 +50,25 @@
                 </tbody>
             </table>
         </div>
-        <!-- <div class="col-4 grand_tot mx-auto d-flex justify-content-between align-items-center">
-            <h4>Grand total</h4>
-            <h5>$ {{ total_amount }}</h5>
-        </div> -->
+        <hr id="remove_pt">
+        <div class="row">
+            <div class="col-9 mx-auto">
+                {% if cart_data %}
+                    <div class="d-flex gr-total my-4">
+                        <h5>Grand Total</h5>
+                        <div class="ml-auto h5"> $ {{ total_amount }}</div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
         {% if totalItems %}
             <a href="{% url 'checkout' %}" class="btn btn-outline-info options" id="pro_chkout_btn">Proceed to Checkout</a>
         {% else %}
             <h1 class="no_items">You have no items in cart</h1>
-            <a href="{% url 'shop' %}" class="btn btn-outline-info options1">Go to Shop</a>
+            <a href="{% url 'shop' %}" class="btn btn-outline-info options1 mt-2">Go to Shop</a>
             <a href="{% url 'gallery' %}" class="btn btn-outline-info options2">Go to Gallery</a>
         {% endif %}
     </div>
-    
 </div>
 
 
