@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,13 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2ifu4rle103qiq77$^qf!a81q$adzp6%8@)tzq^rp=z$%om2vy'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['eazybuy.com', 'localhost', '127.0.0.1']
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django_countries',
     'widget_tweaks',
     'social_django',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'my_ecommerce.urls'
@@ -77,6 +79,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -146,15 +150,20 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ.get('MAIL_NAME')
-EMAIL_HOST_PASSWORD = os.environ.get('MAIL_PASS')
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-STRIPE_PUBLIC_KEY = "pk_test_51I1qtTB87wdwaKDB0MG5E1u8G6BylMiG5wNRRbhPRTzpLrFEvLI6IboPq9v2SubDUnVbRc79bokBCoNnSyFITM3c00RuRjpSpR"
-STRIPE_SECRET_KEY = "sk_test_51I1qtTB87wdwaKDBRrNVVpro9X5OOU9ZCVeTrsF72rf3rrPEj1uMXVVAghgzfWuIYbe5PI4bBEK2wewQoRExp2JI00btpaeu0r"
-STRIPE_WEBHOOK_SECRET = "whsec_Q2fEbq3cgU3vAoGSHwDX7Z8IjirexZqD"
+STRIPE_PUBLIC_KEY = config("STRIPE_PUBLIC_KEY")
+STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
+STRIPE_WEBHOOK_SECRET = config("STRIPE_WEBHOOK_SECRET")
 
 PASSWORD_RESET_TIMEOUT = 3600
+
+SOCIAL_AUTH_FACEBOOK_KEY = config("SOCIAL_AUTH_FACEBOOK_KEY")
+SOCIAL_AUTH_FACEBOOK_SECRET = config("SOCIAL_AUTH_FACEBOOK_SECRET")
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
