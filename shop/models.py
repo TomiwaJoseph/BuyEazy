@@ -101,9 +101,6 @@ class OrderItem(models.Model):
     def get_total_item_price(self):
         return self.quantity * self.product.price
 
-    # def get_final_price(self):
-    #     return get_total_item_price
-
  
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -111,24 +108,28 @@ class Order(models.Model):
     ref_code = models.CharField(max_length=20, blank=True, null=True)
     product = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
-    ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
     shipping_address = models.ForeignKey('Address', related_name="shipping_address",
         on_delete=models.SET_NULL, blank=True, null=True)
     billing_address = models.ForeignKey('Address', related_name="billing_address",
         on_delete=models.SET_NULL, blank=True, null=True)
-    payment = models.ForeignKey('Payment', 
-        on_delete=models.SET_NULL, blank=True, null=True)
     coupon = models.ForeignKey('Coupon', 
         on_delete=models.SET_NULL, blank=True, null=True)
-    being_delivered = models.BooleanField(default=False)
-    received = models.BooleanField(default=False)
+    paid_for = models.BooleanField(default=False)
+    payment_date = models.DateTimeField(null=True, blank=True)
+    being_processed = models.BooleanField(default=False)
+    delivered = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
     refund_granted = models.BooleanField(default=False)
 
     def __str__(self):
         # return self.user.email
-        return "{}'s order".format(self.user.email)
+        return "{}'s order".format(self.user)
+
+    def get_unordered_cart_items_count(self):
+        if self.ordered == False:
+            return self.product.all().count()
+        return 0
     
     def get_total(self):
         total = 0
@@ -147,7 +148,7 @@ class Address(models.Model):
     country = CountryField(multiple=False)
     zip_code = models.CharField(max_length=100)
     address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
-    # default = models.BooleanField(default=False)
+    default = models.BooleanField(default=False)
 
     def __str__(self):
         if self.address_type == 'B':
@@ -158,24 +159,12 @@ class Address(models.Model):
         verbose_name_plural = 'Addresses'
 
 
-class Payment(models.Model):
-    stripe_charge_id = models.CharField(max_length=50)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL,
-        blank=True, null=True)
-    amount = models.FloatField()
-    timestamp = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.user.email
-
-
 class Coupon(models.Model):
     code = models.CharField(max_length=15)
     amount = models.FloatField()
 
     def __str__(self):
         return self.code
-
 
 
 class Refund(models.Model):
