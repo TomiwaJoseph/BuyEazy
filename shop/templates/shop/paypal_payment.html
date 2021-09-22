@@ -31,6 +31,19 @@
             </div>
         {% endfor %}
         <hr>
+        {% if not order_details.coupon %}
+            <form action="{% url 'add_coupon' %}" method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    {{ couponform.code }}
+                    <input type="hidden" name="redirect_to" value="paypal">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-secondary">Redeem</button>
+                    </div>
+                </div>
+            </form>
+            <hr>
+        {% endif %}
         {% if order_details.coupon %}
             <div class="coupon_center d-flex justify-content-between align-items-center">
                 <div>
