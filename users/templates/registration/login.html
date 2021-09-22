@@ -15,30 +15,35 @@
 </div>
 
 <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4 my-auto mx-auto text-center" id="product_center">
+        <img src="{{ random_product.main_image.url }}" 
+            alt="{{ random_product.title }}" class="w-75 img-fluid">
+        <a class="btn btn-outline-info" href="{{ random_product.get_absolute_url }}" role="button">View product</a>
+    </div>
     <div class="col-md-4 mx-auto my-auto" id="log_cat">
         <div class="content-section mt-1 bg-light">
-            {% if form.errors %}
-                {% for field in form %}
-                    {% for error in field.errors %}
-                        <div class="alert alert-danger">
-                            <strong>{{ error|escape }}</strong>
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-                {% for error in form.non_field_errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                {% endfor %}
-            {% endif %}
             <form method="POST">
                 {% csrf_token %}
                 {{ form | crispy }}
                 <div class="form-group">
                     <button class="btn btn-outline-info log" type="submit">Login</button>
-                    <button class="btn btn-outline-danger mt-4 w-100"><i class="fa fa-google mr-2"></i>Login with Google</button>
                 </div>
+                <a class="" href="{% url 'password_reset' %}"><small>Forgot Password?</small></a>
             </form>
+            <div class="mb-2">
+            </div>
+            <hr>
+            <div class="col d-flex justify-content-center text-center" id='design_hr'>
+                <hr class="text-danger">
+                <p>or log in with</p>
+                <hr class="text-danger">
+            </div>
+            <div class="col d-flex justify-content-center login_media">
+                <a href="{% url 'social:begin' 'facebook' %}"><i class="fab fa-facebook-f mx-2" aria-hidden="true"></i></a>
+                <a href="{% url 'social:begin' 'google-oauth2' %}"><i class="fab fa-google mx-2" aria-hidden="true"></i></a>
+            </div>
+            <hr>
             <div class="mb-2">
                 <small class="text-muted">
                     Don't Have An Account? <a class="ml-2 category" href="{% url 'register' %}">Sign Up</a>
@@ -46,6 +51,7 @@
             </div>
         </div>
     </div>
+    <div class="col-md-2"></div>
 </div>
 
 {% endblock %}
