@@ -8,3 +8,14 @@ class Newsletter(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class Gallery(models.Model):
+    description = models.CharField(max_length=50)
+    image = models.ImageField(upload_to="gallery")
+
+    def __str__(self):
+        return self.description
+
+    class Meta:
+        verbose_name_plural = "Gallery"
