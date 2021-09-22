@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from shop.models import Product, Category
 import random
-from .models import Newsletter
+from .models import Newsletter, Gallery
 
 
 # Ajax Requests Start
@@ -12,7 +12,7 @@ def newsletter(request):
     email_in_newsletter = Newsletter.objects.filter(email=get_email)
     if not email_in_newsletter:
         new_email = Newsletter.objects.create(email=get_email)
-        new_email
+        new_email.save()
 
     return HttpResponse('Success')
 
@@ -54,4 +54,17 @@ def search_product(request):
     }
     return render(request, 'main/search.html', context)
 
+def gallery(request):
+    all_gallery_pictures = list(Gallery.objects.all())
+    random.shuffle(all_gallery_pictures)
 
+    context = {
+        'gallery_pictures': all_gallery_pictures[:13]
+    }
+    return render(request, 'main/gallery.html', context)
+
+
+# TODO
+# Social Auth
+# Stripe, Paypal and Razor
+# Dashboard address adn others
