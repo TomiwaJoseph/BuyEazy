@@ -14,7 +14,6 @@ urlpatterns = [
     # Ajax Requests Ends
 
     # Stripe
-    path('landing/', views.TestView.as_view(), name='landing'),
     path('success/', views.SuccessView.as_view(), name="success"),
     path('cancel/', views.CancelView.as_view(), name="cancel"),
     
@@ -23,13 +22,10 @@ urlpatterns = [
     path('webhooks/stripe/', views.stripe_webhook, name="stripe_webhook"),
     path('payment/stripe/', views.StripeLandingView.as_view(), name="stripe_payment"),
     path('payment/paypal/', views.PaypalPaymentView.as_view(), name='paypal_payment'),
-    # End Stripe
+    # End Stripe    
     
-    
-    path('test_page/', views.testpage, name='test'),
     path('save_review/', views.save_review, name='save_review'),
     path('shop/', views.shop, name='shop'),
-    path('gallery/', views.gallery, name='gallery'),
     path('cart/', views.cart, name='cart'),
     path('request-refund/', views.RequestRefundView.as_view(), name='request_refund'),
     path('add-coupon/', views.AddCouponView.as_view(), name='add_coupon'),
