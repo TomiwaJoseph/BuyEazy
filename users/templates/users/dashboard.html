@@ -95,7 +95,7 @@
         </div>
         <div class="row" id="your_addresses_section">
             {% if not user_address_qs %}
-                <h1>You have no billing and shipping address with us... yet.</h1>
+                <h1>You have no billing or shipping address with us... yet.</h1>
             {% endif %}
             {% for address in user_address_qs %}
                 <div class="col-6 mb-4">
