@@ -25,13 +25,6 @@
                 <!-- <img src="imgs/logo.png" alt="#" /> -->
                 EazyBuy</a>
             <ul class="navbar-nav d-block d-lg-none ml-auto">
-                <!-- <li class="nav-item">
-                    <a href="#"><i class="fa fa-cart-arrow-down"></i></a>
-                </li> -->
-                <!-- <a class="nav-link" href="{% url 'cart' %}">
-                    <i class="fa fa-cart-arrow-down"></i>
-                    <span class="badge badge-danger">{{ request.session.cart_data|length }}</span>
-                </a> -->
             </ul>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#show-menu"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +56,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'cart' %}">
                                 <i class="fa fa-cart-arrow-down"></i>
-                                <span class="badge badge-danger">{{ request.session.cart_data|length }}</span>
+                                <span class="badge badge-danger">{{ user.user_order.get_unordered_cart_items_count }}</span>
                             </a>
                         </li>    
                         <li class="nav-item in_or_up">
@@ -123,8 +116,8 @@
                             <span>some street address,</span><br>
                             <span>some code</span>
                         </p>
-                        <p><i class="fa fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+234 8115 8128 01</a></p>
-                        <p><i class="fa fa-envelope"></i>Email: <a href="mailto:tomjoe@gmail.com">tomjoe@gmail.com</a>
+                        <p><i class="fa fa-phone-square"></i>Phone: <a href="tel:+234-8115812801">+234 8115 8128 01</a></p>
+                        <p><i class="fa fa-envelope"></i>Email: <a href="mailto:{{email}}">{{ email }}</a>
                         </p>
                     </div>
                 </div>
@@ -186,7 +179,6 @@
             </div>
         </div>
     </div>
-
 
     <script src="{% static 'main/js/my_jQuery.js' %}"></script>
     <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
