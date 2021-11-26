@@ -40,7 +40,7 @@
                     <br><br>
                     <div class="product-hover">
                         <div class="product-cart">
-                            <button class="btn btn-secondary btn-block add_to_cart_btn"data-id="{{ product.id }}" data-price="{{ product.price }}" data-title="{{ product.title }}" data-image="{{ product.main_image.url }}">Add to cart</button>
+                            <button class="btn btn-secondary btn-block add_to_cart_btn"data-id="{{ product.id }}" data-price="{{ product.discount_price }}" data-title="{{ product.title }}" data-image="{{ product.main_image.url }}">Add to cart</button>
                             {% if user.is_authenticated and product not in user.wishlist_owner.folder.all %}
                                 <button class="btn btn-secondary btn-block wishlist_btn" data-id="{{ product.id }}">Add to wishlist</button>
                             {% endif %}
