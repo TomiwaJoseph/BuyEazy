@@ -1,4 +1,5 @@
 {% extends 'main/base.html' %}
+{% block title %}EazyBuy | Shop{% endblock %}
 {% load static %}
 
 {% block side_cart %}
@@ -64,12 +65,12 @@
                                 </div>
                                 <div class="name_amt">
                                     <p class="name">{{ product.title }}</p>
-                                    <p class="amt">${{ product.price }} {% if product.discount_price %}<del class="text-danger">${{ product.discount_price }}</del>{% endif %}</p>
+                                    <p class="amt">${{ product.discount_price }} {% if product.real_price %}<del class="text-danger">${{ product.real_price }}</del>{% endif %}</p>
                                 </div>
                                 <div class="col-10 d-flex shop_utils justify-content-around">
                                     <a><i class="fa fa-heart wishlist_btn {% if product in user.wishlist_owner.folder.all %}active{% endif %}" data-id="{{ product.id }}"></i></a>
                                     <a><i class="fa fa-shopping-cart add_to_cart_btn" 
-                                        data-id="{{ product.id }}" data-price="{{ product.price }}" data-title="{{ product.title }}" data-image="{{ product.main_image.url }}"
+                                        data-id="{{ product.id }}" data-price="{{ product.discount_price }}" data-title="{{ product.title }}" data-image="{{ product.main_image.url }}"
                                         ></i></a>
                                 </div>
                             </div>

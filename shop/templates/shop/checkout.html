@@ -1,4 +1,5 @@
 {% extends "main/base.html" %}
+{% block title %}EazyBuy | Checkout Page{% endblock %}
 {% load static %}
 {% load crispy_forms_tags %}
 
@@ -6,163 +7,115 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-md-8 address-box">
+    <div class="col-md-12 address-box">
         <h4 class="mb-3">Checkout</h4>
         <hr class="thick_hr">
         {% if cart_contents %}
-        <form method="POST">
-            {% csrf_token %}
-            <div class="content-section">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3>Shipping address</h3>
-                        <hr>
-                        <div class="hideable_shipping_form">
-                            <div class="mb-3">
-                                <label for="shipping_address">Address *</label>
-                                <input type="text" class="form-control" placeholder="1234 Main St" id="shipping_address"
-                                    name="shipping_address">
-                            </div>
-                            <div class="mb-3">
-                                <label for="shipping_address2">Address 2 <span
-                                        class="text-muted">(Optional)</span></label>
-                                <input type="text" class="form-control" placeholder="Apartment or Suite"
-                                    id="shipping_address2" name="shipping_address2">
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <label for="country">Country *</label>
-                                    {{ form.shipping_country }}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="content-section">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>Shipping address</h3>
+                            <hr>
+                            <div class="hideable_shipping_form">
+                                <div class="mb-3">
+                                    <label for="shipping_address">Address *</label>
+                                    <input type="text" class="form-control" placeholder="1234 Main St" id="shipping_address"
+                                        name="shipping_address">
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="shipping_zip">Zip *</label>
-                                    <input type="text" class="form-control" id="shipping_zip" placeholder="zip code"
-                                        name="shipping_zip">
-                                    <div class="invalid-feedback">
-                                        Zip code required.
+                                <div class="mb-3">
+                                    <label for="shipping_address2">Address 2 <span
+                                            class="text-muted">(Optional)</span></label>
+                                    <input type="text" class="form-control" placeholder="Apartment or Suite"
+                                        id="shipping_address2" name="shipping_address2">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label for="country">Country *</label>
+                                        {{ form.shipping_country }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="shipping_zip">Zip *</label>
+                                        <input type="text" class="form-control" id="shipping_zip" placeholder="zip code"
+                                            name="shipping_zip">
+                                        <div class="invalid-feedback">
+                                            Zip code required.
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <hr class="mb-3">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="save_shipping_address"
-                                    id="save_shipping_address">
-                                <label class="custom-control-label" for="save_shipping_address">Save this shipping
-                                    address as default</label>
-                            </div>
-                        </div>
-                        {% if default_shipping_address %}
-                        <div class="custom-control custom-checkbox" id="use_default_shipping_toggle">
-                            <input type="checkbox" class="custom-control-input" name="use_default_shipping"
-                                id="use_default_shipping">
-                            <label class="custom-control-label" for="use_default_shipping" id="use_existing">Use this
-                                shipping address: <span>{{ default_shipping_address.street_address }}</span></label>
-                        </div>
-                        {% endif %}
-                    </div>
-                    <div class="col-md-6">
-                        <h3>Billing address</h3>
-                        <hr>
-                        <div class="hideable_billing_form">
-                            <div class="mb-3">
-                                <label for="billing_address">Address *</label>
-                                <input type="text" class="form-control" placeholder="1234 Main St" id="billing_address"
-                                    name="billing_address">
-                            </div>
-                            <div class="mb-3">
-                                <label for="billing_address2">Address 2 <span
-                                        class="text-muted">(Optional)</span></label>
-                                <input type="text" class="form-control" placeholder="Apartment or Suite"
-                                    id="billing_address2" name="billing_address2">
-                            </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <label for="country">Country *</label>
-                                    {{ form.billing_country }}
+                                <hr class="mb-3">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" name="save_shipping_address"
+                                        id="save_shipping_address">
+                                    <label class="custom-control-label" for="save_shipping_address">Save this shipping
+                                        address as default</label>
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="billing_zip">Zip *</label>
-                                    <input type="text" class="form-control" id="billing_zip" placeholder="zip code"
-                                        name="billing_zip">
-                                    <div class="invalid-feedback">
-                                        Zip code required.
+                            </div>
+                            {% if default_shipping_address %}
+                            <div class="custom-control custom-checkbox" id="use_default_shipping_toggle">
+                                <input type="checkbox" class="custom-control-input" name="use_default_shipping"
+                                    id="use_default_shipping">
+                                <label class="custom-control-label" for="use_default_shipping" id="use_existing">Use this
+                                    shipping address: <span>{{ default_shipping_address.street_address }}</span></label>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Billing address</h3>
+                            <hr>
+                            <div class="hideable_billing_form">
+                                <div class="mb-3">
+                                    <label for="billing_address">Address *</label>
+                                    <input type="text" class="form-control" placeholder="1234 Main St" id="billing_address"
+                                        name="billing_address">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="billing_address2">Address 2 <span
+                                            class="text-muted">(Optional)</span></label>
+                                    <input type="text" class="form-control" placeholder="Apartment or Suite"
+                                        id="billing_address2" name="billing_address2">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label for="country">Country *</label>
+                                        {{ form.billing_country }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="billing_zip">Zip *</label>
+                                        <input type="text" class="form-control" id="billing_zip" placeholder="zip code"
+                                            name="billing_zip">
+                                        <div class="invalid-feedback">
+                                            Zip code required.
+                                        </div>
                                     </div>
                                 </div>
+                                <hr class="mb-3">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" name="save_billing_address"
+                                        id="save_billing_address">
+                                    <label class="custom-control-label" for="save_billing_address">Save this billing address
+                                        as default</label>
+                                </div>
                             </div>
-                            <hr class="mb-3">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="save_billing_address"
-                                    id="save_billing_address">
-                                <label class="custom-control-label" for="save_billing_address">Save this billing address
-                                    as default</label>
+                            {% if default_billing_address %}
+                            <div class="custom-control custom-checkbox" id="use_default_billing_toggle">
+                                <input type="checkbox" class="custom-control-input" name="use_default_billing"
+                                    id="use_default_billing">
+                                <label class="custom-control-label" for="use_default_billing" id="use_existing">Use this
+                                    billing address: <span>{{ default_billing_address.street_address }}</span></label>
                             </div>
+                            {% endif %}
                         </div>
-                        {% if default_billing_address %}
-                        <div class="custom-control custom-checkbox" id="use_default_billing_toggle">
-                            <input type="checkbox" class="custom-control-input" name="use_default_billing"
-                                id="use_default_billing">
-                            <label class="custom-control-label" for="use_default_billing" id="use_existing">Use this
-                                billing address: <span>{{ default_billing_address.street_address }}</span></label>
-                        </div>
-                        {% endif %}
                     </div>
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg my-3" type="submit" id="chkout_btn">Continue to Payment</button>
                 </div>
-                <hr class="mb-4">
-                <h4 class="mb-3">Payment gateways</h4>
-                <div class="d-block my-3">
-                    {% for value, name in form.fields.payment_option.choices %}
-                    <div class="custom-control custom-radio">
-                        <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio"
-                            class="custom-control-input" required>
-                        <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
-                    </div>
-                    {% endfor %}
-                </div>
-                <button class="btn btn-primary btn-lg my-3" type="submit" id="chkout_btn">Continue to checkout</button>
-            </div>
-        </form>
+            </form>
         {% else %}
-        <h4>You have no items in cart. Nothing to checkout here...</h4>
-        <a href="{% url 'shop' %}" class="btn btn-outline-info options1">Go to Shop</a>
+            <h4>You have no items in cart. Nothing to checkout here...</h4>
+            <a href="{% url 'shop' %}" class="btn btn-outline-info options1">Go to Shop</a>
         {% endif %}
-    </div>
-    <div class="col-md-4 order-box">
-        <h3>Order summary</h3>
-        <hr class="thick_hr">
-        {% for item in cart_contents %}
-        <div class="row mb-4">
-            <div class="col">
-                <div class="row">
-                    <div class="col-9 d-flex align-items-center">
-                        <div class="img_name">
-                            <img class="w-25 img-fluid" src="{{ item.product.main_image.url }}"
-                                alt="{{ item.product.title }}" />
-                            <h2 class="">{{ item.product.title }} - x{{ item.quantity }}</h2>
-                        </div>
-                    </div>
-                    <div class="col-3 d-flex align-items-center">
-                        <div class="chk_price ml-auto">$ {% widthratio item.product.price 1 item.quantity %}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-        <hr>
-        {% if order.coupon %}
-        <div class="coupon_center d-flex justify-content-between align-items-center">
-            <div>
-                <h5>Promo code</h5>
-                <small>{{ order.coupon.code }}</small>
-            </div>
-            <div class="ml-auto h5"> -$ {{ order.coupon.amount }}</div>
-        </div>
-        <hr>
-        {% endif %}
-        <div class="d-flex gr-total">
-            <h5>Grand Total</h5>
-            <div class="ml-auto h5"> $ {{ order.get_total }}</div>
-        </div>
-        <hr>
     </div>
 </div>
 

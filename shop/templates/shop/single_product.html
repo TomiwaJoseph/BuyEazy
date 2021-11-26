@@ -1,6 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
-{% block title %}{{ object.title }}{% endblock %}
+{% block title %}EazyBuy | {{ object.title }}{% endblock %}
 
 
 {% block content %}
@@ -43,7 +43,7 @@
         <hr>
         <h1>{{ object.title }}</h1>
         <p class="category">{{ object.category.title }}</p>
-        <h5>{% if object.discount_price %}<del class="text-danger">$ {{ object.discount_price}}</del>{% endif %} ${{ object.price }}</h5>
+        <h5>{% if object.real_price %}<del class="text-danger">$ {{ object.real_price}}</del>{% endif %} ${{ object.discount_price }}</h5>
         <!-- {% if object.availability %}
         <p class="text-success">Available</p>
         {% else %}
@@ -52,9 +52,11 @@
         <p>{{ object.description }}</p>
         <hr>
         <div class="d-flex justify-content-between utils mb-3">
-          <button class="wishlist_btn btn btn-info" data-id="{{ object.id }}"><i class="fa fa-heart"></i> Add to wishlist</button>
+          {% if user.is_authenticated %}
+            <button class="wishlist_btn btn btn-info" data-id="{{ object.id }}"><i class="fa fa-heart"></i> Add to wishlist</button>
+          {% endif %}
           <button class="btn btn-info add_to_cart_btn"
-            data-id="{{ product.id }}" data-price="{{ product.price }}" data-title="{{ product.title }}" data-image="{{ product.main_image.url }}">
+            data-id="{{ product.id }}" data-price="{{ product.discount_price }}" data-title="{{ product.title }}" data-image="{{ product.main_image.url }}">
             <i class="fa fa-shopping-bag"></i> Add to cart</button>
         </div>
       </div>
@@ -200,12 +202,12 @@
                 </div>
                 <div class="name_amt">
                     <p class="name">{{ product.title }}</p>
-                    <p class="amt">${{ product.price }} {% if product.discount_price %}<del class="text-danger">${{ product.discount_price }}</del>{% endif %}</p>
+                    <p class="amt">${{ product.discount_price }} {% if product.real_price %}<del class="text-danger">${{ product.real_price }}</del>{% endif %}</p>
                 </div>
                 <div class="col-10 d-flex shop_utils justify-content-around">
                     <a><i class="fa fa-heart wishlist_btn {% if product in user.wishlist_owner.folder.all %}active{% endif %}" data-id="{{ product.id }}"></i></a>
                     <a><i class="fa fa-shopping-cart add_to_cart_btn {% if product.id|slugify in request.session.cart_data %}active{% endif %}" 
-                        data-id="{{ product.id }}" data-price="{{ product.price }}" data-title="{{ product.title }}" data-image="{{ product.main_image.url }}"
+                        data-id="{{ product.id }}" data-price="{{ product.discount_price }}" data-title="{{ product.title }}" data-image="{{ product.main_image.url }}"
                         ></i></a>
                 </div>
             </div>
