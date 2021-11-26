@@ -11,17 +11,20 @@ urlpatterns = [
     path('delete-from-cart/', views.delete_cart_item, name='delete_cart_item'),
     path('update-cart/', views.update_cart_item, name='update_cart_item'),
     path('show-preview/', views.show_cart_preview, name='show_preview'),
+    path('shop/checkout/payment/', views.payment_page, name='payment_page'),
     # Ajax Requests Ends
 
     # Stripe
-    path('success/', views.SuccessView.as_view(), name="success"),
-    path('cancel/', views.CancelView.as_view(), name="cancel"),
-    
+    path('shop/purchase/stripe/success/', views.SuccessView.as_view(), name="success"),
+    path('shop/purchase/stripe/cancel/', views.CancelView.as_view(), name="cancel"),
+    path('create-checkout-session/', views.CreateCheckoutSessionView.as_view(), name='create_payment'),
+    path('webhooks/stripe/', views.stripe_webhook, name='stripe-webhook'),
+
     #To use for project
-    path('create-payment-intent/', views.StripeIntentView.as_view(), name="create_payment_intent"),
-    path('webhooks/stripe/', views.stripe_webhook, name="stripe_webhook"),
-    path('payment/stripe/', views.StripeLandingView.as_view(), name="stripe_payment"),
-    path('payment/paypal/', views.PaypalPaymentView.as_view(), name='paypal_payment'),
+    # path('create-payment-intent/', views.StripeIntentView.as_view(), name="create_payment_intent"),
+    # path('webhooks/stripe/', views.stripe_webhook, name="stripe_webhook"),
+    # path('payment/stripe/', views.StripeLandingView.as_view(), name="stripe_payment"),
+    # path('payment/paypal/', views.PaypalPaymentView.as_view(), name='paypal_payment'),
     # End Stripe    
     
     path('save_review/', views.save_review, name='save_review'),
