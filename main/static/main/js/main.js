@@ -1,19 +1,19 @@
 $(document).ready(function () {
 
+    $(function(){
+        $('input').blur();
+    })
+    
     $('.search').click(function (e) {
         e.preventDefault();
         $('.navbar form').fadeToggle();
         document.getElementById("search_text").focus();
     });
 
-    // $('#all_cat').addClass('active');
-
     $(".carousel-item").eq(0).addClass('active');
-    // $('div.carousel-inner > div:first-child').addClass('active')
 
-
-    // $('li.active').removeClass('active');
-    // $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+    $('li.active').removeClass('active');
+    $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
 
 
     //Toggle
