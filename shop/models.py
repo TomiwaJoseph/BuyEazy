@@ -27,7 +27,7 @@ class Product(models.Model):
     power_supply = models.CharField(max_length=100)
     battery = models.CharField(max_length=100)
     main_image = models.ImageField(upload_to="products")
-    price = models.PositiveIntegerField()
+    real_price = models.PositiveIntegerField()
     discount_price = models.PositiveIntegerField()
     slug = models.SlugField(max_length=100)
     # availability = models.BooleanField(default=True)
@@ -36,6 +36,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_stripe_price(self):
+        return int(self.discount_price) * 100
 
     def get_absolute_url(self):
         return reverse('view_product', args=[self.slug])
@@ -99,7 +102,10 @@ class OrderItem(models.Model):
         return f"{self.quantity} of {self.product.title}"
 
     def get_total_item_price(self):
-        return self.quantity * self.product.price
+        return self.quantity * self.product.discount_price
+    
+    def get_stripe_price(self):
+        return self.product.discount_price * 100
 
  
 class Order(models.Model):

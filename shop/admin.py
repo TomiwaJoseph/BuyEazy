@@ -6,8 +6,8 @@ from .models import (Product, Reviews, ProductImages, Refund,
 class ProductAdmin(admin.ModelAdmin):
     search_fields = ['title',]
     list_filter = ['category',]
-    list_editable = ['category', 'price', 'discount_price']
-    list_display = ('title', 'price', 'discount_price', 'category', 'image_tag')
+    list_editable = ['category', 'discount_price', 'real_price']
+    list_display = ('title', 'discount_price', 'real_price', 'category', 'image_tag')
     prepopulated_fields = {'slug': ('title',)}
 
 
