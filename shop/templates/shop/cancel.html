@@ -1,11 +1,31 @@
-<html>
-<head>
-  <title>Checkout canceled</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <section>
-    <p>Forgot to add something to your cart? Shop around then come back to pay!</p>
-  </section>
-</body>
-</html>
+{% extends 'main/base.html' %}
+{% block title %}EazyBuy | Checkout Canceled{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 mx-auto my-auto text-center">
+        <h2>Checkout Canceled!</h2>
+        <hr>
+    </div>
+</div>
+<!-- <div class="row">
+  <div class="col text-center">
+    <h1><span class="category_filter_title">Checkout Canceled!</span></h1>
+    <hr class="awaiting_approv mb-4">
+  </div>
+</div> -->
+
+<div class="row">
+  <div class="col-md-6 my-auto mx-auto">
+    <div class="content-section">
+      <div class="alert alert-info my-2 text-center pending_msg">
+        <p>Forgot to add something to cart? Shop around then come back to pay!</p>
+      </div>
+      <a href="{% url 'shop' %}" class="btn btn-outline-info options1 mt-2">Go to Shop</a>
+    </div>
+  </div>
+</div>
+<hr class="awaiting_approv mb-4">
+
+{% endblock %}

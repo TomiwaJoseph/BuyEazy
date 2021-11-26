@@ -1,14 +1,28 @@
-<html>
-<head>
-  <title>Thanks for your order!</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <section>
-    <p>
-      We appreciate your business! If you have any questions, please email
-      <a href="mailto:orders@example.com">orders@example.com</a>.
-    </p>
-  </section>
-</body>
-</html>
+{% extends 'main/base.html' %}
+{% block title %}EazyBuy | Buy Successful{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-4 mx-auto my-auto text-center">
+      <h2>Successful Buy!</h2>
+      <hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 my-auto mx-auto">
+    <div class="content-section">
+      <div class="alert alert-info my-2 text-center pending_msg">
+        <i class="fa fa-check-circle text-success"></i>
+        <p>
+          We appreciate your business! Enjoy your product(s). If you have any questions, please email
+          <a href="mailto:{{email}}">{{ email }}</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="awaiting_approv mb-4">
+
+{% endblock %}
