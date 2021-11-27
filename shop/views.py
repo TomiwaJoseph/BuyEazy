@@ -439,13 +439,7 @@ class CheckoutView(LoginRequiredMixin, View):
 
             return redirect('payment_page')
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
-=======
->>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
 @login_required
 def payment_page(request):    
     cart_contents = OrderItem.objects.filter(
@@ -459,32 +453,6 @@ def payment_page(request):
     }
     return render(request, "shop/payment_page.html", context)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
-order = OrderItem.objects.filter(
-            user__email="tomjoe@gmail.com", ordered=False,
-        )
-line_items = [{
-                'price_data': {
-                    'currency': 'usd',
-                    'unit_amount': item.get_stripe_price(),
-                    'product_data': {
-                        'name': item.product.title,
-                        # 'images': [item.product.main_image.path],
-                    },
-                },
-                'quantity': item.quantity,
-            } for item in order]
-print(line_items)
-print()
-
-<<<<<<< HEAD
->>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
-=======
->>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
 
 class CreateCheckoutSessionView(View):
     def post(self, request, *args, **kwargs):
@@ -516,8 +484,6 @@ class CreateCheckoutSessionView(View):
         return JsonResponse({
             'id': checkout_session.id
         })
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 
 @csrf_exempt
@@ -551,7 +517,6 @@ def stripe_webhook(request):
         print(email)
         print()
         
-        
         # course = Product.objects.get(id=course_id)
         # user = Product.objects.get(user__email=email)
                 
@@ -575,70 +540,11 @@ def stripe_webhook(request):
         )
 
     return HttpResponse(status=200)
-=======
->>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
-
-=======
->>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
-
-<<<<<<< HEAD
-class SuccessView(TemplateView):
-    template_name = "shop/success.html"
-
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
-@csrf_exempt
-def stripe_webhook(request):
-    payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-    event = None
-
-    try:
-        event = stripe.Webhook.construct_event(
-            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
-        )
-    except ValueError as e:
-        # Invalid payload
-        return HttpResponse(status=400)
-    except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
-        return HttpResponse(status=400)
-
-    # Handle the checkout.session.completed event
-    if event['type'] == 'checkout.session.completed':
-        session = event['data']['object']
-        
-        print(session)
-        
-        customer_email = session["customer_details"]["email"]
-        course_id = session["metadata"]["products"]
-        email = session["metadata"]["current_user_email"]
-
-        # course = Product.objects.get(id=course_id)
-        # user = Product.objects.get(user__email=email)
-                
-        # course.students.add(user.user)
-        # user.courses_bought.add(course)
-
-        # send_mail(
-        #     subject="Here is your course",
-        #     message=f'Thanks for purchasing the course "{course.title}".\n Enjoy!',
-        #     recipient_list=[customer_email],
-        #     from_email=settings.EMAIL_HOST_USER
-        # )
-
-    return HttpResponse(status=200)
 
 
 class SuccessView(TemplateView):
     template_name = "shop/success.html"
 
-<<<<<<< HEAD
->>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
-=======
->>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
 
 class CancelView(TemplateView):
     template_name = "shop/cancel.html"
@@ -682,7 +588,6 @@ def save_review(request):
         reviewer = request.user
     )
     return redirect("view_product", to_redirect_to)
-
 
 class AddCouponView(View):
     def post(self, *args, **kwargs):
