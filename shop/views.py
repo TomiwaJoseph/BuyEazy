@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView, View, TemplateView
-from .models import Product, Refund, ProductImages, Address, Order, OrderItem, Payment, Coupon, Reviews
+from .models import Product, Refund, ProductImages, Address, Order, OrderItem, Coupon, Reviews, Category
 from .forms import CheckoutForm, CouponForm, RefundForm
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -10,15 +10,12 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils import timezone
-from users.models import Wishlist
+from users.models import Wishlist, CustomUser
 import stripe
-import json
+from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
-from django_countries.data import COUNTRIES
-# print(COUNTRIES.get('AU'))
 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -28,6 +25,12 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def create_ref_code():
     return "".join(random.choices(string.ascii_lowercase + string.digits, k=20))
 
+def is_valid_form(values):
+    valid = True
+    for field in values:
+        if field[0] == '':
+            valid = False
+    return valid
 
 # Ajax Requests Start
 
@@ -83,20 +86,31 @@ def add_to_cart(request):
                 order = order_qs.first()
                 order.product.add(item_to_cart)
             else:
-                ordered_date = timezone.now()
                 order = Order.objects.create(user=request.user,
-                    ordered_date=ordered_date
+                    ref_code=create_ref_code()
                 )
                 order.product.add(item_to_cart)
+                current_user = CustomUser.objects.get(email=request.user.email)
+                current_user.user_order = order
+                current_user.save()
+
+    if request.user.is_authenticated:
+        total_items = OrderItem.objects.filter(user=request.user, ordered=False).count()
+    else:
+        total_items = len(request.session['cart_data'])
 
         
-    return JsonResponse({'data': request.session['cart_data'], 'total_items': len(request.session['cart_data'])})
+    return JsonResponse({'data': request.session['cart_data'], 'total_items': total_items})
 
 def show_cart_preview(request):
     try:
-        session_cart = request.session['cart_data']
-        all_cart_product_ids = [i for i in session_cart.keys()]
-        cart_contents = [Product.objects.get(id=i) for i in all_cart_product_ids]
+        if request.user.is_authenticated:
+            all_user_order_item_ids = [i.product.id for i in OrderItem.objects.filter(user=request.user, ordered=False)]
+            cart_contents = [Product.objects.get(id=i) for i in all_user_order_item_ids]
+        else:
+            session_cart = request.session['cart_data']
+            all_cart_product_ids = [i for i in session_cart.keys()]
+            cart_contents = [Product.objects.get(id=i) for i in all_cart_product_ids]
     except KeyError:
         cart_contents = []
 
@@ -109,36 +123,7 @@ def load_more_products(request):
     more_products = all_products[offset: offset + limit]
 
     t = render_to_string('shop/ajax_pages/more_products.html', {'more_products': more_products})
-    return JsonResponse({'more_products': t, 'test': 2})
-
-# Ajax Requests Ends
-
-def shop(request):
-    global all_products
-    all_products = list(Product.objects.all())
-    random.shuffle(all_products)
-
-    context = {
-        'all_products': all_products[:6],
-        'total_products': Product.objects.count(),
-    }
-    return render(request, 'shop/shop.html', context)
-
-def cart(request):
-    total_amount = 0
-    if 'cart_data' in request.session:
-        for product_id, item in request.session['cart_data'].items():
-            total_amount += int(item['quantity']) * int(item['price'])
-        context = {
-            'cart_data': request.session['cart_data'],
-            'totalItems': len(request.session['cart_data']),
-            'total_amount': total_amount,
-        }
-        print(total_amount)
-        return render(request, 'shop/cart.html', context)
-    else:
-        return render(request, 'shop/cart.html', 
-        {'cart_data': '', 'totalItems': 0, 'total_amt': total_amount})
+    return JsonResponse({'more_products': t})
 
 def delete_cart_item(request):
     prod_id = str(request.GET['id'])
@@ -150,57 +135,157 @@ def delete_cart_item(request):
     total_amount = 0
     for product_id, item in request.session['cart_data'].items():
         total_amount += int(item['quantity']) * float(item['price'])
-
-    if request.user.is_authenticated:
-        orderItem_to_delete = OrderItem.objects.get(user=request.user, product__id=request.GET['id'])
-        order_qs = Order.objects.get(user=request.user, ordered=False)
-        order_qs.product.remove(orderItem_to_delete)
-        orderItem_to_delete.delete()
-
+        
     context = {
         'cart_data': request.session['cart_data'],
         'totalItems': len(request.session['cart_data']),
         'total_amount': int(round(total_amount, 1))
     }
+
+    if request.user.is_authenticated:
+        orderItem_to_delete = OrderItem.objects.get(user=request.user, product__id=request.GET['id'], ordered=False)
+        order_qs = Order.objects.get(user=request.user, ordered=False)
+        order_qs.product.remove(orderItem_to_delete)
+        orderItem_to_delete.delete()
+
+        cart_dict = {}
+        orderItem_qs = OrderItem.objects.filter(user=request.user, ordered=False)
+        order_qs = Order.objects.filter(user=request.user, ordered=False)
+        if orderItem_qs.exists():
+            for obj in orderItem_qs:
+                cart_dict.update({f"{obj.product.id}": {'title': obj.product.title, 'quantity': obj.quantity, 
+                    'price': f'{obj.product.discount_price}', 'image': f'{obj.product.main_image.url}'}})
+            context.update({"cart_data": cart_dict})
+        if order_qs.exists():
+            context.update({"totalItems": order_qs[0].get_unordered_cart_items_count})
+            context.update({"total_amount": order_qs[0].get_total})
+
+        total_items = OrderItem.objects.filter(user=request.user, ordered=False).count()
+        context.update({"totalItems": total_items})
+    
+        total_items = OrderItem.objects.filter(user=request.user, ordered=False).count()
+        totalAmount = order_qs[0].get_total()
+    else:
+        total_items = len(request.session['cart_data'])
+        totalAmount = total_amount
+
     t = render_to_string('shop/ajax_pages/cart_list.html', context)
-    return JsonResponse({'data': t, 'totalItems': len(request.session['cart_data']), 'total_amount': total_amount})
+    return JsonResponse({'data': t, 'totalItems': total_items, 'total_amount': totalAmount})
 
 def update_cart_item(request):
     prod_id = str(request.GET['id'])
     prod_qty = request.GET['qty']
+    context = {}
     if 'cart_data' in request.session:
         if prod_id in request.session['cart_data']:
             cart_data = request.session['cart_data']
             cart_data[prod_id]['quantity'] = prod_qty
             request.session['cart_data'] = cart_data
-    total_amount = 0
-    for product_id, item in request.session['cart_data'].items():
-        total_amount += int(item['quantity']) * float(item['price'])
+        total_amount = 0
+        for product_id, item in request.session['cart_data'].items():
+            total_amount += int(item['quantity']) * float(item['price'])
     
-    context = {
-        'cart_data': request.session['cart_data'],
-        'totalItems': len(request.session['cart_data']),
-        'total_amount': int(round(total_amount, 1))
-    }
+        context.update({
+            'cart_data': request.session['cart_data'],
+            'totalItems': len(request.session['cart_data']),
+            'total_amount': int(round(total_amount, 1))
+        })
 
     if request.user.is_authenticated:
+        cart_dict = {}
         product_id = int(request.GET['id'])
         orderItem_qs = OrderItem.objects.get(user=request.user, product__id=product_id, ordered=False)
         orderItem_qs.quantity = int(request.GET['qty'])
         orderItem_qs.save()
 
+        orderItem_qs = OrderItem.objects.filter(user=request.user, ordered=False)
+        order_qs = Order.objects.filter(user=request.user, ordered=False)
+        if orderItem_qs.exists():
+            for obj in orderItem_qs:
+                cart_dict.update({f"{obj.product.id}": {'title': obj.product.title, 'quantity': obj.quantity, 
+                    'price': f'{obj.product.discount_price}', 'image': f'{obj.product.main_image.url}'}})
+            context.update({"cart_data": cart_dict})
+        if order_qs.exists():
+            context.update({"totalItems": order_qs[0].get_unordered_cart_items_count})
+            context.update({"total_amount": order_qs[0].get_total})
+
+        total_items = OrderItem.objects.filter(user=request.user, ordered=False).count()
+        context.update({"totalItems": total_items})
+    
+        total_items = OrderItem.objects.filter(user=request.user, ordered=False).count()
+        totalAmount = order_qs[0].get_total()
+    else:
+        total_items = len(request.session['cart_data'])
+        totalAmount = total_amount
+
     t = render_to_string('shop/ajax_pages/cart_list.html', context)
-    return JsonResponse({'data': t, 'totalItems': len(request.session['cart_data']), 'total_amount': total_amount})
+    return JsonResponse({'data': t, 'totalItems': total_items, 'total_amount': totalAmount})
 
-def gallery(request):
-    return render(request, 'shop/gallery.html')
+def filter_category(request):
+    category_to_filter = request.GET.get('_category')
+    filtered_products = Product.objects.filter(category__title=category_to_filter)
+    t = render_to_string('shop/ajax_pages/filter_products.html', {'filtered_products': filtered_products})
+    return JsonResponse({'filtered_products': t, 'category': category_to_filter})
 
-def is_valid_form(values):
-    valid = True
-    for field in values:
-        if field[0] == '':
-            valid = False
-    return valid
+def filter_price_and_product(request):
+    selected = request.POST.getlist('category')
+    min_value = int(request.POST.get('min-value')[1:])
+    max_value = int(request.POST.get('max-value')[1:])
+    filtered_products = Product.objects.filter(
+        category__title__in=selected,
+        price__gte=min_value, price__lte=max_value
+    )
+    t = render_to_string('shop/ajax_pages/filter_price_product.html', {'filtered_products': filtered_products})
+    return JsonResponse({'filtered_products': t})
+
+# Ajax Requests Ends
+
+def shop(request):
+    global all_products
+    all_products = list(Product.objects.all())
+    random.shuffle(all_products)
+    context = {
+        'all_categories': Category.objects.all(),
+        'all_products': all_products[:6],
+        'total_products': Product.objects.count(),
+        'cart_size': 0
+    }
+    if request.user.is_authenticated:
+        qs = Order.objects.filter(user=request.user, ordered=False)
+        if qs.exists():
+            context.update({"cart_size": qs[0].get_unordered_cart_items_count})
+    return render(request, 'shop/shop.html', context)
+
+def cart(request):
+    cart_dict = {}
+    context = {}
+    if request.user.is_authenticated:
+        orderItem_qs = OrderItem.objects.filter(user=request.user, ordered=False)
+        order_qs = Order.objects.filter(user=request.user, ordered=False)
+        if orderItem_qs.exists():
+            for obj in orderItem_qs:
+                cart_dict.update({f"{obj.product.id}": {'title': obj.product.title, 'quantity': obj.quantity, 
+                    'price': f'{obj.product.discount_price}', 'image': f'{obj.product.main_image.url}'}})
+            context.update({"cart_data": cart_dict})
+        if order_qs.exists():
+            context.update({"totalItems": order_qs[0].get_unordered_cart_items_count})
+            context.update({"total_amount": order_qs[0].get_total})
+
+        return render(request, 'shop/cart.html', context)
+    else:
+        total_amount = 0
+        if 'cart_data' in request.session:
+            for product_id, item in request.session['cart_data'].items():
+                total_amount += int(item['quantity']) * int(item['price'])
+            context = {
+                'cart_data': request.session['cart_data'],
+                'totalItems': len(request.session['cart_data']),
+                'total_amount': total_amount,
+            }
+            return render(request, 'shop/cart.html', context)
+        else:
+            return render(request, 'shop/cart.html', 
+            {'cart_data': '', 'totalItems': 0, 'total_amt': total_amount})
 
 
 class CheckoutView(LoginRequiredMixin, View):
@@ -208,7 +293,7 @@ class CheckoutView(LoginRequiredMixin, View):
         order_qs = Order.objects.filter(user=self.request.user, ordered=False)
         if not order_qs.exists():
             order = Order.objects.create(user=self.request.user,
-                ordered_date=timezone.now())
+                ref_code=create_ref_code())
             for product_id, item_data in self.request.session['cart_data'].items():
                 item_to_order = OrderItem.objects.create(
                     user = self.request.user,
@@ -221,25 +306,26 @@ class CheckoutView(LoginRequiredMixin, View):
         cart_contents = OrderItem.objects.filter(
             user=self.request.user, ordered=False,
         )
-        # form = CheckoutForm()
         context = {
             'cart_contents': cart_contents,
             'form': CheckoutForm(),
             'couponform': CouponForm,
-            'order': Order.objects.get(user=self.request.user, ordered=False),
         }
-        shipping_address_qs = Address.objects.filter(
+        default_shipping_address_qs = Address.objects.filter(
             user=self.request.user,
-            address_type="S"
+            address_type="S",
+            default=True
         )
-        if shipping_address_qs.exists():
-            context.update({'existing_shipping_address': shipping_address_qs[0]})
-        billing_address_qs = Address.objects.filter(
+        if default_shipping_address_qs.exists():
+            context.update({'default_shipping_address': default_shipping_address_qs[0]})
+
+        default_billing_address_qs = Address.objects.filter(
             user=self.request.user,
-            address_type="B"
+            address_type="B",
+            default=True
         )
-        if billing_address_qs.exists():
-            context.update({'existing_billing_address': billing_address_qs[0]})
+        if default_billing_address_qs.exists():
+            context.update({'default_billing_address': default_billing_address_qs[0]})
         return render(self.request, 'shop/checkout.html', context)
 
     def post(self, *args, **kwargs):
@@ -256,170 +342,226 @@ class CheckoutView(LoginRequiredMixin, View):
             billing_country = form.cleaned_data.get('billing_country'),
             billing_zip_code = form.cleaned_data.get('billing_zip'),
             
-            know_if_same_shipping_as_billing = form.cleaned_data.get('same_shipping_address')
-            know_if_to_overwrite_existing_shipping_address = form.cleaned_data.get('save_shipping_address')
-            know_if_to_overwrite_existing_billing_address = form.cleaned_data.get('save_billing_address')
-            know_if_to_use_default_billing = form.cleaned_data.get('use_default_billing')
+            know_if_to_save_shipping_address_as_default = form.cleaned_data.get('save_shipping_address')
+            know_if_to_save_billing_address_as_default = form.cleaned_data.get('save_billing_address')
             know_if_to_use_default_shipping = form.cleaned_data.get('use_default_shipping')
-            payment_option = form.cleaned_data.get('payment_option')
+            know_if_to_use_default_billing = form.cleaned_data.get('use_default_billing')
+            user_order = Order.objects.get(user=self.request.user, ordered=False)
             address_options = ['B', 'S']
 
             if know_if_to_use_default_shipping and know_if_to_use_default_billing:
-                if payment_option == 'S':
-                    return redirect('payment', 'stripe')
-                elif payment_option == 'P':
-                    return redirect('gallery')
-            if know_if_to_use_default_shipping and not is_valid_form([billing_street_address,
-                    billing_country, billing_zip_code]):
-                messages.info(self.request, "Please fill in the required fields...")
-                return redirect('checkout')
-            if know_if_to_use_default_billing and not is_valid_form([shipping_street_address,
-                    shipping_country, shipping_zip_code]):
-                messages.info(self.request, "Please fill in the required fields...")
-                return redirect('checkout')
+                user_billing_address = Address.objects.get(user=self.request.user, default=True, address_type='B')
+                user_shipping_address = Address.objects.get(user=self.request.user, default=True, address_type='S')
+                user_order.billing_address = user_billing_address
+                user_order.shipping_address = user_shipping_address
+                user_order.save()
 
-            if not is_valid_form([shipping_street_address, shipping_country,
-                shipping_zip_code, billing_street_address,
+            elif is_valid_form([shipping_street_address, shipping_country,
+                    shipping_zip_code, billing_street_address,
+                    billing_country, billing_zip_code]):
+                new_billing_address = Address.objects.create(
+                    user = self.request.user,
+                    street_address = billing_street_address[0],
+                    apartment_address = billing_apartment_address[0],
+                    country = billing_country[0],
+                    zip_code = billing_zip_code[0],
+                    address_type = "B",
+                    default = False
+                )
+                new_shipping_address = Address.objects.create(
+                    user = self.request.user,
+                    street_address = shipping_street_address[0],
+                    apartment_address = shipping_apartment_address[0],
+                    country = shipping_country[0],
+                    zip_code = shipping_zip_code[0],
+                    address_type = "S",
+                    default = False
+                )
+                user_order.billing_address = new_billing_address
+                user_order.shipping_address = new_shipping_address
+                user_order.save()
+                if know_if_to_save_shipping_address_as_default:
+                    user_default_shipping = Address.objects.filter(user=self.request.user, address_type='S',
+                        default=True).update(default=False)
+                    new_shipping_address.default = True
+                    new_shipping_address.save()
+                if know_if_to_save_billing_address_as_default:
+                    all_user_billing = Address.objects.filter(user=self.request.user, address_type='B',
+                        default=True).update(default=False)
+                    new_billing_address.default = True
+                    new_billing_address.save()
+
+            elif know_if_to_use_default_shipping and is_valid_form([billing_street_address,
                 billing_country, billing_zip_code]):
-                messages.info(self.request, "Please fill in the required fields...")
+                user_shipping_address = Address.objects.get(user=self.request.user, default=True, address_type='S')
+                new_billing_address = Address.objects.create(
+                    user = self.request.user,
+                    street_address = billing_street_address[0],
+                    apartment_address = billing_apartment_address[0],
+                    country = billing_country[0],
+                    zip_code = billing_zip_code[0],
+                    address_type = "B",
+                    default = False
+                )
+                user_order.billing_address = new_billing_address
+                user_order.shipping_address = user_shipping_address
+                user_order.save()
+                if know_if_to_save_billing_address_as_default:
+                    all_user_billing = Address.objects.filter(user=self.request.user, address_type='B',
+                        default=True).update(default=False)
+                    new_billing_address.default = True
+                    new_billing_address.save()
+
+            elif know_if_to_use_default_billing and is_valid_form([shipping_street_address,
+                shipping_country, shipping_zip_code]):
+                user_billing_address = Address.objects.get(user=self.request.user, default=True, address_type='B')
+                new_shipping_address = Address.objects.create(
+                    user = self.request.user,
+                    street_address = shipping_street_address[0],
+                    apartment_address = shipping_apartment_address[0],
+                    country = shipping_country[0],
+                    zip_code = shipping_zip_code[0],
+                    address_type = "S",
+                    default = False
+                )
+                user_order.billing_address = user_billing_address
+                user_order.shipping_address = new_shipping_address
+                user_order.save()
+                if know_if_to_save_shipping_address_as_default:
+                    user_default_shipping = Address.objects.filter(user=self.request.user, address_type='S',
+                        default=True).update(default=False)
+                    new_shipping_address.default = True
+                    new_shipping_address.save()
+
+            else:
+                messages.error(self.request, "Please fill in the required fields...")
                 return redirect('checkout')
-            
-            if know_if_to_overwrite_existing_shipping_address:
-                if is_valid_form([shipping_street_address,
-                    shipping_country, shipping_zip_code]):
-                    obj, created = Address.objects.update_or_create(
-                        user = self.request.user, address_type="S",
-                        defaults = {
-                            'street_address': shipping_street_address[0],
-                            'apartment_address': shipping_apartment_address[0],
-                            'country': shipping_country[0],
-                            'zip_code': shipping_zip_code[0],
-                            'address_type': "S"
-                        }
-                    )
-                    order.shipping_address = obj
-                    order.save()
-                else:
-                    messages.info(self.request, "Please fill in the required fields...")
-                    return redirect('checkout')
-            if know_if_to_overwrite_existing_billing_address:
-                if is_valid_form([billing_street_address,
-                    billing_country, billing_zip_code]):
-                    obj, created = Address.objects.update_or_create(
-                        user = self.request.user, address_type="B",
-                        defaults = {
-                            'street_address': billing_street_address[0],
-                            'apartment_address': billing_apartment_address[0],
-                            'country': billing_country[0],
-                            'zip_code': billing_zip_code[0],
-                            'address_type': "B"
-                        }
-                    )
-                    order.billing_address = obj
-                    order.save()
-                else:
-                    messages.info(self.request, "Please fill in the required fields...")
-                    return redirect('checkout')
-            if know_if_same_shipping_as_billing:
-                for option in address_options:
-                    obj, created = Address.objects.update_or_create(
-                        user = self.request.user, address_type=option,
-                        defaults = {
-                            'street_address': shipping_street_address[0],
-                            'apartment_address': shipping_apartment_address[0],
-                            'country': shipping_country[0],
-                            'zip_code': shipping_zip_code[0],
-                            'address_type': option
-                        }
-                    )
-                    order.shipping_address = obj
-                    order.billing_address = obj
-                    order.save()
-            
-            if payment_option == 'S':
-                return redirect('payment', 'stripe')
-            elif payment_option == 'P':
-                return redirect('gallery')
+
+            return redirect('payment_page')
 
 
-class PaymentView(View):
+@login_required
+def payment_page(request):    
+    cart_contents = OrderItem.objects.filter(
+        user=request.user, ordered=False,
+    )
+    order = Order.objects.get(user=request.user, ordered=False)
+    context = {
+        'cart_contents': cart_contents,
+        'order': order,
+        "STRIPE_PUBLISHABLE_KEY": settings.STRIPE_PUBLISHABLE_KEY
+    }
+    return render(request, "shop/payment_page.html", context)
+
+
+class CreateCheckoutSessionView(View):
+    def post(self, request, *args, **kwargs):
+        order = OrderItem.objects.filter(
+            user=request.user, ordered=False,
+        )
+        domain_url = "http://127.0.0.1:8000"
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items = [{
+                'price_data': {
+                    'currency': 'usd',
+                    'unit_amount': item.get_stripe_price(),
+                    'product_data': {
+                        'name': item.product.title,
+                        # 'images': [item.product.main_image.path],
+                    },
+                },
+                'quantity': item.quantity,
+            } for item in order],
+            metadata={
+                "products": order,
+                "current_user_email": self.request.user.email,
+            },
+            mode='payment',
+            success_url = domain_url + '/shop/purchase/stripe/success/',
+            cancel_url = domain_url + '/shop/purchase/stripe/cancel/',
+        )
+        return JsonResponse({
+            'id': checkout_session.id
+        })
+
+
+@csrf_exempt
+def stripe_webhook(request):
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+    
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the checkout.session.completed event
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+                
+        customer_email = session["customer_details"]["email"]
+        order = session["metadata"]["products"]
+        email = session["metadata"]["current_user_email"]
+
+        print()
+        print(customer_email)
+        print(order)
+        print(email)
+        print()
+        
+        
+        # course = Product.objects.get(id=course_id)
+        # user = Product.objects.get(user__email=email)
+                
+        # course.students.add(user.user)
+        # user.courses_bought.add(course)
+        
+        if len(order) > 1:
+            the_string = "Thanks for buying: \n\n"
+            for i, q in enumerate(order, 1):
+                the_string += (str(i) + '. ' + str(q) + '\n')
+            message = the_string + '\nEnjoy!'
+        else:
+            item = order.first().product.title
+            message=f'Thanks for buying "{item}".\n Enjoy!'
+            
+        send_mail(
+            subject="Product Purchase",
+            message=message,
+            recipient_list=[customer_email],
+            from_email=settings.EMAIL_HOST_USER
+        )
+
+    return HttpResponse(status=200)
+
+
+class SuccessView(TemplateView):
+    template_name = "shop/success.html"
+
+
+class CancelView(TemplateView):
+    template_name = "shop/cancel.html"
+
+
+class PaypalPaymentView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
-        try:
-            cart_contents = OrderItem.objects.filter(
-                user=self.request.user, ordered=False,
-            )
-            order = Order.objects.get(user=self.request.user, ordered=False)
-            context = {
-                'cart_contents': cart_contents,
-                # 'grand_total': order.get_total(),
-                'order': order,
-            }
-            return render(self.request, "shop/payment.html", context)
-        except ObjectDoesNotExist:
-            messages.warning(self.request, "You have not added a billing address yet.")
-            return redirect('checkout')
+        order_details = Order.objects.filter(user=self.request.user, ordered=False)
+        context = {
+            "order_details": order_details[0],
+            "couponform": CouponForm(),
+        }
+        return render(self.request, "shop/paypal_payment.html", context)
 
     def post(self, *args, **kwargs):
-        try:
-            order = Order.objects.get(user=self.request.user, ordered=False)
-            token = self.request.POST.get('stripeToken')
-            amount = int(order.get_total() * 100)
-            charge = stripe.Charge.create(
-                amount = amount,
-                currency = "usd",
-                source = token,
-            )
-
-            # create the payment 
-            payment = Payment()
-            payment.stripe_charge_id = charge["id"]
-            payment.user = self.request.user
-            payment.amount = amount
-            payment.save()
-
-            # assign payment to the order
-            order.ordered = True
-            order.payment = payment
-            order.ref_code = create_ref_code()
-            order.save()
-
-            messages.success(self.request, "Your order was successful!")
-            return redirect('gallery')
-
-        except stripe.error.CardError as e:
-            body = e.json_body
-            err = body.get('error', {})
-            messages.warning(self.request, f"{err.get('message')}")
-            return redirect(".")
-        except stripe.error.RateLimitError as e:
-            # Too many requests made to the API too quickly
-            messages.warning(self.request, "Rate limit error")
-            return redirect(".")
-        except stripe.error.InvalidRequestError as e:
-            # Invalid parameters were supplied to Stripe's API
-            print(e)
-            messages.warning(self.request, "Invalid parameters")
-            return redirect(".")
-        except stripe.error.AuthenticationError as e:
-            # Authentication with Stripe's API failed
-            # (maybe you changed API keys recently)
-            messages.warning(self.request, "Not authenticated")
-            return redirect(".")
-        except stripe.error.APIConnectionError as e:
-            # Network communication with Stripe failed
-            messages.warning(self.request, "Network error")
-            return redirect(".")
-        except stripe.error.StripeError as e:
-            # Display a very generic error to the user, and maybe send
-            # yourself an email
-            messages.warning(
-                self.request, "Something went wrong. You were not charged. Please try again.")
-            return redirect(".")
-        except Exception as e:
-            # send an email to ourselves
-            messages.warning(
-                self.request, "A serious error occurred. We have been notifed.")
-            return redirect(".")
+        pass
 
 
 class SingleProduct(DetailView):
@@ -437,17 +579,6 @@ class SingleProduct(DetailView):
         return context
 
 
-def testpage(request):
-    if 'cart_data' in request.session:
-        del request.session['cart_data']
-    if request.user.is_authenticated:
-        all_order_item = OrderItem.objects.filter(user=request.user, ordered=False)
-        all_order_item.delete()
-        order = Order.objects.filter(user=request.user, ordered=False)
-        order.delete()
-    messages.info(request, 'Something went wrong. You were not charged. Please try again.')
-    return render(request, 'shop/test.html')
-
 @login_required
 def save_review(request):
     to_redirect_to = request.POST.get('to_redirect')
@@ -459,10 +590,12 @@ def save_review(request):
     )
     return redirect("view_product", to_redirect_to)
 
+
 class AddCouponView(View):
     def post(self, *args, **kwargs):
         form = CouponForm(self.request.POST or None)
         if form.is_valid():
+            redirect_to = self.request.POST.get('redirect_to')
             try:
                 code = form.cleaned_data.get('code')
                 order = Order.objects.get(
@@ -470,15 +603,24 @@ class AddCouponView(View):
                 try:
                     coupon = Coupon.objects.get(code=code)
                 except ObjectDoesNotExist:
-                    messages.info(self.request, "This coupon does not exist")
-                    return redirect("checkout")
+                    messages.error(self.request, "This coupon does not exist")
+                    if redirect_to == 'stripe':
+                        return redirect("stripe_payment")
+                    elif redirect_to == 'paypal':
+                        return redirect("paypal_payment")
                 order.coupon = coupon
                 order.save()
                 messages.success(self.request, "Successfully added coupon")
-                return redirect("checkout")
+                if redirect_to == 'stripe':
+                    return redirect("stripe_payment")
+                elif redirect_to == 'paypal':
+                    return redirect("paypal_payment")
             except ObjectDoesNotExist:
-                messages.info(self.request, "You do not have an active order")
-                return redirect("checkout")
+                messages.error(self.request, "You do not have an active order")
+                if redirect_to == 'stripe':
+                    return redirect("stripe_payment")
+                elif redirect_to == 'paypal':
+                    return redirect("paypal_payment")
 
 
 class RequestRefundView(View):
@@ -516,131 +658,11 @@ class RequestRefundView(View):
                 return redirect("request_refund")
 
 
-class SuccessView(TemplateView):
-    template_name = "shop/success.html"
+"""
 
+    stripe listen --forward-to localhost:8000/webhooks/stripe
+    4242424242424242 Works
+    4000000000009995 Insufficient funds
+    4000002500003155 authentication not handled
 
-class CancelView(TemplateView):
-    template_name = "shop/cancel.html"
-
-
-class StripeLandingView(TemplateView):
-    template_name = "shop/landing.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context.update({
-            "STRIPE_PUBLIC_KEY": settings.STRIPE_PUBLIC_KEY,
-        })
-        return context
-
-
-class CreateCheckoutSessionView(View):
-    def post(self, request, *args, **kwargs):
-        YOUR_DOMAIN = "http://127.0.0.8000"
-        checkout_session = stripe.checkout.Session.create(
-            success_url=YOUR_DOMAIN + '/success/',
-            cancel_url=YOUR_DOMAIN + '/cancel/',
-            payment_method_types=['card'],
-            mode='payment',
-            line_items=[
-                {
-                    'price_data': {
-                        'currency': 'usd',
-                        'unit_amount': 2000,
-                        'product_data': {
-                            'name': "single product",
-                            # 'images': ['https://i.imgur.com/EHyR2nP.png']
-                        },
-                    },
-                    'quantity': 7,
-                },
-            ],
-        )
-        return JsonResponse({
-            "id": checkout_session.id
-        })
-
-
-@csrf_exempt
-def stripe_webhook(request):
-    payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-    event = None
-
-    try:
-        event = stripe.Webhook.construct_event(
-            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
-        )
-    except ValueError as e:
-        # Invalid payload
-        return HttpResponse(status=400)
-    except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
-        return HttpResponse(status=400)
-
-    # Handle the checkout.session.completed event
-    if event['type'] == 'checkout.session.completed':
-        session = event['data']['object']
-
-        # Save an order in your database, marked as 'awaiting payment'
-        create_order(session)
-
-        # Check if the order is already paid (e.g., from a card payment)
-        #
-        # A delayed notification payment will have an `unpaid` status, as
-        # you're still waiting for funds to be transferred from the customer's
-        # account.
-        if session.payment_status == "paid":
-            # Fulfill the purchase
-            fulfill_order(session)
-
-    elif event['type'] == 'checkout.session.async_payment_succeeded':
-        session = event['data']['object']
-
-        # Fulfill the purchase
-        fulfill_order(session)
-
-    elif event['type'] == 'checkout.session.async_payment_failed':
-        session = event['data']['object']
-
-        # Send an email to the customer asking them to retry their order
-        email_customer_about_failed_payment(session)
-
-    # Passed signature verification
-    return HttpResponse(status=200)
-
-def fulfill_order(session):
-    # TODO: fill me in
-    print("Fulfilling order")
-
-def create_order(session):
-    # TODO: fill me in
-    print("Creating order")
-
-def email_customer_about_failed_payment(session):
-    # TODO: fill me in
-    print("Emailing customer")
-
-
-
-
-def calculate_order_amount():
-    return 1270
-
-class StripeIntentView(View):
-    def post(self, request, *args, **kwargs):
-        try:
-            req_json = json.loads(request.body)
-            customer = stripe.Customer.create(email=req_json['email'])
-            intent = stripe.PaymentIntent.create(
-                amount=calculate_order_amount(),
-                currency='usd',
-                customer=customer['id']
-            )
-            return JsonResponse({
-                'clientSecret': intent['client_secret']
-            })
-        except Exception as e:
-            return JsonResponse({ 'error': str(e) })
-
+"""
