@@ -440,7 +440,10 @@ class CheckoutView(LoginRequiredMixin, View):
             return redirect('payment_page')
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
 =======
 >>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
 @login_required
@@ -457,7 +460,10 @@ def payment_page(request):
     return render(request, "shop/payment_page.html", context)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
 order = OrderItem.objects.filter(
             user__email="tomjoe@gmail.com", ordered=False,
         )
@@ -475,6 +481,9 @@ line_items = [{
 print(line_items)
 print()
 
+<<<<<<< HEAD
+>>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
+=======
 >>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
 
 class CreateCheckoutSessionView(View):
@@ -507,6 +516,7 @@ class CreateCheckoutSessionView(View):
         return JsonResponse({
             'id': checkout_session.id
         })
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -565,15 +575,20 @@ def stripe_webhook(request):
         )
 
     return HttpResponse(status=200)
+=======
+>>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
 
 =======
 >>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
 
+<<<<<<< HEAD
 class SuccessView(TemplateView):
     template_name = "shop/success.html"
 
 <<<<<<< HEAD
 =======
+=======
+>>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
 @csrf_exempt
 def stripe_webhook(request):
     payload = request.body
@@ -620,6 +635,9 @@ def stripe_webhook(request):
 class SuccessView(TemplateView):
     template_name = "shop/success.html"
 
+<<<<<<< HEAD
+>>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
+=======
 >>>>>>> 7f5f582f13a2502ba1afead43372a85f8801b869
 
 class CancelView(TemplateView):
