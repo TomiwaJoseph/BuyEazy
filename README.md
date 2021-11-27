@@ -3,7 +3,7 @@
 <h2>Features</h2>
 <ul>
     <li>Sign up, login page with email</li>
-    <li>Save favorites to watch in your wishlist<li>
+    <li>Save favorites to watch in your wishlist</li>
     <li>Easy buying experience</li>
     <li>Highly responsive</li>
     <li>Payment gateway integration</li>
