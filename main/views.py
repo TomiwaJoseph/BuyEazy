@@ -1,8 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from shop.models import Product, Category
 import random
 from .models import Newsletter, Gallery
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 
 # Ajax Requests Start
@@ -17,7 +21,6 @@ def newsletter(request):
     return HttpResponse('Success')
 
 # Ajax Requests Ends
-
 
 def index(request):
     all_categories = []
@@ -37,6 +40,19 @@ def index(request):
     return render(request, 'main/index.html', context)
 
 def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        subject = request.POST.get('subject')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        
+        intro_and_message = f"Hi, {name} here.\n" + message
+            
+        send_mail(subject, intro_and_message, email,
+            [settings.EMAIL_HOST_USER], fail_silently=False)
+
+        messages.success(request, 'Message sent successfully')
+        return redirect('contact')
     return render(request, 'main/contact.html')
 
 def search_product(request):
