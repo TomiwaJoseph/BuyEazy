@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView, View, TemplateView
-from .models import Product, Refund, ProductImages, Address, Order, OrderItem, Coupon, Reviews, Category
-from .forms import CheckoutForm, CouponForm, RefundForm
+from .models import Product, Refund, ProductImages, Address, Order, OrderItem, Reviews, Category
+from .forms import CheckoutForm, RefundForm
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import random
@@ -16,6 +16,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -127,20 +128,21 @@ def load_more_products(request):
 
 def delete_cart_item(request):
     prod_id = str(request.GET['id'])
+    context = {}
     if "cart_data" in request.session:
         if prod_id in request.session['cart_data']:
             cart_data = request.session['cart_data']
             del request.session['cart_data'][prod_id]
             request.session['cart_data'] = cart_data
-    total_amount = 0
-    for product_id, item in request.session['cart_data'].items():
-        total_amount += int(item['quantity']) * float(item['price'])
+        total_amount = 0
+        for product_id, item in request.session['cart_data'].items():
+            total_amount += int(item['quantity']) * float(item['price'])
         
-    context = {
-        'cart_data': request.session['cart_data'],
-        'totalItems': len(request.session['cart_data']),
-        'total_amount': int(round(total_amount, 1))
-    }
+        context = {
+            'cart_data': request.session['cart_data'],
+            'totalItems': len(request.session['cart_data']),
+            'total_amount': int(round(total_amount, 1))
+        }
 
     if request.user.is_authenticated:
         orderItem_to_delete = OrderItem.objects.get(user=request.user, product__id=request.GET['id'], ordered=False)
@@ -233,7 +235,7 @@ def filter_price_and_product(request):
     max_value = int(request.POST.get('max-value')[1:])
     filtered_products = Product.objects.filter(
         category__title__in=selected,
-        price__gte=min_value, price__lte=max_value
+        discount_price__gte=min_value, discount_price__lte=max_value
     )
     t = render_to_string('shop/ajax_pages/filter_price_product.html', {'filtered_products': filtered_products})
     return JsonResponse({'filtered_products': t})
@@ -309,7 +311,6 @@ class CheckoutView(LoginRequiredMixin, View):
         context = {
             'cart_contents': cart_contents,
             'form': CheckoutForm(),
-            'couponform': CouponForm,
         }
         default_shipping_address_qs = Address.objects.filter(
             user=self.request.user,
@@ -456,7 +457,10 @@ def payment_page(request):
 
 class CreateCheckoutSessionView(View):
     def post(self, request, *args, **kwargs):
-        order = OrderItem.objects.filter(
+        order_items = OrderItem.objects.filter(
+            user=request.user, ordered=False,
+        )
+        order = Order.objects.get(
             user=request.user, ordered=False,
         )
         domain_url = "http://127.0.0.1:8000"
@@ -472,9 +476,9 @@ class CreateCheckoutSessionView(View):
                     },
                 },
                 'quantity': item.quantity,
-            } for item in order],
+            } for item in order_items],
             metadata={
-                "products": order,
+                "products": order.id,
                 "current_user_email": self.request.user.email,
             },
             mode='payment',
@@ -508,29 +512,20 @@ def stripe_webhook(request):
         session = event['data']['object']
                 
         customer_email = session["customer_details"]["email"]
-        order = session["metadata"]["products"]
+        order_id = session["metadata"]["products"]
         email = session["metadata"]["current_user_email"]
-
-        print()
-        print(customer_email)
-        print(order)
-        print(email)
-        print()
-        
-        # course = Product.objects.get(id=course_id)
-        # user = Product.objects.get(user__email=email)
                 
-        # course.students.add(user.user)
-        # user.courses_bought.add(course)
+        order = Order.objects.get(id=int(order_id))
+        order_products = order.product.all()
         
-        if len(order) > 1:
+        if order_products.count() > 1:
             the_string = "Thanks for buying: \n\n"
-            for i, q in enumerate(order, 1):
-                the_string += (str(i) + '. ' + str(q) + '\n')
+            for i, q in enumerate(order_products, 1):
+                the_string += str(i) + '. ' + str(q.product.title) + '\n'
             message = the_string + '\nEnjoy!'
         else:
-            item = order.first().product.title
-            message=f'Thanks for buying "{item}".\n Enjoy!'
+            item = order_products.first().product.title
+            message=f'Thanks for buying "{item}".\nEnjoy!'
             
         send_mail(
             subject="Product Purchase",
@@ -538,7 +533,17 @@ def stripe_webhook(request):
             recipient_list=[customer_email],
             from_email=settings.EMAIL_HOST_USER
         )
-
+        
+        order.ordered = True
+        order.paid_for = True
+        order.payment_date = timezone.now()
+        order.being_processed = True
+        order.save()
+        
+        for order_item in order_products:
+            order_item.ordered = True
+            order_item.save()
+            
     return HttpResponse(status=200)
 
 
@@ -555,7 +560,6 @@ class PaypalPaymentView(LoginRequiredMixin, View):
         order_details = Order.objects.filter(user=self.request.user, ordered=False)
         context = {
             "order_details": order_details[0],
-            "couponform": CouponForm(),
         }
         return render(self.request, "shop/paypal_payment.html", context)
 
@@ -588,37 +592,6 @@ def save_review(request):
         reviewer = request.user
     )
     return redirect("view_product", to_redirect_to)
-
-class AddCouponView(View):
-    def post(self, *args, **kwargs):
-        form = CouponForm(self.request.POST or None)
-        if form.is_valid():
-            redirect_to = self.request.POST.get('redirect_to')
-            try:
-                code = form.cleaned_data.get('code')
-                order = Order.objects.get(
-                    user=self.request.user, ordered=False)
-                try:
-                    coupon = Coupon.objects.get(code=code)
-                except ObjectDoesNotExist:
-                    messages.error(self.request, "This coupon does not exist")
-                    if redirect_to == 'stripe':
-                        return redirect("stripe_payment")
-                    elif redirect_to == 'paypal':
-                        return redirect("paypal_payment")
-                order.coupon = coupon
-                order.save()
-                messages.success(self.request, "Successfully added coupon")
-                if redirect_to == 'stripe':
-                    return redirect("stripe_payment")
-                elif redirect_to == 'paypal':
-                    return redirect("paypal_payment")
-            except ObjectDoesNotExist:
-                messages.error(self.request, "You do not have an active order")
-                if redirect_to == 'stripe':
-                    return redirect("stripe_payment")
-                elif redirect_to == 'paypal':
-                    return redirect("paypal_payment")
 
 
 class RequestRefundView(View):
