@@ -119,8 +119,6 @@ class Order(models.Model):
         on_delete=models.SET_NULL, blank=True, null=True)
     billing_address = models.ForeignKey('Address', related_name="billing_address",
         on_delete=models.SET_NULL, blank=True, null=True)
-    coupon = models.ForeignKey('Coupon', 
-        on_delete=models.SET_NULL, blank=True, null=True)
     paid_for = models.BooleanField(default=False)
     payment_date = models.DateTimeField(null=True, blank=True)
     being_processed = models.BooleanField(default=False)
@@ -141,8 +139,6 @@ class Order(models.Model):
         total = 0
         for order_item in self.product.all():
             total += order_item.get_total_item_price()
-        if self.coupon:
-            total -= self.coupon.amount
         return total
 
 
@@ -163,14 +159,6 @@ class Address(models.Model):
 
     class Meta:
         verbose_name_plural = 'Addresses'
-
-
-class Coupon(models.Model):
-    code = models.CharField(max_length=15)
-    amount = models.FloatField()
-
-    def __str__(self):
-        return self.code
 
 
 class Refund(models.Model):

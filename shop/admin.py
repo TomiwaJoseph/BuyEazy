@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (Product, Reviews, ProductImages, Refund,
-    Category, OrderItem, Order, Coupon, Address)
+    Category, OrderItem, Order, Address)
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -19,7 +19,7 @@ class OrderItemAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     list_editable = ['being_processed', 'delivered', 'refund_requested', 'refund_granted']
     list_display = ['user', 'ref_code', 'ordered', 'paid_for', 'payment_date', 'being_processed', 'delivered',
-        'refund_requested', 'refund_granted', 'coupon']
+        'refund_requested', 'refund_granted']
 
 
 class AddressAdmin(admin.ModelAdmin):
@@ -33,7 +33,6 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(ProductImages)
 admin.site.register(Address, AddressAdmin)
-admin.site.register(Coupon)
 admin.site.register(Reviews)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)

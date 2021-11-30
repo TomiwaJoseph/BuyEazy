@@ -31,7 +31,6 @@ urlpatterns = [
     path('shop/', views.shop, name='shop'),
     path('cart/', views.cart, name='cart'),
     path('request-refund/', views.RequestRefundView.as_view(), name='request_refund'),
-    path('add-coupon/', views.AddCouponView.as_view(), name='add_coupon'),
     path('checkout/', views.CheckoutView.as_view(), name='checkout'),
     path('view-product/<slug:slug>', views.SingleProduct.as_view(), name='view_product'),
 ]
