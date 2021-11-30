@@ -1,4 +1,5 @@
-# Buy computers Eazyly
+# Buy Computers Eazyly
+
 <p>This app is created for easy purchase of computers.</p>
 <h2>Features</h2>
 <ul>
@@ -9,10 +10,11 @@
     <li>Payment gateway integration</li>
     <li>Refund mechanism</li>
     <li>In short, this app WORKS!</li>
-    <li>...and more</li>
+    <li>... and more</li>
 </ul>
 <h2>To do...</h2>
 <ul>
     <li>Effect a country - state combo instead of zip code because not all countries have zip codes</li>
-    <li>Social App authentication without signup😎😎</li>
+    <li>After deployment, integrate Social App authentication without signup😎😎</li>
+    <li>Integrate PayPal payment gateway when they "are not sorry and can confirm it is me" (IYKYK) 😒😏</li>
 </ul>
