@@ -233,10 +233,15 @@ def filter_price_and_product(request):
     selected = request.POST.getlist('category')
     min_value = int(request.POST.get('min-value')[1:])
     max_value = int(request.POST.get('max-value')[1:])
-    filtered_products = Product.objects.filter(
-        category__title__in=selected,
-        discount_price__gte=min_value, discount_price__lte=max_value
-    )
+    if selected:
+        filtered_products = Product.objects.filter(
+            category__title__in=selected,
+            discount_price__gte=min_value, discount_price__lte=max_value
+        )
+    else:
+        filtered_products = Product.objects.filter(
+            discount_price__gte=min_value, discount_price__lte=max_value
+        )
     t = render_to_string('shop/ajax_pages/filter_price_product.html', {'filtered_products': filtered_products})
     return JsonResponse({'filtered_products': t})
 

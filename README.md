@@ -9,7 +9,6 @@
     <li>Highly responsive</li>
     <li>Payment gateway integration</li>
     <li>Refund mechanism</li>
-    <li>In short, this app WORKS!</li>
     <li>... and more</li>
 </ul>
 <h2>To do...</h2>
