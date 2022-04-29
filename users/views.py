@@ -10,7 +10,6 @@ from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View
 from django.contrib import messages
-from django.contrib.auth import update_session_auth_hash, authenticate
 from django.db.models import Count
 from django.db.models.functions import ExtractMonth
 import calendar
