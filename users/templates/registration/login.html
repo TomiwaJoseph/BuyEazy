@@ -40,8 +40,8 @@
                 <hr class="text-danger">
             </div>
             <div class="col d-flex justify-content-center login_media">
-                <a href="#"><i class="fab fa-facebook-f mx-2" aria-hidden="true"></i></a>
-                <a href="#"><i class="fab fa-google mx-2" aria-hidden="true"></i></a>
+                <a href="{% url 'social:begin' 'facebook' %}"><i class="fab fa-facebook-f mx-2" aria-hidden="true"></i></a>
+                <a href="{% url 'social:begin' 'google-oauth2' %}"><i class="fab fa-google mx-2" aria-hidden="true"></i></a>
             </div>
             <hr>
             <div class="mb-2">
