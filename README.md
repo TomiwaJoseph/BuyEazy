@@ -4,22 +4,28 @@ An ecommerce website for the main purpose of easy purchase of computers. It can 
 
 ## Demo
 
-Use the [Demo Website] (https://tomiwajoseph-ecommerce.herokuapp.com)
+Use the [Demo Website](https://tomiwajoseph-ecommerce.herokuapp.com)
+
 Demo Video 👇🏻👇🏻
-https://raw.githubusercontent.com/TomiwaJoseph/EazyBuy-ECommerce-Shop/master/media/demo_video.mp4
+
+https://user-images.githubusercontent.com/67712127/166341279-392aa6f9-3881-4b9d-8e43-2821d16af5c9.mp4
 
 ## Technologies used
 
-Front-end
+**Front-end**
 
+```
 - HTML
 - CSS
 - JavaScript
 - Bootstrap
+```
 
-Back-end
+**Back-end**
 
+```
 - Python (Django)
+```
 
 ## Features
 
