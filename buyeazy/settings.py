@@ -15,7 +15,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', "https://tjbuyeazy.onrender.com"]
+ALLOWED_HOSTS = ["tjbuyeazy.onrender.com", 'localhost']
 AUTH_USER_MODEL = 'users.CustomUser'
 
 
@@ -150,3 +150,5 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+CSRF_TRUSTED_ORIGINS = ["https://tjbuyeazy.onrender.com"]

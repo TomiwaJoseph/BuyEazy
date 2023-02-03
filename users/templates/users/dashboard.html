@@ -7,7 +7,7 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
         <div class="list-group" id="dashboard_sidebar">
             <button class="list-group-item btn btn-outline-info" id="dash_btn">Dashboard</button>
             <button class="list-group-item btn btn-outline-info" id="wish_sidebar_btn">Wishlist</button>
@@ -17,7 +17,7 @@
             <a href="{% url 'logout' %}" class="list-group-item text-danger btn btn-outline-info">Logout</a>
         </div>
     </div>
-    <div class="col-md-8 pl-4">
+    <div class="col-md-8 pl-4" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
         <div class="row" id="dashboard_section">
             <div class="col-md-12">
                 <div>

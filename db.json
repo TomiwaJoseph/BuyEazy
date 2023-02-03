@@ -1,0 +1,373 @@
+[
+{
+  "model": "main.gallery",
+  "pk": 1,
+  "fields": {
+    "description": "Macbook Air 13",
+    "image": "gallery/img1.jpg"
+  }
+},
+{
+  "model": "main.gallery",
+  "pk": 2,
+  "fields": {
+    "description": "Macbook Air Retina",
+    "image": "gallery/img6.jpg"
+  }
+},
+{
+  "model": "main.gallery",
+  "pk": 3,
+  "fields": {
+    "description": "Macbook Sleek",
+    "image": "gallery/img7.jpg"
+  }
+},
+{
+  "model": "main.gallery",
+  "pk": 4,
+  "fields": {
+    "description": "Lenovo Laptop",
+    "image": "gallery/img4.jpg"
+  }
+},
+{
+  "model": "main.gallery",
+  "pk": 5,
+  "fields": {
+    "description": "HP Laptop",
+    "image": "gallery/img3_gm1AZfC.jpg"
+  }
+},
+{
+  "model": "main.gallery",
+  "pk": 6,
+  "fields": {
+    "description": "ASUS Laptop",
+    "image": "gallery/img4_9ikr4rN.jpg"
+  }
+},
+{
+  "model": "users.customuser",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$HyM4Z6ZY3rqLGfmMl1q72I$aa9QaPAV8dYnEKNNSOQazsxuAvP7giblxGqQcTfIt0w=",
+    "last_login": "2023-02-03T13:20:33.602Z",
+    "is_superuser": false,
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-02-02T19:15:06Z",
+    "email": "demouser@gmail.com",
+    "user_order": null,
+    "first_name": "Demo",
+    "last_name": "User",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.userprofile",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "stripe_customer_id": null,
+    "one_click_purchasing": false
+  }
+},
+{
+  "model": "users.userprofile",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "stripe_customer_id": null,
+    "one_click_purchasing": false
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 1,
+  "fields": {
+    "title": "HP Chromebook 11",
+    "description": "The stylish HP Chromebook provides a speedy connection to your protected online content and automatically updated apps, all within an ultra-thin full-sized notebook, providing a comfortable gateway to surf, socialize and play.",
+    "category": 2,
+    "operating_system": "Chrome OS™",
+    "processor": "Intel® Celeron® N2840 with Intel® HD Graphics (2.16 GHz, up to 2.58 GHz, 1 MB cache, 2 cores)",
+    "processor_technology": "Intel Turbo Boost Technology",
+    "graphics": "Intel HD Graphics",
+    "memory": "2 GB DDR3L SDRAM (onboard)",
+    "hard_drive": "16 GB eMMC",
+    "wireless": "802.11ac (2x2) and Bluetooth® 4.0 combo",
+    "power_supply": "45 W AC power adapter",
+    "battery": "3-cell, 36 Wh Li-ion",
+    "main_image": "products/chrome-book-11.jpg",
+    "real_price": 900,
+    "discount_price": 209,
+    "slug": "hp-chromebook-11",
+    "other_product_images": []
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 2,
+  "fields": {
+    "title": "Microsoft Surface Pro",
+    "description": "The stylish Microsoft Surface Pro provides a speedy connection to your protected online content and automatically updated apps, all within an ultra-thin full-sized notebook, providing a comfortable gateway to surf, socialize and play.",
+    "category": 3,
+    "operating_system": "Windows 10™",
+    "processor": "Quad-core 6th Gen Intel Core i5 or i7",
+    "processor_technology": "Intel Turbo Boost Technology",
+    "graphics": "NVIDIA GeForce GTX 965M 2GB GPU GDDR5 memory or NVIDIA GeForce GTX 980M 4GB GPU GDDR5 memory",
+    "memory": "8GB, 16GB, or 32GB RAM",
+    "hard_drive": "Rapid hybrid drive options: 64GB SSD with 1TB HDD, 128GB SSD with 1TB HDD, 128GB SSD with 2TB HDD",
+    "wireless": "Wi-Fi: 802.11ac Wi-Fi wireless networking, IEEE 802.11 a/b/g/n compatible Bluetooth: Bluetooth 4.0 w",
+    "power_supply": "45 W AC power adapter",
+    "battery": "3-cell, 36 Wh Li-ion",
+    "main_image": "products/surface-pro.jpg",
+    "real_price": 300,
+    "discount_price": 211,
+    "slug": "microsoft-surface-pro",
+    "other_product_images": []
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 3,
+  "fields": {
+    "title": "Lenovo Yoga",
+    "description": "The stylish Lenovo Yoga provides a speedy connection to your protected online content and automatically updated apps, all within an ultra-thin full-sized notebook, providing a comfortable gateway to surf, socialize and play.",
+    "category": 3,
+    "operating_system": "Windows 10™",
+    "processor": "Intel® Celeron® N2840 with Intel® HD Graphics (2.16 GHz, up to 2.58 GHz, 1 MB cache, 2 cores)",
+    "processor_technology": "Intel Turbo Boost Technology",
+    "graphics": "Intel HD Graphics",
+    "memory": "8GB, 16GB, or 32GB RAM",
+    "hard_drive": "16 GB eMMC",
+    "wireless": "Wi-Fi: 802.11ac Wi-Fi wireless networking, IEEE 802.11 a/b/g/n compatible Bluetooth: Bluetooth 4.0 w",
+    "power_supply": "45 W AC power adapter",
+    "battery": "3-cell, 36 Wh Li-ion",
+    "main_image": "products/lenovo-yoga.jpg",
+    "real_price": 300,
+    "discount_price": 231,
+    "slug": "lenovo-yoga",
+    "other_product_images": []
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 4,
+  "fields": {
+    "title": "Lenovo IdeaCenter",
+    "description": "The stylish Lenovo IdeaCenter provides a speedy connection to your protected online content and automatically updated apps, all within an ultra-thin full-sized notebook, providing a comfortable gateway to surf, socialize and play.",
+    "category": 1,
+    "operating_system": "Windows 10™",
+    "processor": "Quad-core 6th Gen Intel Core i5 or i7",
+    "processor_technology": "Intel Turbo Boost Technology",
+    "graphics": "NVIDIA GeForce GTX 965M 2GB GPU GDDR5 memory or NVIDIA GeForce GTX 980M 4GB GPU GDDR5 memory",
+    "memory": "2 GB DDR3L SDRAM (onboard)",
+    "hard_drive": "16 GB eMMC",
+    "wireless": "802.11ac (2x2) and Bluetooth® 4.0 combo",
+    "power_supply": "45 W AC power adapter",
+    "battery": "3-cell, 36 Wh Li-ion",
+    "main_image": "products/lenovo-ideacenter.jpg",
+    "real_price": 400,
+    "discount_price": 345,
+    "slug": "lenovo-ideacenter",
+    "other_product_images": []
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 5,
+  "fields": {
+    "title": "Microsoft Ipad",
+    "description": "The stylish Microsoft Ipad provides a speedy connection to your protected online content and automatically updated apps, all within an ultra-thin full-sized notebook, providing a comfortable gateway to surf, socialize and play.",
+    "category": 4,
+    "operating_system": "Windows 10™",
+    "processor": "Quad-core 6th Gen Intel Core i5 or i7",
+    "processor_technology": "Intel Turbo Boost Technology",
+    "graphics": "Intel HD Graphics",
+    "memory": "2 GB DDR3L SDRAM (onboard)",
+    "hard_drive": "16 GB eMMC",
+    "wireless": "802.11ac (2x2) and Bluetooth® 4.0 combo",
+    "power_supply": "45 W AC power adapter",
+    "battery": "3-cell, 36 Wh Li-ion",
+    "main_image": "products/mi-pad-2.jpg",
+    "real_price": 0,
+    "discount_price": 195,
+    "slug": "microsoft-ipad",
+    "other_product_images": []
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 6,
+  "fields": {
+    "title": "Apple Imac",
+    "description": "The stylish Apple Imac provides a speedy connection to your protected online content and automatically updated apps, all within an ultra-thin full-sized notebook, providing a comfortable gateway to surf, socialize and play.",
+    "category": 1,
+    "operating_system": "Chrome OS™",
+    "processor": "Quad-core 6th Gen Intel Core i5 or i7",
+    "processor_technology": "Intel Turbo Boost Technology",
+    "graphics": "NVIDIA GeForce GTX 965M 2GB GPU GDDR5 memory or NVIDIA GeForce GTX 980M 4GB GPU GDDR5 memory",
+    "memory": "8GB, 16GB, or 32GB RAM",
+    "hard_drive": "16 GB eMMC",
+    "wireless": "Wi-Fi: 802.11ac Wi-Fi wireless networking, IEEE 802.11 a/b/g/n compatible Bluetooth: Bluetooth 4.0 w",
+    "power_supply": "45 W AC power adapter",
+    "battery": "3-cell, 36 Wh Li-ion",
+    "main_image": "products/apple-imac-27-retina.jpg",
+    "real_price": 453,
+    "discount_price": 231,
+    "slug": "apple-imac",
+    "other_product_images": []
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 7,
+  "fields": {
+    "title": "HP Spectre",
+    "description": "The stylish HP Spectre provides a speedy connection to your protected online content and automatically updated apps, all within an ultra-thin full-sized notebook, providing a comfortable gateway to surf, socialize and play.",
+    "category": 3,
+    "operating_system": "Windows 10™",
+    "processor": "Intel® Celeron® N2840 with Intel® HD Graphics (2.16 GHz, up to 2.58 GHz, 1 MB cache, 2 cores)",
+    "processor_technology": "Intel Turbo Boost Technology",
+    "graphics": "Intel HD Graphics",
+    "memory": "2 GB DDR3L SDRAM (onboard)",
+    "hard_drive": "16 GB eMMC",
+    "wireless": "Wi-Fi: 802.11ac Wi-Fi wireless networking, IEEE 802.11 a/b/g/n compatible Bluetooth: Bluetooth 4.0 w",
+    "power_supply": "45 W AC power adapter",
+    "battery": "3-cell, 36 Wh Li-ion",
+    "main_image": "products/hp-spectre-x360.jpg",
+    "real_price": 0,
+    "discount_price": 211,
+    "slug": "hp-spectre",
+    "other_product_images": []
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 8,
+  "fields": {
+    "title": "Ipad Air",
+    "description": "The stylish Ipad Air provides a speedy connection to your protected online content and automatically updated apps, all within an ultra-thin full-sized notebook, providing a comfortable gateway to surf, socialize and play.",
+    "category": 4,
+    "operating_system": "Windows 10™",
+    "processor": "Intel® Celeron® N2840 with Intel® HD Graphics (2.16 GHz, up to 2.58 GHz, 1 MB cache, 2 cores)",
+    "processor_technology": "Intel Turbo Boost Technology",
+    "graphics": "Intel HD Graphics",
+    "memory": "2 GB DDR3L SDRAM (onboard)",
+    "hard_drive": "Rapid hybrid drive options: 64GB SSD with 1TB HDD, 128GB SSD with 1TB HDD, 128GB SSD with 2TB HDD",
+    "wireless": "802.11ac (2x2) and Bluetooth® 4.0 combo",
+    "power_supply": "45 W AC power adapter",
+    "battery": "3-cell, 36 Wh Li-ion",
+    "main_image": "products/ipad-air.jpg",
+    "real_price": 330,
+    "discount_price": 123,
+    "slug": "ipad-air",
+    "other_product_images": []
+  }
+},
+{
+  "model": "shop.product",
+  "pk": 9,
+  "fields": {
+    "title": "ChromeBook 14",
+    "description": "The stylish Chromebook 14 provides a speedy connection to your protected online content and automatically updated apps, all within an ultra-thin full-sized notebook, providing a comfortable gateway to surf, socialize and play.",
+    "category": 2,
+    "operating_system": "Windows 10™",
+    "processor": "Intel® Celeron® N2840 with Intel® HD Graphics (2.16 GHz, up to 2.58 GHz, 1 MB cache, 2 cores)",
+    "processor_technology": "Intel Turbo Boost Technology",
+    "graphics": "Intel HD Graphics",
+    "memory": "8GB, 16GB, or 32GB RAM",
+    "hard_drive": "Rapid hybrid drive options: 64GB SSD with 1TB HDD, 128GB SSD with 1TB HDD, 128GB SSD with 2TB HDD",
+    "wireless": "802.11ac (2x2) and Bluetooth® 4.0 combo",
+    "power_supply": "45 W AC power adapter",
+    "battery": "3-cell, 36 Wh Li-ion",
+    "main_image": "products/chrome-book-14.jpg",
+    "real_price": 0,
+    "discount_price": 231,
+    "slug": "chromebook-14",
+    "other_product_images": []
+  }
+},
+{
+  "model": "shop.reviews",
+  "pk": 1,
+  "fields": {
+    "product_id": 4,
+    "review": "Amazing product...would definitely recommend.",
+    "reviewer": 1,
+    "date_reviewed": "2021-08-08T15:51:32.428Z"
+  }
+},
+{
+  "model": "shop.reviews",
+  "pk": 2,
+  "fields": {
+    "product_id": 4,
+    "review": "Lenovo IdeaCenter helps to bring your ideas to life. But is it worth paying for? Absolutely!",
+    "reviewer": 2,
+    "date_reviewed": "2021-08-08T16:09:35.489Z"
+  }
+},
+{
+  "model": "shop.reviews",
+  "pk": 3,
+  "fields": {
+    "product_id": 2,
+    "review": "Amazing product with sleek design...definitely worth the buy.",
+    "reviewer": 1,
+    "date_reviewed": "2021-08-11T09:02:56.148Z"
+  }
+},
+{
+  "model": "shop.reviews",
+  "pk": 4,
+  "fields": {
+    "product_id": 3,
+    "review": "Amazing product! Fast as a snail 😁",
+    "reviewer": 1,
+    "date_reviewed": "2023-02-02T19:08:44.662Z"
+  }
+},
+{
+  "model": "shop.category",
+  "pk": 1,
+  "fields": {
+    "title": "Desktops",
+    "description": "Computers that are put at home or offices. Stationary Computers.",
+    "date_created": "2021-07-07T07:22:41.389Z",
+    "slug": "desktop-computers"
+  }
+},
+{
+  "model": "shop.category",
+  "pk": 2,
+  "fields": {
+    "title": "Laptops",
+    "description": "Computers that can be taken anywhere. On the go Computers.",
+    "date_created": "2021-07-07T07:23:34.785Z",
+    "slug": "laptops"
+  }
+},
+{
+  "model": "shop.category",
+  "pk": 3,
+  "fields": {
+    "title": "Hybrids",
+    "description": "Computers that are both laptops and tablets.",
+    "date_created": "2021-07-07T07:24:42.208Z",
+    "slug": "hybrids"
+  }
+},
+{
+  "model": "shop.category",
+  "pk": 4,
+  "fields": {
+    "title": "Tablets",
+    "description": "Computers that are tad bit powerful that mobile phones.",
+    "date_created": "2021-07-07T07:25:11.994Z",
+    "slug": "tablets"
+  }
+}
+]
