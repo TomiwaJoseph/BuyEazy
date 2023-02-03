@@ -1,11 +1,4 @@
-.env
-cert.crt
-cert.key
+/env
 __pycache__
 migrations
 assets
-test.html
-test2.html
-jquery-ui.css
-jquery-ui.js
-checkout2.html
