@@ -525,7 +525,7 @@ class CreateCheckoutSessionView(View):
                     'unit_amount': item.get_stripe_price(),
                     'product_data': {
                         'name': item.product.title,
-                        'images': [item.product.main_image.path],
+                        # 'images': [item.product.main_image.path],
                     },
                 },
                 'quantity': item.quantity,
