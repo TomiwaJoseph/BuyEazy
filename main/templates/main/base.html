@@ -2,188 +2,187 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/side_cart.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/fontawesome-free/css/all.min.css' %}">
-    <title>
-        {% block title %} EazyBuy {% endblock %}
-    </title>
-    {% block extra_head %} {% endblock extra_head %}
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/css/side_cart.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'main/fontawesome-free/css/all.min.css' %}">
+	<link rel="stylesheet" href="{% static 'main/css/aos.css' %}">
+	<title>
+		{% block title %} BuyEazy {% endblock %}
+	</title>
+	{% block extra_head %} {% endblock extra_head %}
 </head>
-
 <body>
-    {% block side_cart %} {% endblock %}
+	{% block side_cart %} {% endblock %}
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top rounded">
+		<div class="container">
+			<a class="navbar-brand" href="{% url 'index' %}" id="nav_col">
+				BuyEazy</a>
+			<ul class="navbar-nav d-block d-lg-none ml-auto">
+			</ul>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#show-menu"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top rounded">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'index' %}" id="nav_col">
-                <!-- <img src="imgs/logo.png" alt="#" /> -->
-                EazyBuy</a>
-            <ul class="navbar-nav d-block d-lg-none ml-auto">
-            </ul>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#show-menu"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+			<div class="collapse navbar-collapse" id="show-menu">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'shop' %}">Shop</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'gallery' %}">Gallery</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'contact' %}">Contact</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link search" href="#"><i class="fa fa-search"></i></a>
+						<form method="POST" action="{% url 'search' %}">
+							{% csrf_token %}
+							<input type="search" name="search" id="search_text" class="form-control" placeholder="search product">
+						</form>
+					</li>
+					{% if user.is_authenticated %}
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'cart' %}">
+								<i class="fa fa-cart-arrow-down"></i>
+								<span class="badge badge-danger">{{ user.user_order.get_unordered_cart_items_count }}</span>
+							</a>
+						</li>    
+						<li class="nav-item in_or_up">
+								<a href="#" class="nav-link dropdown-toggle" id="dropdown09" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">
+									<i class="fa fa-user"></i>
+								</a>
+								<div class="auth_opt text-center">
+									<a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+									<a class="nav-link" href="{% url 'logout' %}">Logout</a>
+								</div>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'cart' %}" id="show_cart">
+								<i class="fa fa-cart-arrow-down"></i>
+								<span class="badge badge-danger">{{ request.session.cart_data|length }}</span>
+							</a>
+						</li>
+						<li class="nav-item in_or_up">
+							<a class="nav-link">Login</a>
+							<div class="auth_opt text-center">
+								<a class="nav-link" href="{% url 'login' %}"><i class="fa fa-lock"></i> Login</a>
+								<a class="nav-link" href="{% url 'register' %}"><i class="fa fa-user"></i> Sign Up</a>
+							</div>
+						</li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-            <div class="collapse navbar-collapse" id="show-menu">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'shop' %}">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'gallery' %}">Gallery</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link search" href="#"><i class="fa fa-search"></i></a>
-                        <form method="POST" action="{% url 'search' %}">
-                            {% csrf_token %}
-                            <input type="search" name="search" id="search_text" class="form-control" placeholder="search product">
-                        </form>
-                    </li>
-                    {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'cart' %}">
-                                <i class="fa fa-cart-arrow-down"></i>
-                                <span class="badge badge-danger">{{ user.user_order.get_unordered_cart_items_count }}</span>
-                            </a>
-                        </li>    
-                        <li class="nav-item in_or_up">
-                                <a href="#" class="nav-link dropdown-toggle" id="dropdown09" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-user"></i>
-                                </a>
-                                <div class="auth_opt text-center">
-                                    <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
-                                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                                </div>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'cart' %}" id="show_cart">
-                                <i class="fa fa-cart-arrow-down"></i>
-                                <span class="badge badge-danger">{{ request.session.cart_data|length }}</span>
-                            </a>
-                        </li>
-                        <li class="nav-item in_or_up">
-                            <a class="nav-link">Login</a>
-                            <div class="auth_opt text-center">
-                                <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-lock"></i> Login</a>
-                                <a class="nav-link" href="{% url 'register' %}"><i class="fa fa-user"></i> Sign Up</a>
-                            </div>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
+	<div class="container">
+		<div class="col-md-8 mx-auto my-auto">
+				{% if messages %}
+						{% for message in messages %}
+						<div class="alert alert-{{ message.tags }} alert-dismissible text-center">
+						{{ message }}
+						<button type="button" class="close" data-dismiss="alert" aria-label="close">
+								<span aria-hidden="true" class="text-"><small>x</small></span>
+						</button>
+						</div>
+						{% endfor%}
+				{% endif %}
+		</div>
+		{% block content %}
+		{% endblock %}
+	</div>
 
-    <div class="container">
-        <div class="col-md-8 mx-auto my-auto">
-            {% if messages %}
-                {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} alert-dismissible text-center">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                    <span aria-hidden="true" class="text-"><small>x</small></span>
-                </button>
-                </div>
-                {% endfor%}
-            {% endif %}
-        </div>
-        {% block content %}
-        {% endblock %}
-    </div>
-    <div class="footer bg-dark">
-        <div class="container">
-            <div class="row" id='footer'>
-                <div class="col-md-4">
-                    <div class="footer-top-box">
-                        <h3>Contact us</h3>
-                        <hr class="foot_hr">
-                        <p><i class="fa fa-map-marker-alt"></i>Address: No. 123456789<br>
-                            <span>some street address,</span><br>
-                            <span>some code</span>
-                        </p>
-                        <p><i class="fa fa-phone-square"></i>Phone: <a href="tel:+234-8115812801">+234 8115 8128 01</a></p>
-                        <p><i class="fa fa-envelope"></i>Email: <a href="mailto:{{email}}">{{ email }}</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="footer-top-box">
-                        <h3>Newsletter</h3>
-                        <hr class="foot_hr">
-                        <form class="newsletter-box" method="POST">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <input required type="email" name="email" placeholder="Email Address*"
-                                    class="form-control" />
-                                <i class="fa fa-envelope"></i>
-                            </div>
-                            <button class="btn" type="submit" id="newsletter_btn">Submit</button>
-                        </form>
+	<div class="footer bg-dark">
+		<div class="container">
+				<div class="row" id='footer'>
+						<div class="col-md-4">
+								<div class="footer-top-box">
+										<h3>Contact us</h3>
+										<hr class="foot_hr">
+										<p><i class="fa fa-map-marker-alt"></i>Address: No. 123456789, Python Street<br>
+												<!-- <span>Python Street</span><br> -->
+												<!-- <span>some code</span> -->
+										</p>
+										<p><i class="fa fa-phone-square"></i>Phone: <a href="tel:+234-8115812801">+234 8115 8128 01</a></p>
+										<p><i class="fa fa-envelope"></i>Email: <a href="mailto:{{email}}">tomiwajoseph88@gmail.com</a>
+										</p>
+								</div>
+						</div>
+						<div class="col-md-4">
+								<div class="footer-top-box">
+										<h3>Newsletter</h3>
+										<hr class="foot_hr">
+										<form class="newsletter-box" method="POST">
+												{% csrf_token %}
+												<div class="form-group">
+														<input required type="email" name="email" placeholder="Email Address*"
+																class="form-control" />
+														<i class="fa fa-envelope"></i>
+												</div>
+												<button class="btn" type="submit" id="newsletter_btn">Submit</button>
+										</form>
 
-                        <!-- Modal -->
-                        <div id="success_tic" class="modal fade" role="dialog">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="page-body">
-                                        <div class="head">
-                                            <h2></h2>
-                                            <p></p>
-                                        </div>
-                                        <h1>
-                                            <div class="checkmark-circle">
-                                                <div class="background"></div>
-                                                <div class="checkmark draw"></div>
-                                            </div>
-                                            <h1>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="footer-top-box">
-                        <h3>Social Media</h3>
-                        <hr class="foot_hr">
-                        <p>Connect and follow us here...</p>
-                        <div class="social_media">
-                            <a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                            <a href="https://github.com/TomiwaJoseph" target="blank"><i class="fab fa-github"
-                                    aria-hidden="true"></i></a>
-                            <a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+										<!-- Modal -->
+										<div id="success_tic" class="modal fade" role="dialog">
+												<div class="modal-dialog modal-dialog-centered" role="document">
+														<!-- Modal content-->
+														<div class="modal-content">
+																<div class="page-body">
+																		<div class="head">
+																				<h2></h2>
+																				<p></p>
+																		</div>
+																		<h1>
+																				<div class="checkmark-circle">
+																						<div class="background"></div>
+																						<div class="checkmark draw"></div>
+																				</div>
+																				<h1>
+																</div>
+														</div>
+												</div>
+										</div>
+								</div>
+						</div>
+						<div class="col-md-4">
+								<div class="footer-top-box">
+										<h3>Social Media</h3>
+										<hr class="foot_hr">
+										<p>Connect and follow us here...</p>
+										<div class="social_media">
+												<a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+												<a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+												<a href="https://github.com/TomiwaJoseph" target="blank"><i class="fab fa-github"
+																aria-hidden="true"></i></a>
+												<a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a>
+												<a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+												<a href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+												<a href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a>
+										</div>
+								</div>
+						</div>
+				</div>
+		</div>
+	</div>
 
-    <script src="{% static 'main/js/my_jQuery.js' %}"></script>
-    <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'main/js/slider_range.js' %}"></script>
-    <script src="{% static 'main/js/main.js' %}"></script>
-    <script src="{% static 'main/js/ajax_requests.js' %}"></script>
-    {% block script %} {% endblock %}
+	<script src="{% static 'main/js/my_jQuery.js' %}"></script>
+	<script src="{% static 'main/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'main/js/slider_range.js' %}"></script>
+	<script src="{% static 'main/js/main.js' %}"></script>
+	<script src="{% static 'main/js/ajax_requests.js' %}"></script>
+	<script src="{% static 'main/js/aos.js' %}"></script>
+	{% block script %} {% endblock %}
 </body>
-
 </html>
