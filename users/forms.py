@@ -16,17 +16,16 @@ class LoginForm(AuthenticationForm):
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ['full_name', ]
+        fields = ['first_name', 'last_name']
 
 
 class ChangePasswordForm(forms.Form):
     old_password = forms.CharField(widget=forms.PasswordInput(
-        render_value=False, attrs={"class": "form-control", 
-        "type": "password", "placeholder": "Enter old password"}))
+        render_value=False, attrs={"class": "form-control",
+                                   "type": "password", "placeholder": "Enter old password"}))
     new_password1 = forms.CharField(label="New password", widget=forms.PasswordInput(
-        render_value=False, attrs={"class": "form-control", 
-        "type": "password", "placeholder": "New password"}))
+        render_value=False, attrs={"class": "form-control",
+                                   "type": "password", "placeholder": "New password"}))
     new_password2 = forms.CharField(label="Repeat password", widget=forms.PasswordInput(
-        render_value=False, attrs={"class": "form-control", 
-        "type": "password", "placeholder": "Repeat new password"}))
-
+        render_value=False, attrs={"class": "form-control",
+                                   "type": "password", "placeholder": "Repeat new password"}))

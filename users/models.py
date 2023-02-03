@@ -2,24 +2,26 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from shop.models import Product, Order
-from django.core.validators import RegexValidator
 
-
-alphanumeric = RegexValidator(r'^^[a-zA-Z ]+$', 'Only letters and space are allowed.')
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def create_user(self, email, password=None, is_active=True, is_staff=False, is_admin=False, **extra_fields):
+    def _create_user(self, email, password=None, **extra_fields):
         if not email:
-            raise ValueError('The given email must be set')
-        email = self.normalize_email(email=email)
+            raise ValueError('Users must have an email address')
+        email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password, **extra_fields):
+    def create_user(self, email, password, **extra_fields):
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
+
+    def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
@@ -31,22 +33,33 @@ class UserManager(BaseUserManager):
 
 
 class CustomUser(AbstractUser):
-    email = models.EmailField(unique=True, max_length=60)
+    """User model"""
     username = None
-    user_order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
-    full_name = models.CharField(max_length=50, unique=False, validators=[alphanumeric])
+    email = models.EmailField(
+        verbose_name="email address",
+        max_length=255,
+        unique=True
+    )
+    user_order = models.ForeignKey(
+        Order, on_delete=models.SET_NULL, blank=True, null=True)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    objects =  UserManager()
+    objects = UserManager()
 
     def __str__(self):
-        return self.full_name if self.full_name else self.email
+        return self.first_name + " " + self.last_name if self.first_name or self.last_name else self.email
+
+    def get_user_fullname(self):
+        return super().get_full_name()
 
 
 class UserProfile(models.Model):
-    user =  models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     stripe_customer_id = models.CharField(max_length=50, blank=True, null=True)
     one_click_purchasing = models.BooleanField(default=False)
 
@@ -55,10 +68,9 @@ class UserProfile(models.Model):
 
 
 class Wishlist(models.Model):
-    user =  models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, 
-        related_name="wishlist_owner", null=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+                                related_name="wishlist_owner", null=True)
     folder = models.ManyToManyField(Product, blank=True)
 
     def __str__(self):
         return "{}'s wishlist".format(self.user)
-

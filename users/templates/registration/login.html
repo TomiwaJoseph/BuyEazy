@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 
-{% block title %}EazyBuy | Log In{% endblock %}
+{% block title %}BuyEazy | Log In{% endblock %}
 
 
 {% block content %}
@@ -29,7 +29,12 @@
                 <div class="form-group">
                     <button class="btn btn-outline-info log" type="submit">Login</button>
                 </div>
-                <a class="" href="{% url 'password_reset' %}"><small>Forgot Password?</small></a>
+                <button class="btn demo-button">
+                    <a href="{% url 'login_demo_user' %}?next_path={{request.GET.next}}">
+                        Login as Demo User
+                    </a>
+                </button>
+                <a href="{% url 'password_reset' %}"><small>Forgot Password?</small></a>
             </form>
             <div class="mb-2">
             </div>
@@ -40,8 +45,8 @@
                 <hr class="text-danger">
             </div>
             <div class="col d-flex justify-content-center login_media">
-                <a href="{% url 'social:begin' 'facebook' %}"><i class="fab fa-facebook-f mx-2" aria-hidden="true"></i></a>
-                <a href="{% url 'social:begin' 'google-oauth2' %}"><i class="fab fa-google mx-2" aria-hidden="true"></i></a>
+                <i class="fab fa-facebook-f mx-2" aria-hidden="true"></i>
+                <i class="fab fa-google mx-2" aria-hidden="true"></i>
             </div>
             <hr>
             <div class="mb-2">
