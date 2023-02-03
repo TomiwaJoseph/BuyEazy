@@ -11,12 +11,11 @@ ADDRESS_CHOICES = (
 )
 
 
-# Create your models here.
 class Product(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=300)
     category = models.ForeignKey("Category", on_delete=models.CASCADE,
-        related_name="product_category", null=True)
+                                 related_name="product_category", null=True)
     operating_system = models.CharField(max_length=50)
     processor = models.CharField(max_length=150)
     processor_technology = models.CharField(max_length=100)
@@ -30,13 +29,11 @@ class Product(models.Model):
     real_price = models.PositiveIntegerField()
     discount_price = models.PositiveIntegerField()
     slug = models.SlugField(max_length=100)
-    # availability = models.BooleanField(default=True)
     other_product_images = models.ManyToManyField("ProductImages")
-    # product_review = models.ManyToManyField("Reviews")
 
     def __str__(self):
         return self.title
-    
+
     def get_stripe_price(self):
         return int(self.discount_price) * 100
 
@@ -51,10 +48,11 @@ class Product(models.Model):
 
 class Reviews(models.Model):
     product_id = models.ForeignKey("Product", null=True,
-        on_delete=models.CASCADE, related_name="reviewed_product")
+                                   on_delete=models.CASCADE, related_name="reviewed_product")
     review = models.CharField(max_length=100, blank=False)
-    reviewer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    date_reviewed =  models.DateTimeField(auto_now_add=True)
+    reviewer = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    date_reviewed = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return '{} reviewed {}'.format(self.reviewer, self.product_id)
@@ -72,20 +70,20 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     class Meta:
         verbose_name_plural = 'Categories'
 
 
 class ProductImages(models.Model):
     product_id = models.ForeignKey("Product", on_delete=models.CASCADE,
-        related_name="product_images", null=True)
+                                   related_name="product_images", null=True)
     # title = models.CharField(max_length=100)
     image = models.ImageField(upload_to="products/sub_images")
 
     def __str__(self):
         return "image of {}".format(self.product_id)
-    
+
     class Meta:
         verbose_name = 'Product Images'
         verbose_name_plural = 'Product Images'
@@ -93,7 +91,7 @@ class ProductImages(models.Model):
 
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE)
+                             on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
@@ -103,22 +101,22 @@ class OrderItem(models.Model):
 
     def get_total_item_price(self):
         return self.quantity * self.product.discount_price
-    
+
     def get_stripe_price(self):
         return self.product.discount_price * 100
 
- 
+
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE)
+                             on_delete=models.CASCADE)
     ref_code = models.CharField(max_length=20, blank=True, null=True)
     product = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
     ordered = models.BooleanField(default=False)
     shipping_address = models.ForeignKey('Address', related_name="shipping_address",
-        on_delete=models.SET_NULL, blank=True, null=True)
+                                         on_delete=models.SET_NULL, blank=True, null=True)
     billing_address = models.ForeignKey('Address', related_name="billing_address",
-        on_delete=models.SET_NULL, blank=True, null=True)
+                                        on_delete=models.SET_NULL, blank=True, null=True)
     paid_for = models.BooleanField(default=False)
     payment_date = models.DateTimeField(null=True, blank=True)
     being_processed = models.BooleanField(default=False)
@@ -134,7 +132,7 @@ class Order(models.Model):
         if self.ordered == False:
             return self.product.all().count()
         return 0
-    
+
     def get_total(self):
         total = 0
         for order_item in self.product.all():
@@ -144,7 +142,7 @@ class Order(models.Model):
 
 class Address(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE)
+                             on_delete=models.CASCADE)
     street_address = models.CharField(max_length=100)
     apartment_address = models.CharField(max_length=100)
     country = CountryField(multiple=False)
@@ -169,4 +167,3 @@ class Refund(models.Model):
 
     def __str__(self):
         return f"{self.pk}"
-

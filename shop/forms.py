@@ -7,9 +7,9 @@ class CheckoutForm(forms.Form):
     shipping_address = forms.CharField(required=False)
     shipping_address2 = forms.CharField(required=False)
     shipping_country = CountryField(blank_label='(select country)').formfield(
-            required=False,
-            widget=CountrySelectWidget(attrs={
-                'class': 'custom-select d-block w-100',
+        required=False,
+        widget=CountrySelectWidget(attrs={
+            'class': 'custom-select d-block w-100',
         }))
     shipping_zip = forms.CharField(required=False)
 
@@ -27,15 +27,6 @@ class CheckoutForm(forms.Form):
     use_default_shipping = forms.BooleanField(required=False)
     save_billing_address = forms.BooleanField(required=False)
     use_default_billing = forms.BooleanField(required=False)
-    
-
-# class CouponForm(forms.Form):
-#     code = forms.CharField(widget=forms.TextInput(attrs={
-#         'class': 'form-control',
-#         'placeholder': 'Promo code',
-#         'aria-label': 'Recipient\'s username',
-#         'aria-describedby': 'basic-addon2'
-#     }))
 
 
 class RefundForm(forms.Form):
@@ -44,4 +35,3 @@ class RefundForm(forms.Form):
         'rows': 4
     }))
     email = forms.EmailField()
-
