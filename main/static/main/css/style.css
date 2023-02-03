@@ -1,6 +1,5 @@
 body {
-  font-family: "montserrat";
-  /* min-height: 75rem; */
+  font-family: "montserrat", sans-serif;
   padding-top: 7rem;
   color: rgb(58, 58, 58);
 }
@@ -165,14 +164,14 @@ button:focus {
   }
 }
 .alert-dismissible {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
   font-size: 18px;
 }
 .fixed-top {
   z-index: 2000;
 }
 nav.navbar {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
 }
 a:hover {
   text-decoration: none;
@@ -233,14 +232,14 @@ nav.navbar form {
 .footer {
   background-color: #f0f0f0 !important;
   padding: 30px 0 30px 0;
-  font-family: "montserrat";
+  font-family: "montserrat", sans-serif;
   margin-top: 20px;
 }
 .footer-top-box {
   margin-top: 10px;
 }
 .footer-top-box h3 {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
 }
 
 .footer-top-box p,
@@ -380,7 +379,7 @@ nav.navbar form {
 .product-item .product-cart .btn {
   background-color: #2f2f2f;
   color: #fff;
-  font-family: "Montserrat", sans-serif;
+  font-family: "montserrat", sans-serif;
   font-size: 13px;
   font-weight: 700;
   line-height: 30px;
@@ -468,7 +467,7 @@ nav.navbar form {
   margin-top: 40px;
 }
 .single-product-details h1 {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
 }
 .single-product-details h5 {
   font-size: 30px;
@@ -480,12 +479,12 @@ nav.navbar form {
   font-weight: 700;
 }
 .shrt_desc h3 {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
   font-size: 25px;
   font-weight: 600;
 }
 .single-product-details .utils .btn {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
   padding: 10px;
   width: 48%;
 }
@@ -494,7 +493,7 @@ nav.navbar form {
   font-style: italic;
 }
 #reviews h2 {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
 }
 #reviews {
   margin-top: 100px;
@@ -509,7 +508,7 @@ nav.navbar form {
 }
 #review_form button {
   width: 100%;
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
 }
 #review_form button:hover {
   color: teal;
@@ -530,12 +529,12 @@ nav.navbar form {
   background-color: teal !important;
 }
 #rel_pro {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
   margin-top: 50px;
 }
 .name_amt .name {
   font-size: 20px;
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
 }
 .name_amt p a:hover {
   color: teal;
@@ -635,7 +634,7 @@ del {
   font-size: 18px;
   outline: none;
   border: none;
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
   margin-bottom: 30px;
 }
 #loadMore:hover {
@@ -680,7 +679,7 @@ del {
   background: teal;
 }
 #sidebar h3 {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
 }
 #sidebar_filt_but button,
 #filter_form button {
@@ -889,7 +888,7 @@ del {
   outline: none;
   border: 1px solid teal;
   width: 100%;
-  font-family: "montserrat";
+  font-family: "montserrat", sans-serif;
 }
 .form-control:focus {
   -webkit-box-shadow: 0 3px 10px -2px teal !important;
@@ -967,7 +966,7 @@ del {
 /* <--------- Search ----------> */
 #search_q h2,
 #search_q h3 {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
 }
 
 /* <--------- Cart ----------> */
@@ -980,7 +979,7 @@ del {
 }
 .table-main .table thead th {
   font-size: 18px;
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
 }
 .table-main table td.thumbnail-img {
   width: 100px;
@@ -998,7 +997,7 @@ del {
   font-weight: 700;
   font-size: 18px;
   color: #3a3a3a;
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
 }
 .remove-pr {
   text-align: center;
@@ -1026,7 +1025,7 @@ del {
 .order-box h3 {
   font-size: 28px;
   color: #3a3a3a;
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
   font-weight: 700;
 }
 .order-box h4 {
@@ -1043,13 +1042,13 @@ del {
   font-size: 18px;
   margin: 0px;
   padding: 0px;
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
   line-height: 35px !important;
 }
 .gr-total .h5 {
   margin: 0px;
   font-weight: 700;
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
   line-height: 35px;
 }
 #pro_chkout_btn {
@@ -1058,7 +1057,7 @@ del {
   outline: none;
   border: none;
   width: 100%;
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
   padding: 10px;
   font-size: 18px;
   margin-bottom: 10px;
@@ -1073,7 +1072,7 @@ del {
   outline: none;
   border: none;
   width: 100%;
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
   padding: 10px;
 }
 #chkout_btn:hover {
@@ -1081,11 +1080,11 @@ del {
   background: teal !important;
 }
 .no_items {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
 }
 .options1,
 .options2 {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
   color: #fff !important;
   background: #3a3a3a !important;
   outline: none;
@@ -1114,7 +1113,7 @@ del {
   font-size: 28px;
   color: #3a3a3a;
   font-weight: 700;
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
 }
 .address-box h3 {
   font-size: 24px;
@@ -1131,7 +1130,7 @@ del {
   font-weight: 600;
 }
 .coupon_center h5 {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
   color: teal;
 }
 .coupon_center small {
@@ -1173,7 +1172,7 @@ del {
   background: none;
 }
 #each_card h5 {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
 }
 .list-group-item span {
   color: teal;
@@ -1184,13 +1183,13 @@ del {
 #wishlist_section h1,
 #orders_section h1,
 #your_addresses_section h1 {
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
 }
 
 /* <--------------- Payment Page -----------> */
 .paymt h2 {
   font-size: 28px;
-  font-family: "dosis";
+  font-family: "dosis", sans-serif;
   font-weight: 600;
 }
 .fab {
