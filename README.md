@@ -29,13 +29,13 @@ https://user-images.githubusercontent.com/67712127/166341279-392aa6f9-3881-4b9d-
 
 - Sign up, login page with email
 - Save favorites to watch in your wishlist
+- Persistent cart data before and after login
 - Easy buying experience
-- Highly responsive
+- Responsive design
 - Payment gateway integration (Stripe)
 - ... and more
 
 ## To do
 
-- Effect a country - state combo instead of zip code because not all countries have zip codes
 - After deployment, integrate Social App authentication without signup😎😎</li>
 - Integrate PayPal payment gateway when they "are not sorry and can confirm it is me" (IYKYK) 😒😏
