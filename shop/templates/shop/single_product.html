@@ -1,6 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
-{% block title %}EazyBuy | {{ object.title }}{% endblock %}
+{% block title %}BuyEazy | {{ object.title }}{% endblock %}
 
 
 {% block content %}
@@ -44,12 +44,7 @@
         <h1>{{ object.title }}</h1>
         <p class="category">{{ object.category.title }}</p>
         <h5>{% if object.real_price %}<del class="text-danger">$ {{ object.real_price}}</del>{% endif %} ${{ object.discount_price }}</h5>
-        <!-- {% if object.availability %}
-        <p class="text-success">Available</p>
-        {% else %}
-        <p class="text-danger">Out of Stock</p>
-        {% endif%} -->
-        <p>{{ object.description }}</p>
+        <p class="text-justify">{{ object.description }}</p>
         <hr>
         <div class="d-flex justify-content-between utils mb-3">
           {% if user.is_authenticated %}

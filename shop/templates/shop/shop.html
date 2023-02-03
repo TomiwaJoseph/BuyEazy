@@ -1,5 +1,5 @@
 {% extends 'main/base.html' %}
-{% block title %}EazyBuy | Shop{% endblock %}
+{% block title %}BuyEazy | Shop{% endblock %}
 {% load static %}
 
 {% block side_cart %}
@@ -78,7 +78,11 @@
                     </div>
                 {% endfor %}
             </div>
-            <p class="my-4 text-center"><button id="loadMore" data-total="{{ total_products }}" class="btn btn-dark btn-sm">Load More <i class="fa fa-spinner load-more-icon"></i></button></p>
+            <p class="my-4 text-center">
+                <button id="loadMore" data-total="{{ total_products }}" class="btn btn-dark btn-sm">Load More 
+                    <i class="fa fa-spinner load-more-icon"></i>
+                </button>
+            </p>
         </div>
         <div class="col-md-3" id="sidebar">
             <div class="search-product">
