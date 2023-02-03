@@ -34,7 +34,7 @@
 <div class="container">
   <div class="row" id="categories">
       {% for product in all_categories %}
-          <div class="col-sm-3 text-center product-item">
+          <div class="col-sm-3 text-center product-item" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1000">
               <div class="product-img">
                   <img src="{{ product.main_image.url }}" alt="{{ product.title }}"
                       class="image img-fluid" />
@@ -54,7 +54,7 @@
       {% endfor %}
   </div>
   <hr class="mb-4">
-  <a href="{% url 'shop' %}" class="btn btn-primary btn-lg mb-4" id="chkout_btn">View all products</a>
+  <a href="{% url 'shop' %}" class="btn btn-primary btn-lg mb-4" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000" id="chkout_btn">View all products</a>
 </div>
 
 <div class="container">
