@@ -125,47 +125,48 @@
 {% block script %}
 
 <script>
-    var hideable_shipping_form = $('.hideable_shipping_form');
-    var hideable_billing_form = $('.hideable_billing_form');
-    var use_default_billing_toggle = $('#use_default_billing_toggle');
-    var use_default_shipping_toggle = $('#use_default_shipping_toggle');
+    $(document).ready(function () {
+        var hideable_shipping_form = $('.hideable_shipping_form');
+        var hideable_billing_form = $('.hideable_billing_form');
+        var use_default_shipping_toggle = $('#use_default_shipping_toggle');
+        var use_default_billing_toggle = $('#use_default_billing_toggle');
+    
+        var use_default_shipping = document.querySelector("input[name=use_default_shipping]");
+        var use_default_billing = document.querySelector("input[name=use_default_billing]");
+        var save_shipping_address = document.querySelector("input[name=save_shipping_address]");
+        var save_billing_address = document.querySelector("input[name=save_billing_address]");
 
-    var use_default_shipping = document.querySelector("input[name=use_default_shipping]");
-    var use_default_billing = document.querySelector("input[name=use_default_billing]");
-    var save_billing_address = document.querySelector("input[name=save_billing_address]");
-    var save_shipping_address = document.querySelector("input[name=save_shipping_address]");
+        $("input[name=use_default_shipping]").on('change', function(){
+            if (this.checked){
+                hideable_shipping_form.hide();
+            } else {
+                hideable_shipping_form.show();
+            }
+        })
+        
+        $("input[name=use_default_billing]").on('change', function(){
+            if (this.checked){
+                hideable_billing_form.hide();
+            } else {
+                hideable_billing_form.show();
+            }
+        })
 
-    save_shipping_address.addEventListener('change', function () {
-        if (this.checked) {
-            use_default_shipping_toggle.hide();
-        } else {
-            use_default_shipping_toggle.show();
-        }
-    })
+        $("input[name=save_shipping_address]").on('change', function(){
+            if (this.checked){
+                use_default_shipping_toggle.hide();
+            } else {
+                use_default_shipping_toggle.show();
+            }
+        })
 
-    save_billing_address.addEventListener('change', function () {
-        if (this.checked) {
-            use_default_billing_toggle.hide();
-        } else {
-            use_default_billing_toggle.show();
-        }
-    })
-
-    use_default_shipping.addEventListener('change', function () {
-        if (this.checked) {
-            hideable_shipping_form.hide();
-        } else {
-            hideable_shipping_form.show();
-        }
-    })
-
-    use_default_billing.addEventListener('change', function () {
-        if (this.checked) {
-            console.log('Imole')
-            hideable_billing_form.hide();
-        } else {
-            hideable_billing_form.show();
-        }
+        $("input[name=save_billing_address]").on('change', function(){
+            if (this.checked){
+                use_default_billing_toggle.hide();
+            } else {
+                use_default_billing_toggle.show();
+            }
+        })
     })
 </script>
 
