@@ -4,7 +4,7 @@ An ecommerce website for the main purpose of easy purchase of computers. It can 
 
 ## Demo
 
-Use the [Demo Website](https://tjeazybuy.herokuapp.com/)
+Use the [Demo Website](https://tjbuyeazy.onrender.com)
 
 https://user-images.githubusercontent.com/67712127/166341279-392aa6f9-3881-4b9d-8e43-2821d16af5c9.mp4
 
