@@ -43,7 +43,6 @@ $(document).ready(function () {
   $("#password_change_section").hide();
   $("#your_addresses_section").hide();
 
-  const sidebar_filter = $("#dashboard_sidebar");
   all_sidebar_buttons = $("#dashboard_sidebar").find("button");
   sidebarButtonCount = all_sidebar_buttons.length;
 

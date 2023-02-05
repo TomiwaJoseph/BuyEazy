@@ -15,13 +15,13 @@
 </div>
 
 <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-4 my-auto mx-auto text-center" id="product_center" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-4 col-md-4 my-auto mx-auto text-center" id="product_center" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
         <img src="{{ random_product.main_image.url }}" 
             alt="{{ random_product.title }}" class="w-75 img-fluid">
         <a class="btn btn-outline-info" href="{{ random_product.get_absolute_url }}" role="button">View product</a>
     </div>
-    <div class="col-md-4 mx-auto my-auto" id="log_cat" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
+    <div class="col-lg-4 col-md-6 mx-auto my-auto" id="log_cat" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
         <div class="content-section mt-1 bg-light">
             <form method="POST">
                 {% csrf_token %}
@@ -56,7 +56,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-lg-2"></div>
 </div>
 
 {% endblock %}

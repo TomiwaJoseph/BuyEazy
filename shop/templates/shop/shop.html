@@ -54,6 +54,7 @@
                 </div>
             </div>
             <div class="row" id="product_container">
+                <div class="col-12 text-center no-products"></div>
                 {% for product in all_products %}
                     <div class="col-md-4 product_box" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
                         <a href="{% url 'view_product' product.slug %}">
@@ -110,11 +111,13 @@
                 </div>
             </div>
             <div class="row slider-labels">
-                <div class="col-xs-6 col-md-6 col-lg-6 caption">
-                    <strong>Min:</strong> <span id="slider-range-value1"></span>
-                </div>
-                <div class="col-xs-6 col-md-6 col-lg-6 text-right caption">
-                    <strong>Max:</strong> <span id="slider-range-value2"></span>
+                <div class="col-12 d-flex justify-content-between">
+                    <div>
+                        <strong>Min:</strong> <span id="slider-range-value1"></span>
+                    </div>
+                    <div>
+                        <strong>Max:</strong> <span id="slider-range-value2"></span>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -140,32 +143,32 @@
 <div class="container">
     <hr class="mb-4">
     <div class="row" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000">
-        <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 mt-3">
             <div class="item text-center">
                 <i class="fa fa-phone"></i>
                 <h3>24/7 free</h3>
                 <p>support</p>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 mt-3">
             <div class="item text-center">
                 <i class="fa fa-star"></i>
                 <h3>Low price<h3>
-                        <p>guarantee</p>
+                <p>guarantee</p>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 mt-3">
             <div class="item text-center">
                 <i class="fa fa-wrench"></i>
                 <h3> Manufacturer’s<h3>
-                        <p>warranty</p>
+                <p>warranty</p>
             </div>
         </div>
-        <div class="col-xs-6 col-sm-3 col-md-6 col-lg-3">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 mt-3">
             <div class="item text-center">
                 <i class="fa fa-recycle"></i>
                 <h3> Full refund<h3>
-                        <p>guarantee</p>
+                <p>guarantee</p>
             </div>
         </div>
     </div>
@@ -173,3 +176,42 @@
 </div>
 {% endblock %}
 
+{% block script %}
+
+<script type="text/javascript">
+    // Initialize slider:
+    $(document).ready(function () {
+        const value1 = 0;
+        const highestProductPrice = {{ max_price }}
+        console.log(highestProductPrice)
+        $(".noUi-handle").on("click", function () {
+            $(this).width(50);
+        });
+        var rangeSlider = document.getElementById("slider-range");
+        var moneyFormat = wNumb({
+            decimals: 0,
+            thousand: ",",
+            prefix: "$",
+        });
+        noUiSlider.create(rangeSlider, {
+            start: [value1 + 30, highestProductPrice - 30],
+            step: 1,
+            range: {
+                min: [0],
+                max: [highestProductPrice]
+            },
+            format: moneyFormat,
+            connect: true,
+        });
+        // Set visual min and max values and also update value hidden form inputs
+        rangeSlider.noUiSlider.on("update", function (values, handle) {
+            document.getElementById("slider-range-value1").innerHTML = values[0];
+            document.getElementById("slider-range-value2").innerHTML = values[1];
+            document.getElementsByName("min-value").value = moneyFormat.from(values[0]);
+            document.getElementsByName("max-value").value = moneyFormat.from(values[1]);
+        });
+    })
+
+</script>
+
+{% endblock %}

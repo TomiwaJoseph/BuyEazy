@@ -5,7 +5,7 @@
 {% endif %}
 
 {% for product in wishlist_products.first.folder.all %}
-    <div class="col-3 mb-3 mb-4">
+    <div class="col-lg-4 mb-4">
         <div class="card text-center" id="each_card">
             <img class="img-fluid w-75 mx-auto" src="{{ product.main_image.url }}" alt="{{ product.title }}">
             <div class="card-body">

@@ -4,18 +4,10 @@
 <hr class="thick_hr">
 {% for item in order_details.product.all %}
     <div class="row mb-4">
-        <div class="col">
-            <div class="row">
-                <div class="col-9 d-flex align-items-center">
-                    <div class="img_name">
-                        <img class="w-25 img-fluid" src="{{ item.product.main_image.url }}" alt="{{ item.product.title }}" />
-                        <h2 class="">{{ item.product.title }} - x{{ item.quantity }}</h2>
-                    </div>
-                </div>
-                <div class="col-3 d-flex align-items-center">
-                    <div class="chk_price ml-auto">$ {% widthratio item.product.discount_price 1 item.quantity %}</div>
-                </div>
-            </div>
+        <div class="col-12 d-flex align-items-center">
+            <img class="w-25 img-fluid" src="{{ item.product.main_image.url }}" alt="{{ item.product.title }}" />
+            <h2 class="item-title-quantity">{{ item.product.title }} - x{{ item.quantity }}</h2>
+            <div class="chk_price ml-auto">$ {% widthratio item.product.discount_price 1 item.quantity %}</div>
         </div>
     </div>
 {% endfor %}
