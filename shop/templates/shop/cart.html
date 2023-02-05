@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-md-9 my-auto mx-auto" id="cartList">
-        <div class="table-main table-responsive">
+        <div class="table-main table-responsive" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
             <table class="table">
                 <thead>
                     <tr>
@@ -62,7 +62,7 @@
             </div>
         </div>
         {% if totalItems %}
-            <a href="{% url 'checkout' %}" class="btn btn-outline-info options" id="pro_chkout_btn">Proceed to Checkout</a>
+            <a href="{% url 'checkout' %}" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000" class="btn btn-outline-info options" id="pro_chkout_btn">Proceed to Checkout</a>
         {% else %}
             <h1 class="no_items">You have no items in cart</h1>
             <a href="{% url 'shop' %}" class="btn btn-outline-info options1 mt-2">Go to Shop</a>

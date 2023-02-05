@@ -14,19 +14,15 @@
   </div>
 </div>
 
-<div class="col-md-8 order-box my-auto mx-auto">
+<div class="col-md-8 order-box my-auto mx-auto" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
   <hr class="thick_hr">
   {% for item in cart_contents %}
     <div class="row mb-4">
       <div class="col">
-        <div class="d-flex justify-content-between">
-          <div class="img_name">
-            <img class="w-25 img-fluid" src="{{ item.product.main_image.url }}" alt="{{ item.product.title }}" />
-            <h2 class="">{{ item.product.title }} - x{{ item.quantity }}</h2>
-          </div>
-          <div class="col-3 d-flex align-items-center">
-            <div class="chk_price ml-auto">$ {% widthratio item.product.discount_price 1 item.quantity %}</div>
-          </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <img class="w-25 img-fluid" src="{{ item.product.main_image.url }}" alt="{{ item.product.title }}" />
+          <h2 class="item-title-quantity">{{ item.product.title }} - x{{ item.quantity }}</h2>
+          <div class="chk_price">$ {% widthratio item.product.discount_price 1 item.quantity %}</div>
         </div>
       </div>
     </div>

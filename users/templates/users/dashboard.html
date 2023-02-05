@@ -7,7 +7,7 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
         <div class="list-group" id="dashboard_sidebar">
             <button class="list-group-item btn btn-outline-info" id="dash_btn">Dashboard</button>
             <button class="list-group-item btn btn-outline-info" id="wish_sidebar_btn">Wishlist</button>
@@ -17,7 +17,7 @@
             <a href="{% url 'logout' %}" class="list-group-item text-danger btn btn-outline-info">Logout</a>
         </div>
     </div>
-    <div class="col-md-8 pl-4">
+    <div class="col-md-8 pl-4" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
         <div class="row" id="dashboard_section">
             <div class="col-md-12">
                 <div>
@@ -31,7 +31,7 @@
             {% endif %}
 
             {% for product in all_wishlist.first.folder.all %}
-                <div class="col-3 mb-3 mb-4">
+                <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card text-center" id="each_card">
                         <img class="img-fluid w-75 mx-auto" src="{{ product.main_image.url }}" alt="{{ product.title }}">
                         <div class="card-body">
@@ -49,11 +49,13 @@
             <div class="col-12 mb-4">
                 <div class="row">
                     {% if not completed_orders %}
-                        <h1>You have no completed orders with us... yet.</h1>
+                        <div class="col-12">
+                            <h1>You have no completed orders with us... yet.</h1>
+                        </div>
                     {% endif %}
 
                     {% if completed_orders %}
-                        <div class="col-5">
+                        <div class="col-lg-5 col-sm-12">
                             <div class="table-responsive">
                                 <table class="table-bordered table">
                                     <thead>
@@ -71,7 +73,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="col-7 order-box" id="order_details_box">
+                        <div class="col-lg-7 order-box" id="order_details_box">
                         </div>
                     {% endif %}
                 </div>
@@ -96,10 +98,12 @@
         </div>
         <div class="row" id="your_addresses_section">
             {% if not user_address_qs %}
-                <h1>You have no billing or shipping address with us... yet.</h1>
+                <div class="col-12">
+                    <h1>You have no billing or shipping address with us... yet.</h1>
+                </div>
             {% endif %}
             {% for address in user_address_qs %}
-                <div class="col-6 mb-4">
+                <div class="col-lg-6 mb-4">
                     <div id="addr_type">
                         <h4 class="mb-3">{{ address.address_type|lookup_address_type }}</h4>
                         <hr class="thick_hr">
