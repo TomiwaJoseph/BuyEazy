@@ -281,11 +281,13 @@ def shop(request):
     global all_products
     all_products = list(Product.objects.all())
     random.shuffle(all_products)
+    max_price = max([obj.discount_price for obj in Product.objects.all()])
     context = {
         'all_categories': Category.objects.all(),
         'all_products': all_products[:6],
         'total_products': Product.objects.count(),
-        'cart_size': 0
+        'cart_size': 0,
+        'max_price': max_price
     }
     if request.user.is_authenticated:
         qs = Order.objects.filter(user=request.user, ordered=False)
@@ -410,6 +412,16 @@ class CheckoutView(LoginRequiredMixin, View):
             elif is_valid_form([shipping_street_address, shipping_country,
                                 shipping_zip_code, billing_street_address,
                                 billing_country, billing_zip_code]):
+
+                # Check if addresses exist and delete
+                address_checker = Address.objects.filter(
+                    user=self.request.user)
+                if address_checker.exists():
+                    Address.objects.get(
+                        user=self.request.user, address_type="B").delete()
+                    Address.objects.get(
+                        user=self.request.user, address_type="S").delete()
+
                 new_billing_address = Address.objects.create(
                     user=self.request.user,
                     street_address=billing_street_address[0],
@@ -432,18 +444,24 @@ class CheckoutView(LoginRequiredMixin, View):
                 user_order.shipping_address = new_shipping_address
                 user_order.save()
                 if know_if_to_save_shipping_address_as_default:
-                    user_default_shipping = Address.objects.filter(user=self.request.user, address_type='S',
-                                                                   default=True).update(default=False)
+                    Address.objects.filter(user=self.request.user, address_type='S',
+                                           default=True).update(default=False)
                     new_shipping_address.default = True
                     new_shipping_address.save()
                 if know_if_to_save_billing_address_as_default:
-                    all_user_billing = Address.objects.filter(user=self.request.user, address_type='B',
-                                                              default=True).update(default=False)
+                    Address.objects.filter(user=self.request.user, address_type='B',
+                                           default=True).update(default=False)
                     new_billing_address.default = True
                     new_billing_address.save()
 
             elif know_if_to_use_default_shipping and is_valid_form([billing_street_address,
                                                                     billing_country, billing_zip_code]):
+                # Check if billing address exist and delete
+                address_checker = Address.objects.filter(
+                    user=self.request.user)
+                if address_checker.exists():
+                    Address.objects.get(
+                        user=self.request.user, address_type="B").delete()
                 user_shipping_address = Address.objects.get(
                     user=self.request.user, default=True, address_type='S')
                 new_billing_address = Address.objects.create(
@@ -466,6 +484,12 @@ class CheckoutView(LoginRequiredMixin, View):
 
             elif know_if_to_use_default_billing and is_valid_form([shipping_street_address,
                                                                    shipping_country, shipping_zip_code]):
+                # Check if shipping address exist and delete
+                address_checker = Address.objects.filter(
+                    user=self.request.user)
+                if address_checker.exists():
+                    Address.objects.get(
+                        user=self.request.user, address_type="S").delete()
                 user_billing_address = Address.objects.get(
                     user=self.request.user, default=True, address_type='B')
                 new_shipping_address = Address.objects.create(
