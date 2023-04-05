@@ -1,8 +1,4 @@
 $(document).ready(function () {
-  // window.addEventListener("load", function () {
-  //   AOS.init();
-  // });
-
   $(function () {
     $("input").blur();
   });

@@ -1,12 +1,8 @@
-{% extends 'main/base.html' %}
-{% block title %}BuyEazy | Payment Page{% endblock %}
-
-{% block extra_head %}
-  <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
-  <script src="https://js.stripe.com/v3/"></script>
-{% endblock extra_head %}
-
-{% block content %}
+{% extends 'main/base.html' %} {% block title %}BuyEazy | Payment Page{%
+endblock %} {% block extra_head %}
+<script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+<script src="https://js.stripe.com/v3/"></script>
+{% endblock extra_head %} {% block content %}
 
 <div class="row paymt">
   <div class="col-md-6 mx-auto my-auto text-center">
@@ -14,61 +10,71 @@
   </div>
 </div>
 
-<div class="col-md-8 order-box my-auto mx-auto" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
-  <hr class="thick_hr">
+<div
+  class="col-md-8 order-box my-auto mx-auto"
+  data-aos="fade-up"
+  data-aos-delay="200"
+  data-aos-duration="1000"
+>
+  <hr class="thick_hr" />
   {% for item in cart_contents %}
-    <div class="row mb-4">
-      <div class="col">
-        <div class="d-flex justify-content-between align-items-center">
-          <img class="w-25 img-fluid" src="{{ item.product.main_image.url }}" alt="{{ item.product.title }}" />
-          <h2 class="item-title-quantity">{{ item.product.title }} - x{{ item.quantity }}</h2>
-          <div class="chk_price">$ {% widthratio item.product.discount_price 1 item.quantity %}</div>
+  <div class="row mb-4">
+    <div class="col">
+      <div class="d-flex justify-content-between align-items-center">
+        <img
+          class="w-25 img-fluid"
+          src="{{ item.product.main_image.url }}"
+          alt="{{ item.product.title }}"
+        />
+        <h2 class="item-title-quantity">
+          {{ item.product.title }} - x{{ item.quantity }}
+        </h2>
+        <div class="chk_price">
+          $ {% widthratio item.product.discount_price 1 item.quantity %}
         </div>
       </div>
     </div>
+  </div>
   {% endfor %}
-  <hr class="thick_hr">
+  <hr class="thick_hr" />
   <div class="d-flex gr-total">
     <h5>Grand Total</h5>
-    <div class="ml-auto h5"> $ {{ order.get_total }}</div>
+    <div class="ml-auto h5">$ {{ order.get_total }}</div>
   </div>
-  <hr class="thick_hr">
+  <hr class="thick_hr" />
 </div>
 
 <div class="row paymt">
   <div class="col-md-6 mx-auto my-auto text-center">
     <h2>Select Payment Gateway</h2>
-    <hr>
+    <hr />
   </div>
 </div>
 <div class="text-center gateway">
   <i class="fab fa-stripe stripe_logo" id="checkout-button"></i>
 </div>
-<hr class="awaiting_approv mb-4">
+<hr class="awaiting_approv mb-4" />
 
-{% endblock %}
-
-
-{% block script %}
+{% endblock %} {% block script %}
 
 <script type="text/javascript">
-  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-  var stripe = Stripe("{{ STRIPE_PUBLISHABLE_KEY }}")
-  var checkout_button = document.getElementById("checkout-button")
+  const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+  var stripe = Stripe("{{ STRIPE_PUBLISHABLE_KEY }}");
+  var checkout_button = document.getElementById("checkout-button");
 
   checkout_button.addEventListener("click", function () {
     fetch("{% url 'create_payment' %}", {
-        method: "POST",
-        headers: {
-          'X-CSRFToken': csrftoken
-        },
-      })
+      method: "POST",
+      headers: {
+        "X-CSRFToken": csrftoken,
+      },
+    })
       .then(function (response) {
         return response.json();
       })
       .then(function (session) {
         return stripe.redirectToCheckout({
-          sessionId: session.id
+          sessionId: session.id,
         });
       })
       .then(function (result) {

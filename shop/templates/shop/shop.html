@@ -56,7 +56,7 @@
             <div class="row" id="product_container">
                 <div class="col-12 text-center no-products"></div>
                 {% for product in all_products %}
-                    <div class="col-md-4 product_box" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
+                    <div class="col-md-4 product_box" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000">
                         <a href="{% url 'view_product' product.slug %}">
                             <div class="content-section text-center">
                                 <div class="the_img">
@@ -85,7 +85,7 @@
                 </button>
             </p>
         </div>
-        <div class="col-md-3" id="sidebar" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
+        <div class="col-md-3" id="sidebar" data-aos="flip-down" data-aos-delay="200" data-aos-duration="1000">
             <div class="search-product">
                 <form method="POST" action="{% url 'search' %}">
                     {% csrf_token %}
@@ -183,7 +183,6 @@
     $(document).ready(function () {
         const value1 = 0;
         const highestProductPrice = {{ max_price }}
-        console.log(highestProductPrice)
         $(".noUi-handle").on("click", function () {
             $(this).width(50);
         });
