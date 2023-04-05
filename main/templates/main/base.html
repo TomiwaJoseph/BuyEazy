@@ -199,9 +199,14 @@
 		crossorigin="anonymous"
 	></script>
 	<script src="{% static 'main/js/slider_range.js' %}"></script>
-	<script src="{% static 'main/js/main.js' %}"></script>
 	<script src="{% static 'main/js/ajax_requests.js' %}"></script>
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	<script src="{% static 'main/js/main.js' %}"></script>
+	<script>
+		window.addEventListener("load", function () {
+			AOS.init();
+		});
+	</script>
 	{% block script %} {% endblock %}
 </body>
 </html>
