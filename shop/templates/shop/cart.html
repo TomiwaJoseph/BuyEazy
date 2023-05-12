@@ -1,14 +1,11 @@
-{% extends 'main/base.html' %} {% block title %}BuyEazy | Cart{% endblock %} {%
-block content %}
+{% extends 'main/base.html' %}
+{% block title %}BuyEazy | Cart{% endblock %}
+
+{% block content %}
 
 <div class="row">
   <div class="col-md-9 my-auto mx-auto" id="cartList">
-    <div
-      class="table-main table-responsive"
-      data-aos="fade-down"
-      data-aos-delay="200"
-      data-aos-duration="1000"
-    >
+    <div class="table-main table-responsive" data-aos="fade-down" data-aos-delay="200" data-aos-duration="1000">
       <table class="table">
         <thead>
           <tr>
@@ -25,43 +22,26 @@ block content %}
           <tr>
             <td class="thumbnail-img">
               <a href="{% url 'view_product' item.title|slugify %}">
-                <img
-                  class="img-fluid"
-                  src="{{ item.image }}"
-                  alt="{{ item.title }}"
-                />
+                <img class="img-fluid" src="{{ item.image }}" alt="{{ item.title }}" />
               </a>
             </td>
             <td class="name-pr">
-              <a href="{% url 'view_product' item.title|slugify %}"
-                >{{ item.title }}</a
-              >
+              <a href="{% url 'view_product' item.title|slugify %}">{{ item.title }}</a>
             </td>
             <td class="price-pr">
               <p>$ {{ item.price }}</p>
             </td>
             <td class="quantity-box">
-              <input
-                type="number"
-                class="qty-{{ product_ }}"
-                value="{{ item.quantity }}"
-                min="1"
-              />
+              <input type="number" class="qty-{{ product_ }}" value="{{ item.quantity }}" min="1" />
             </td>
             <td class="total-pr">
               <p>$ {% widthratio item.price 1 item.quantity %}</p>
             </td>
             <td class="remove-pr">
-              <button
-                class="btn btn-info update-product"
-                data-item="{{ product_ }}"
-              >
+              <button class="btn btn-info update-product" data-item="{{ product_ }}">
                 <i class="fa fa-sync"></i>
               </button>
-              <button
-                class="btn btn-danger delete-product"
-                data-item="{{ product_ }}"
-              >
+              <button class="btn btn-danger delete-product" data-item="{{ product_ }}">
                 <i class="fa fa-trash"></i>
               </button>
             </td>
@@ -82,23 +62,12 @@ block content %}
       </div>
     </div>
     {% if totalItems %}
-    <a
-      href="{% url 'checkout' %}"
-      data-aos="flip-up"
-      data-aos-delay="200"
-      data-aos-duration="1000"
-      class="btn btn-outline-info options"
-      id="pro_chkout_btn"
-      >Proceed to Checkout</a
-    >
+    <a href="{% url 'checkout' %}" data-aos="flip-up" data-aos-delay="200" data-aos-duration="1000"
+      class="btn btn-outline-info options" id="pro_chkout_btn">Proceed to Checkout</a>
     {% else %}
     <h1 class="no_items">You have no items in cart</h1>
-    <a href="{% url 'shop' %}" class="btn btn-outline-info options1 mt-2"
-      >Go to Shop</a
-    >
-    <a href="{% url 'gallery' %}" class="btn btn-outline-info options2"
-      >Go to Gallery</a
-    >
+    <a href="{% url 'shop' %}" class="btn btn-outline-info options1 mt-2">Go to Shop</a>
+    <a href="{% url 'gallery' %}" class="btn btn-outline-info options2">Go to Gallery</a>
     {% endif %}
   </div>
 </div>

@@ -1,5 +1,6 @@
-{% extends 'main/base.html' %} {% block title %}BuyEazy | Contact Us{% endblock
-%} {% block content %}
+{% extends 'main/base.html' %}
+{% block title %}BuyEazy | Contact Us{% endblock%}
+{% block content %}
 
 <div class="row">
   <div class="col-md-4 mx-auto my-auto text-center">
@@ -10,12 +11,7 @@
 
 <div class="container">
   <div class="row d-flex justify-content-center">
-    <div
-      class="col-md-5 mt-4"
-      data-aos="zoom-in-up"
-      data-aos-delay="200"
-      data-aos-duration="1000"
-    >
+    <div class="col-md-5 mt-4" data-aos="zoom-in-up" data-aos-delay="200" data-aos-duration="1000">
       <div class="content-section" id="contct_addr">
         <p class="mb-4">
           Ask for my resume, inquire about your web development projects, api
@@ -25,19 +21,10 @@
         </p>
       </div>
     </div>
-    <div
-      class="col-md-5 mt-4 order-md-first order-lg-last"
-      data-aos="zoom-in-down"
-      data-aos-delay="200"
-      data-aos-duration="1000"
-    >
+    <div class="col-md-5 mt-4 order-md-first order-lg-last" data-aos="zoom-in-down" data-aos-delay="200"
+      data-aos-duration="1000">
       <div class="content-section">
-        <form
-          action="{% url 'contact' %}"
-          method="POST"
-          class=""
-          id="contact-form"
-        >
+        <form action="{% url 'contact' %}" method="POST" class="" id="contact-form">
           {% csrf_token %}
           <div class="form-group">
             <p>Your name *</p>
@@ -53,17 +40,9 @@
           </div>
           <div class="form-group">
             <p>Message *</p>
-            <textarea
-              required
-              name="message"
-              rows="8"
-              class="form-control"
-            ></textarea>
+            <textarea required name="message" rows="8" class="form-control"></textarea>
           </div>
-          <button
-            type="submit"
-            class="btn btn-outline-info log my-3 text-uppercase"
-          >
+          <button type="submit" class="btn btn-outline-info log my-3 text-uppercase">
             Send message
           </button>
         </form>

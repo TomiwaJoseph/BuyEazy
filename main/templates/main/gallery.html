@@ -1,9 +1,7 @@
-{% extends 'main/base.html' %} {% block title %}BuyEazy | Gallery {% endblock %}
-{% block extra_head %}
+{% extends 'main/base.html' %}
+{% block title %}BuyEazy | Gallery {% endblock %}
 
-<style></style>
-
-{% endblock extra_head %} {% block content %}
+{% block content %}
 
 <div class="row">
   <div class="col-md-4 mx-auto my-auto text-center">
@@ -17,16 +15,10 @@
     <div id="image-gallery">
       <div class="row">
         {% for image in gallery_pictures %}
-        <div
-          class="col-lg-4 col-md-6 col-sm-6 col-xs-12 image text-center"
-          data-aos="zoom-out"
-          data-aos-delay="200"
-          data-aos-duration="1000"
-        >
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 image text-center" data-aos="zoom-out" data-aos-delay="200"
+          data-aos-duration="1000">
           <div class="img-wrapper">
-            <a href="{{ image.image.url }}"
-              ><img src="{{ image.image.url }}" class="img-responsive w-100"
-            /></a>
+            <a href="{{ image.image.url }}"><img src="{{ image.image.url }}" class="img-responsive w-100" /></a>
             <div class="img-overlay">
               <i class="fa fa-plus-circle" aria-hidden="true"></i>
             </div>
@@ -48,16 +40,14 @@
   // Gallery image hover
   $(".img-wrapper").hover(
     function () {
-      $(this).find(".img-overlay").animate(
-        {
+      $(this).find(".img-overlay").animate({
           opacity: 1,
         },
         600
       );
     },
     function () {
-      $(this).find(".img-overlay").animate(
-        {
+      $(this).find(".img-overlay").animate({
           opacity: 0,
         },
         600
