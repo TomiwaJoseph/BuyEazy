@@ -196,6 +196,11 @@
 	<script src="{% static 'main/js/main.js' %}"></script>
 	<script src="{% static 'main/js/ajax_requests.js' %}"></script>
 	<script src="{% static 'main/js/aos.js' %}"></script>
+	<script>
+		window.addEventListener("load", function () {
+			AOS.init();
+		});
+	</script>
 	{% block script %} {% endblock %}
 </body>
 
