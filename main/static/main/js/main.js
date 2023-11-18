@@ -73,7 +73,7 @@ $(document).ready(function () {
         $("#orders_section").hide();
         $("#wishlist_section").hide();
         $("#your_addresses_section").hide();
-      } else {
+      } else if (this.innerHTML == "Your addresses") {
         $("#dashboard_section").hide();
         $("#your_addresses_section").show();
         $("#password_change_section").hide();

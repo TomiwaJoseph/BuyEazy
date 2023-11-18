@@ -3,10 +3,12 @@ body {
   padding-top: 7rem;
   color: rgb(58, 58, 58);
 }
+
 a,
 a:hover {
   color: #3a3a3a;
 }
+
 button:focus {
   box-shadow: none !important;
 }
@@ -17,21 +19,26 @@ button:focus {
   background-color: #f8d7da;
   border-color: #f5c6cb;
 }
+
 #success_tic .page-body {
   max-width: 300px;
   background-color: #ffffff;
   margin: 10% auto;
 }
+
 #success_tic .page-body .head {
   text-align: center;
 }
+
 #success_tic h2 {
   color: teal;
   margin-bottom: 10px;
 }
+
 #success_tic h1 {
   text-align: center;
 }
+
 #success_tic .checkmark-circle {
   width: 150px;
   height: 150px;
@@ -39,6 +46,7 @@ button:focus {
   display: inline-block;
   vertical-align: top;
 }
+
 .checkmark-circle .background {
   width: 150px;
   height: 150px;
@@ -46,9 +54,11 @@ button:focus {
   background: #1ab394;
   position: absolute;
 }
+
 #success_tic .checkmark-circle .checkmark {
   border-radius: 5px;
 }
+
 #success_tic .checkmark-circle .checkmark.draw:after {
   -webkit-animation-delay: 300ms;
   -moz-animation-delay: 300ms;
@@ -71,6 +81,7 @@ button:focus {
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
+
 #success_tic .checkmark-circle .checkmark:after {
   opacity: 1;
   height: 75px;
@@ -88,6 +99,7 @@ button:focus {
   top: 80px;
   position: absolute;
 }
+
 @-webkit-keyframes checkmark {
   0% {
     height: 0;
@@ -113,6 +125,7 @@ button:focus {
     opacity: 1;
   }
 }
+
 @-moz-keyframes checkmark {
   0% {
     height: 0;
@@ -138,6 +151,7 @@ button:focus {
     opacity: 1;
   }
 }
+
 @keyframes checkmark {
   0% {
     height: 0;
@@ -163,50 +177,63 @@ button:focus {
     opacity: 1;
   }
 }
+
 .alert-dismissible {
   font-family: "dosis", sans-serif;
   font-size: 18px;
 }
+
 .fixed-top {
   z-index: 2000;
 }
+
 nav.navbar {
   font-family: "dosis", sans-serif;
 }
+
 a:hover {
   text-decoration: none;
 }
+
 .in_or_up a {
   cursor: pointer;
 }
-.navbar-nav > .active > a,
+
+.navbar-nav>.active>a,
 #nav_col {
   color: teal !important;
 }
+
 .navbar-dark {
   background-color: #e7e7e7 !important;
 }
+
 nav.navbar a,
 nav.navbar ul li a {
   color: #5e5e5e !important;
 }
+
 nav.navbar ul li a:hover {
   font-size: 21px;
   color: teal !important;
 }
+
 .navbar-brand {
   font-size: 40px;
 }
+
 nav.navbar ul li {
   padding: 0 15px;
   font-size: 20px;
 }
+
 nav.navbar form {
   background-color: teal;
   padding: 3px;
   position: absolute;
   display: none;
 }
+
 .auth_opt {
   display: none;
   position: absolute;
@@ -214,6 +241,7 @@ nav.navbar form {
   min-width: 120px;
   z-index: 1;
 }
+
 .auth_opt a {
   color: #3a3a3a;
   padding: 8px 5px;
@@ -222,22 +250,27 @@ nav.navbar form {
   text-align: left;
   margin-left: 10px;
 }
+
 .auth_opt a:hover {
   background-color: white;
   margin-left: 0;
 }
+
 .in_or_up:hover .auth_opt {
   display: block;
 }
+
 .footer {
   background-color: #f0f0f0 !important;
   padding: 30px 0 30px 0;
   font-family: "montserrat", sans-serif;
   margin-top: 20px;
 }
+
 .footer-top-box {
   margin-top: 10px;
 }
+
 .footer-top-box h3 {
   font-family: "dosis", sans-serif;
 }
@@ -246,23 +279,28 @@ nav.navbar form {
 #contct_addr p {
   font-size: 15px;
 }
+
 .footer-top-box span,
 #contct_addr span {
   margin-left: 20px;
 }
+
 .footer-top-box p i,
 #contct_addr i {
   font-size: 25px;
   color: teal;
   margin-right: 10px;
 }
+
 .foot_hr {
   background-color: teal;
 }
+
 .newsletter-box {
   margin-top: 15px;
   position: relative;
 }
+
 .newsletter-box input {
   height: 40px;
   border: 1px solid teal;
@@ -271,12 +309,14 @@ nav.navbar form {
   padding: 0 20px;
   width: 100%;
 }
+
 .newsletter-box i {
   position: absolute;
   right: 15px;
   top: 10px;
   font-size: 20px;
 }
+
 .newsletter-box button,
 #profile_upd_btn,
 #reset_success_btn {
@@ -284,20 +324,24 @@ nav.navbar form {
   color: teal;
   border: 1px solid teal;
 }
+
 .newsletter-box button:hover,
 #profile_upd_btn:hover,
 #reset_success_btn:hover {
   background-color: teal;
   color: #fff;
 }
+
 .footer-top-box .social_media {
   display: inline-block;
 }
+
 .footer-top-box .social_media i {
   font-size: 30px;
   padding: 7px;
   color: teal;
 }
+
 .footer-top-box .social_media i:hover {
   background: teal;
   color: white;
@@ -310,47 +354,58 @@ nav.navbar form {
   color: teal;
   font-weight: 700;
 }
+
 #myCarousel .carousel-item img {
   width: 42%;
 }
+
 .carousel-item h1,
 .carousel-item p {
   color: rgb(58, 58, 58);
 }
+
 .carousel-item .btn-primary {
   color: white !important;
   background-color: teal !important;
   border-color: teal;
 }
+
 .carousel-item .btn-primary:hover {
   color: teal !important;
   background-color: #fff !important;
 }
+
 .space_up {
   margin-bottom: 100px;
 }
+
 .row .item i.fa {
   font-size: 30px;
   color: teal;
 }
+
 .row .item p {
   color: #9c9c9c;
   font-size: 20px;
 }
+
 .row .item h3 {
   font-size: 20px;
   margin-top: 10px;
 }
+
 #sort_category {
   font-size: 18px;
   color: #3a3a3a;
 }
+
 .product-img:hover img {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .product-img .product-hover .product-cart {
   width: 100%;
   position: absolute;
@@ -368,6 +423,7 @@ nav.navbar form {
   padding-right: 30px;
   padding-left: 30px;
 }
+
 .product-img:hover .product-hover .product-cart {
   opacity: 1;
   transform: translateY(0);
@@ -376,6 +432,7 @@ nav.navbar form {
   -o-transform: translateY(0);
   -ms-transform: translateY(0);
 }
+
 .product-item .product-cart .btn {
   background-color: #2f2f2f;
   color: #fff;
@@ -391,6 +448,7 @@ nav.navbar form {
   transition: all 0.2s ease-in-out;
   border-radius: 0;
 }
+
 .product-item .product-img .product-hover {
   position: absolute;
   overflow: hidden;
@@ -400,44 +458,38 @@ nav.navbar form {
   height: 80%;
   opacity: 0;
   background-color: rgba(135, 230, 245, 0.75);
-  background-image: linear-gradient(
-    to top,
-    #32c8de 0%,
-    transparent 49%,
-    transparent 82%,
-    transparent 100%
-  );
-  background-image: -webkit-linear-gradient(
-    to top,
-    #32c8de 0%,
-    transparent 49%,
-    transparent 82%,
-    transparent 100%
-  );
-  background-image: -moz-linear-gradient(
-    to top,
-    #32c8de 0%,
-    transparent 49%,
-    transparent 82%,
-    transparent 100%
-  );
-  background-image: -o-linear-gradient(
-    to top,
-    #32c8de 0%,
-    transparent 49%,
-    transparent 82%,
-    transparent 100%
-  );
+  background-image: linear-gradient(to top,
+      #32c8de 0%,
+      transparent 49%,
+      transparent 82%,
+      transparent 100%);
+  background-image: -webkit-linear-gradient(to top,
+      #32c8de 0%,
+      transparent 49%,
+      transparent 82%,
+      transparent 100%);
+  background-image: -moz-linear-gradient(to top,
+      #32c8de 0%,
+      transparent 49%,
+      transparent 82%,
+      transparent 100%);
+  background-image: -o-linear-gradient(to top,
+      #32c8de 0%,
+      transparent 49%,
+      transparent 82%,
+      transparent 100%);
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
 }
+
 .product-item .btn:hover {
   background-color: #fff;
   border-color: #fff;
   color: #2f2f2f;
 }
+
 .product-item .product-img:hover .product-hover {
   opacity: 1;
 }
@@ -447,6 +499,7 @@ nav.navbar form {
   width: 80%;
   margin: auto;
 }
+
 .specification {
   padding-top: 10px;
   border-bottom: 1px solid #eee;
@@ -456,111 +509,139 @@ nav.navbar form {
   -o-transition: all 0.3s;
   transition: all 0.3s;
 }
+
 .specification label {
   font-weight: 600;
   color: teal;
 }
+
 .specification:hover {
   background-color: #f5f5f5;
 }
+
 .single-product-details {
   margin-top: 40px;
 }
+
 .single-product-details h1 {
   font-family: "dosis", sans-serif;
 }
+
 .single-product-details h5 {
   font-size: 30px;
   color: teal;
 }
+
 .single-product-details .text-success,
 .single-product-details .text-danger {
   font-size: 20px;
   font-weight: 700;
 }
+
 .shrt_desc h3 {
   font-family: "dosis", sans-serif;
   font-size: 25px;
   font-weight: 600;
 }
+
 .single-product-details .utils .btn {
   font-family: "dosis", sans-serif;
   padding: 10px;
   width: 48%;
 }
+
 #reviews .text-secondary {
   font-size: 15px;
   font-style: italic;
 }
+
 #reviews h2 {
   font-family: "dosis", sans-serif;
 }
+
 #reviews {
   margin-top: 100px;
 }
+
 #reviews .btn {
   background: teal;
   color: #fff;
 }
+
 #reviewer {
   color: teal;
   font-weight: 700;
 }
+
 #review_form button {
   width: 100%;
   font-family: "dosis", sans-serif;
 }
+
 #review_form button:hover {
   color: teal;
   background: none;
 }
+
 .text-secondary {
   font-weight: 600;
 }
+
 .media-body .log,
 .utils .btn-info {
   background: rgb(58, 58, 58) !important;
   color: #fff !important;
   border: none;
 }
+
 .media-body .log:hover,
 .utils .btn-info:hover {
   color: white !important;
   background-color: teal !important;
 }
+
 #rel_pro {
   font-family: "dosis", sans-serif;
   margin-top: 50px;
 }
+
 .name_amt .name {
   font-size: 20px;
   font-family: "dosis", sans-serif;
 }
+
 .name_amt p a:hover {
   color: teal;
 }
+
 .name_amt .amt {
   font-size: 20px;
   color: teal;
   font-weight: 600;
 }
+
 .thick_hr {
   height: 2px;
   background-color: teal;
 }
+
 del {
   font-size: 14px;
 }
+
 .text-muted {
   text-decoration: none;
 }
+
 .shop_utils i {
   font-size: 25px;
   margin-bottom: 10px;
 }
+
 .shop_utils .fa-heart {
   color: rgb(58, 58, 58);
 }
+
 .shop_utils .fa-heart:hover {
   cursor: pointer;
   color: #dc3545;
@@ -569,6 +650,7 @@ del {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .shop_utils .fa-shopping-cart:hover {
   color: teal;
   cursor: pointer;
@@ -577,15 +659,18 @@ del {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .shop_utils .fa-shopping-cart {
   color: rgb(58, 58, 58);
 }
+
 .the_img img:hover {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .content-section:hover,
 #your_addresses_section .list-group-item:hover {
   box-shadow: 0 1px 2px rgba(43, 59, 93, 0.29), 0 0 13px rgba(43, 59, 93, 0.29);
@@ -593,17 +678,21 @@ del {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .fa-heart.active {
   color: #dc3545;
 }
+
 .fa-shopping-cart.active {
   /* color: #007bff; */
   color: teal;
 }
+
 .carousel-indicators li img {
   margin-top: 30px;
   background-color: red;
 }
+
 .single-product-slider .carousel-control-prev {
   bottom: auto;
   background: teal;
@@ -612,6 +701,7 @@ del {
   background-image: none;
   top: 40%;
 }
+
 .single-product-slider .carousel-control-next {
   bottom: auto;
   background: teal;
@@ -620,9 +710,11 @@ del {
   background-image: none;
   top: 40%;
 }
+
 .single-product-slider .carousel-indicators li img {
   opacity: 0.5;
 }
+
 .single-product-slider .carousel-indicators li.active img {
   opacity: 1;
 }
@@ -637,16 +729,20 @@ del {
   font-family: "dosis", sans-serif;
   margin-bottom: 30px;
 }
+
 #loadMore:hover {
   color: #fff;
   background-color: #016868;
 }
+
 .load-more-icon {
   margin-left: 10px !important;
 }
+
 .search-product {
   position: relative;
 }
+
 .search-product input[type="text"] {
   background: #f1f1f1;
   border: 0;
@@ -662,6 +758,7 @@ del {
   -moz-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .search-product button {
   background: rgb(58, 58, 58);
   color: #ffffff;
@@ -675,12 +772,15 @@ del {
   cursor: pointer;
   height: 100%;
 }
+
 .search-product button:hover {
   background: teal;
 }
+
 #sidebar h3 {
   font-family: "dosis", sans-serif;
 }
+
 #sidebar_filt_but button,
 #filter_form button {
   display: block;
@@ -690,20 +790,24 @@ del {
   color: teal;
   font-size: 15px;
 }
+
 #sidebar_filt_but .active,
 #dashboard_sidebar .active {
   background: teal !important;
   color: #fff;
 }
+
 #sidebar_filt_but button:hover,
 #filter_form button:hover {
   background: teal !important;
   color: #fff;
 }
+
 #filter_form .form-group {
   display: block;
   margin-bottom: 15px;
 }
+
 #filter_form .form-group input {
   padding: 0;
   height: initial;
@@ -712,10 +816,12 @@ del {
   display: none;
   cursor: pointer;
 }
+
 #filter_form .form-group label {
   position: relative;
   cursor: pointer;
 }
+
 #filter_form .form-group label:before {
   content: "";
   background-color: transparent;
@@ -729,7 +835,8 @@ del {
   cursor: pointer;
   margin-right: 5px;
 }
-#filter_form .form-group input:checked + label:after {
+
+#filter_form .form-group input:checked+label:after {
   content: "";
   display: block;
   position: absolute;
@@ -741,7 +848,8 @@ del {
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
-#filter_form .form-group input:checked + label {
+
+#filter_form .form-group input:checked+label {
   color: red;
 }
 
@@ -766,10 +874,12 @@ del {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 .noUi-target {
   position: relative;
   direction: ltr;
 }
+
 .noUi-base {
   width: 100%;
   height: 100%;
@@ -777,6 +887,7 @@ del {
   z-index: 1;
   /* Fix 401 */
 }
+
 .noUi-origin {
   position: absolute;
   right: 0;
@@ -784,21 +895,26 @@ del {
   left: 0;
   bottom: 0;
 }
+
 .noUi-handle {
   position: relative;
   z-index: 1;
 }
+
 .noUi-stacking .noUi-handle {
   /* This class is applied to the lower origin when its values is > 50%. */
   z-index: 10;
 }
+
 .noUi-state-tap .noUi-origin {
   -webkit-transition: left 0.3s, top 0.3s;
   transition: left 0.3s, top 0.3s;
 }
+
 .noUi-state-drag * {
   cursor: inherit !important;
 }
+
 /* Painting and performance;
 * Browsers can paint handles in their own layer.
 */
@@ -807,11 +923,13 @@ del {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
+
 /* Slider size and handle placement;
 */
 .noUi-horizontal {
   height: 4px;
 }
+
 .noUi-horizontal .noUi-handle {
   width: 18px;
   height: 18px;
@@ -820,36 +938,44 @@ del {
   top: -7px;
   background-color: #008080;
 }
+
 /* Styling;
 */
 .noUi-background {
   background: #d6d7d9;
 }
+
 .noUi-connect {
   background: #008080;
   -webkit-transition: background 450ms;
   transition: background 450ms;
 }
+
 .noUi-origin {
   border-radius: 2px;
 }
+
 .noUi-target {
   border-radius: 2px;
 }
+
 /* Handles and cursors;
 */
 .noUi-draggable {
   cursor: w-resize;
 }
+
 .noUi-vertical .noUi-draggable {
   cursor: n-resize;
 }
+
 .noUi-handle {
   cursor: default;
   -webkit-box-sizing: content-box !important;
   -moz-box-sizing: content-box !important;
   box-sizing: content-box !important;
 }
+
 .noUi-handle:active {
   border: 8px solid #345dbb;
   border: 8px solid rgba(53, 93, 187, 0.38);
@@ -858,12 +984,14 @@ del {
   left: -14px;
   top: -14px;
 }
+
 /* Disabled state;
 */
 [disabled].noUi-connect,
 [disabled] .noUi-connect {
   background: #b8b8b8;
 }
+
 [disabled].noUi-origin,
 [disabled] .noUi-handle {
   cursor: not-allowed;
@@ -877,11 +1005,13 @@ del {
   border-radius: 3px;
   margin-bottom: 20px;
 }
+
 .log:hover {
   color: #fff;
   background: teal;
   border: 1px solid teal;
 }
+
 .log {
   background: none;
   color: teal;
@@ -890,28 +1020,34 @@ del {
   width: 100%;
   font-family: "montserrat", sans-serif;
 }
+
 .form-control:focus {
   -webkit-box-shadow: 0 3px 10px -2px teal !important;
   box-shadow: 0 3px 10px -2px teal !important;
   color: #000;
   border: 1px none;
 }
+
 .demo-button {
   display: block;
   background: teal;
   margin-bottom: 10px;
   width: 100%;
 }
+
 .demo-button a {
   color: #fff;
 }
+
 .demo-button:hover {
   color: #fff;
   font-weight: 500;
 }
+
 .login_error {
   font-size: 14px;
 }
+
 .category {
   display: inline-block;
   background: teal;
@@ -925,25 +1061,30 @@ del {
   letter-spacing: 0.2em;
   text-decoration: none;
 }
+
 .category:hover {
   background: #016868;
 }
+
 #product_center .btn {
   background: none !important;
   color: teal !important;
   width: 75%;
   border: none;
 }
+
 #product_center .btn:hover {
   background: teal !important;
   color: #fff !important;
 }
+
 #design_hr hr {
   border: none;
   height: 2px;
   background-color: teal;
   width: 20%;
 }
+
 .login_media i {
   font-size: 24px;
   margin: 5px 0;
@@ -951,9 +1092,11 @@ del {
   color: #fff;
   border-radius: 3px;
 }
+
 .login_media .fa-facebook-f {
   background-color: #3b5998;
 }
+
 .login_media .fa-google {
   background-color: #db4a39;
 }
@@ -973,38 +1116,47 @@ del {
 #remove_pt {
   margin-top: -20px;
 }
+
 .table-main table thead {
   background: teal;
   color: #ffffff;
 }
+
 .table-main .table thead th {
   font-size: 18px;
   font-family: "dosis", sans-serif;
 }
+
 .table-main table td.thumbnail-img {
   width: 100px;
 }
+
 .table-main table td {
   vertical-align: middle;
   font-size: 16px;
 }
+
 .quantity-box input {
   width: 50px;
   border: 2px solid teal;
   text-align: center;
 }
+
 .name-pr a {
   font-weight: 700;
   font-size: 18px;
   color: #3a3a3a;
   font-family: "dosis", sans-serif;
 }
+
 .remove-pr {
   text-align: center;
 }
+
 .remove-pr button {
   font-size: 14px;
 }
+
 .input-group .form-control {
   min-height: 50px;
   border-radius: 0px;
@@ -1012,30 +1164,36 @@ del {
   border: 3px solid #e8e8e8;
   font-size: 18px;
 }
+
 .input-group .input-group-append button {
   color: #fff !important;
   background: #3a3a3a !important;
   outline: none;
   border: none;
 }
+
 .input-group .input-group-append button:hover {
   color: #fff !important;
   background: teal !important;
 }
+
 .order-box h3 {
   font-size: 28px;
   color: #3a3a3a;
   font-family: "dosis", sans-serif;
   font-weight: 700;
 }
+
 .order-box h4 {
   font-size: 16px;
   padding: 0px;
   line-height: 35px !important;
 }
+
 .order-box .font-weight-bold {
   font-size: 18px;
 }
+
 .gr-total h5 {
   font-weight: 700;
   color: teal;
@@ -1045,12 +1203,14 @@ del {
   font-family: "dosis", sans-serif;
   line-height: 35px !important;
 }
+
 .gr-total .h5 {
   margin: 0px;
   font-weight: 700;
   font-family: "dosis", sans-serif;
   line-height: 35px;
 }
+
 #pro_chkout_btn {
   color: #fff !important;
   background: #3a3a3a !important;
@@ -1062,10 +1222,12 @@ del {
   font-size: 18px;
   margin-bottom: 10px;
 }
+
 #pro_chkout_btn:hover {
   color: #fff !important;
   background: teal !important;
 }
+
 #chkout_btn {
   color: #fff !important;
   background: #3a3a3a !important;
@@ -1075,13 +1237,16 @@ del {
   font-family: "dosis", sans-serif;
   padding: 10px;
 }
+
 #chkout_btn:hover {
   color: #fff !important;
   background: teal !important;
 }
+
 .no_items {
   font-family: "dosis", sans-serif;
 }
+
 .options1,
 .options2 {
   font-family: "dosis", sans-serif;
@@ -1095,10 +1260,12 @@ del {
   padding: 10px;
   font-size: 16px;
 }
+
 .options1:hover {
   color: #fff !important;
   background: teal !important;
 }
+
 .options2:hover {
   color: #fff !important;
   background: #dc3545 !important;
@@ -1115,32 +1282,40 @@ del {
   font-weight: 700;
   font-family: "dosis", sans-serif;
 }
+
 .address-box h3 {
   font-size: 24px;
 }
+
 .img_name {
   display: inline-block;
 }
+
 .item-title-quantity {
   font-size: 14px !important;
   display: inline;
   margin-bottom: 0 !important;
 }
+
 .chk_price {
   font-size: 16px;
   font-weight: 600;
 }
+
 .coupon_center h5 {
   font-family: "dosis", sans-serif;
   color: teal;
 }
+
 .coupon_center small {
   color: #28a745;
 }
+
 .coupon_center .h5 {
   font-size: 16px;
   color: #28a745;
 }
+
 #use_existing span {
   color: teal;
   font-weight: 700;
@@ -1153,34 +1328,43 @@ del {
   outline: none;
   border: 1px solid teal;
 }
+
 #dashboard_sidebar .text-danger:hover {
   color: #fff !important;
   background: #dc3545;
   outline: none;
   border: 1px solid #dc3545;
 }
+
 #each_card a:hover {
   color: #fff;
   background: teal;
 }
+
 #each_card a {
   background: none;
   color: teal;
   border: 1px solid teal;
   font-size: 12px;
 }
+
 #each_card button {
   background: none;
 }
+
 #each_card h5 {
   font-family: "dosis", sans-serif;
 }
+
 .list-group-item span {
   color: teal;
 }
+
 .del_wish_item {
   cursor: pointer;
 }
+
+#dashboard_section h1,
 #wishlist_section h1,
 #orders_section h1,
 #your_addresses_section h1 {
@@ -1193,20 +1377,24 @@ del {
   font-family: "dosis", sans-serif;
   font-weight: 600;
 }
+
 .fab {
   font-size: 68px;
   cursor: pointer;
   padding: 0 20px 0 20px;
 }
+
 .fab:hover {
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+
 .stripe_logo {
   color: #6b71e3;
 }
+
 .paypal_logo {
   color: #00457c;
 }
@@ -1216,6 +1404,7 @@ del {
   font-size: 32px;
   margin-bottom: 10px;
 }
+
 .pending_msg p {
   font-size: 16px;
 }
@@ -1224,10 +1413,12 @@ del {
 #gallery {
   padding-top: 10px;
 }
+
 .img-wrapper {
   position: relative;
   /* margin-top: 15px; */
 }
+
 .img-overlay {
   /* background: rgba(0, 128, 128, 0.418); */
   background: rgba(0, 0, 0, 0.7);
@@ -1241,10 +1432,12 @@ del {
   align-items: center;
   opacity: 0;
 }
+
 .img-overlay i {
   color: #fff;
   font-size: 2em;
 }
+
 #overlay {
   background: rgba(0, 0, 0, 0.925);
   width: 100%;
@@ -1261,6 +1454,7 @@ del {
   -ms-user-select: none;
   user-select: none;
 }
+
 #gallery img {
   margin: 0;
   width: 80%;
@@ -1268,24 +1462,29 @@ del {
   object-fit: contain;
   padding: 5%;
 }
+
 #nextButton {
   color: #fff;
   font-size: 40px;
   transition: opacity 0.8s;
 }
+
 #nextButton:hover {
   opacity: 0.7;
   cursor: pointer;
 }
+
 #prevButton {
   color: #fff;
   font-size: 40px;
   transition: opacity 0.8s;
 }
+
 #prevButton:hover {
   opacity: 0.7;
   cursor: pointer;
 }
+
 #exitButton {
   color: #fff;
   font-size: 40px;
@@ -1294,14 +1493,17 @@ del {
   top: 3px;
   right: 15px;
 }
+
 #exitButton:hover {
   opacity: 0.7;
   cursor: pointer;
 }
+
 .image p {
   color: teal;
   font-weight: 500;
 }
+
 /* ============================= */
 /* RESPONSIVENESS FOR ALL PAGES */
 /* ============================= */
@@ -1310,6 +1512,7 @@ del {
   .wish_utils {
     justify-content: center !important;
   }
+
   .wish_utils i {
     margin-left: 20px;
   }
@@ -1319,43 +1522,55 @@ del {
   #myCarousel .carousel-item img {
     width: 90% !important;
   }
+
   .carousel-item h1 {
     font-size: 28px !important;
   }
+
   .carousel-item p:first-child {
     font-size: 12px !important;
   }
+
   #myCarousel .carousel-control-prev .fa,
   #myCarousel .carousel-control-next .fa {
     display: none;
   }
+
   .product-img {
     width: 60% !important;
     margin: 0 auto;
   }
+
   .newsletter-box button {
     margin-bottom: 20px;
   }
+
   #contct_addr p:first-child {
     text-align: left !important;
   }
+
   #contact-form {
     padding: 0 !important;
   }
+
   #prevButton .fa,
   #nextButton .fa,
   #exitButton .fa {
     font-size: 24px !important;
   }
+
   .billing-col h3 {
     margin-top: 25px !important;
   }
+
   #product_center a {
     margin-bottom: 10px;
   }
+
   #dashboard_sidebar {
     margin-bottom: 25px;
   }
+
   #your_addresses_section h1,
   #orders_section h1 {
     font-size: 28px;
@@ -1373,10 +1588,12 @@ del {
   .single-product-details .utils {
     display: block !important;
   }
+
   .single-product-details .utils .btn {
     width: 100%;
     margin-bottom: 10px;
   }
+
   #log_cat {
     font-size: 14px;
   }
